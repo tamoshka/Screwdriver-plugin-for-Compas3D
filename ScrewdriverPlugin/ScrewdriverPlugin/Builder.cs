@@ -8,7 +8,7 @@ using Kompas;
 namespace ScrewdriverPlugin
 
 {
-    internal class Builder
+    public class Builder
     {
         private Wrapper _wrapper = new Wrapper();
 
@@ -39,17 +39,17 @@ namespace ScrewdriverPlugin
                 _wrapper.CreateLine(0, y, x1, y, 1);
                 _wrapper.Spin();
                 _wrapper.CreateSketch(1);
-                _wrapper.CreateLine(0, y - 1, x1, y - 10, 1);
-                _wrapper.CreateLine(0, y - 1, -x1, y - 10, 1);
-                _wrapper.CreateLine(-x1, y - 10, -x1, y, 1);
-                _wrapper.CreateLine(x1, y - 10, x1, y, 1);
+                _wrapper.CreateLine(0, y - 1, x1, y - y/5, 1);
+                _wrapper.CreateLine(0, y - 1, -x1, y - y/5, 1);
+                _wrapper.CreateLine(-x1, y - y / 5, -x1, y, 1);
+                _wrapper.CreateLine(x1, y - y/5, x1, y, 1);
                 _wrapper.CreateLine(-x1, y, x1, y, 1);
                 _wrapper.Extrusion(1, -x1 * 2);
                 _wrapper.CreateSketch(3);
-                _wrapper.CreateLine(0, -y + 1, x1, -y + 10, 1);
-                _wrapper.CreateLine(0, -y + 1, -x1, -y + 10, 1);
-                _wrapper.CreateLine(-x1, -y + 10, -x1, -y, 1);
-                _wrapper.CreateLine(x1, -y +10, x1, -y, 1);
+                _wrapper.CreateLine(0, -y + 1, x1, -y +y/5, 1);
+                _wrapper.CreateLine(0, -y + 1, -x1, -y + y/5, 1);
+                _wrapper.CreateLine(-x1, -y + y/5, -x1, -y, 1);
+                _wrapper.CreateLine(x1, -y +y/5, x1, -y, 1);
                 _wrapper.CreateLine(-x1, -y, x1, -y, 1);
                 _wrapper.Extrusion(1, -x1 * 2);
                 _wrapper.CreateSketch(2);
@@ -57,19 +57,19 @@ namespace ScrewdriverPlugin
                 _wrapper.CreateLine(Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, Math.Sqrt(2) / 2 * x1, 1);
                 _wrapper.Extrusion(2, y);
                 _wrapper.CreateSketch(1);
-                _wrapper.CreateLine(-0.5, y - 1, x1, y - 6, 1);
-                _wrapper.CreateLine(0.5, y - 1, -x1, y - 6, 1);
-                _wrapper.CreateLine(0.5, y - 1, -0.5, y - 1, 1);
-                _wrapper.CreateLine(-x1, y - 6, -x1, y, 1);
-                _wrapper.CreateLine(x1, y - 6, x1, y, 1);
+                _wrapper.CreateLine(x1/5, y - 1, x1, y - y/5, 1);
+                _wrapper.CreateLine(-x1 / 5, y - 1, -x1, y - y/5, 1);
+                _wrapper.CreateLine(-x1 / 5, y - 1, x1 / 5, y - 1, 1);
+                _wrapper.CreateLine(-x1, y - y/5, -x1, y, 1);
+                _wrapper.CreateLine(x1, y - y/5, x1, y, 1);
                 _wrapper.CreateLine(-x1, y, x1, y, 1);
                 _wrapper.Extrusion(1, -x1 * 2);
                 _wrapper.CreateSketch(3);
-                _wrapper.CreateLine(-0.5, -y + 1, x1, -y + 6, 1);
-                _wrapper.CreateLine(0.5, -y + 1, -x1, -y + 6, 1);
-                _wrapper.CreateLine(0.5, -y + 1, -0.5, -y + 1, 1);
-                _wrapper.CreateLine(-x1, -y + 6, -x1, -y, 1);
-                _wrapper.CreateLine(x1, -y + 6, x1, -y, 1);
+                _wrapper.CreateLine(x1 / 5, -y + 1, x1, -y + y/5, 1);
+                _wrapper.CreateLine(-x1 / 5, -y + 1, -x1, -y + y/5, 1);
+                _wrapper.CreateLine(-x1 / 5, -y + 1, x1 / 5, -y + 1, 1);
+                _wrapper.CreateLine(-x1, -y + y/5, -x1, -y, 1);
+                _wrapper.CreateLine(x1, -y + y/5, x1, -y, 1);
                 _wrapper.CreateLine(-x1, -y, x1, -y, 1);
                 _wrapper.Extrusion(1, -x1 * 2);
             }
@@ -81,10 +81,10 @@ namespace ScrewdriverPlugin
                 _wrapper.CreateLine(0, y, x1, y, 1);
                 _wrapper.Spin();
                 _wrapper.CreateSketch(1);
-                _wrapper.CreateLine(0, y - 1, x1, y - 10, 1);
-                _wrapper.CreateLine(0, y - 1, -x1, y - 10, 1);
-                _wrapper.CreateLine(-x1, y - 10, -x1, y, 1);
-                _wrapper.CreateLine(x1, y - 10, x1, y, 1);
+                _wrapper.CreateLine(0, y - 1, x1, y -y/5, 1);
+                _wrapper.CreateLine(0, y - 1, -x1, y -y/5, 1);
+                _wrapper.CreateLine(-x1, y - y/5, -x1, y, 1);
+                _wrapper.CreateLine(x1, y - y/5, x1, y, 1);
                 _wrapper.CreateLine(-x1, y, x1, y, 1);
                 _wrapper.Extrusion(1, -x1*2);
             }

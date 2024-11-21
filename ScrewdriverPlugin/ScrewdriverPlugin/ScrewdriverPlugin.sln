@@ -5,7 +5,7 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrewdriverPlugin", "ScrewdriverPlugin.csproj", "{2580780E-46B3-4FF4-A07B-428157F07E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kompas", "D:\Projects\Wrapper\Kompas.csproj", "{ACA92215-0309-49D8-98A6-0CDD0DAB1118}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kompas", "..\..\Kompas\Wrapper\Kompas.csproj", "{ACA92215-0309-49D8-98A6-0CDD0DAB1118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

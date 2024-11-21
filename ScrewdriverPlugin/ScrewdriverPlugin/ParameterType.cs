@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace ScrewdriverPlugin
 
 {
-    enum ParameterType
+    
+    public enum ParameterType
     {
         HandleLength,
         HandleWidth,

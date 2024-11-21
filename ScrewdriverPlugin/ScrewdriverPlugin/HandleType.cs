@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ScrewdriverPlugin
 
 {
-    enum HandleType
+    public enum HandleType
     {
         Prisme,
         Cylinder

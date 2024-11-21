@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ScrewdriverPlugin
 
 {
-    enum RodType
+    public enum RodType
     {
         Cruciform,
         Flat

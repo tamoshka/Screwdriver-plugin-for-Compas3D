@@ -64,11 +64,6 @@ namespace ScrewdriverPlugin
                 {
                     SecondValidate(TextBoxRodLength, ParameterType.RodLength);
                 }
-                FirstValidate(TextBoxRodWidth, ParameterType.RodWidth);
-                if (TextBoxRodWidth.BackColor != SystemColors.Window)
-                {
-                    SecondValidate(TextBoxRodWidth, ParameterType.RodWidth);
-                }
             }
         }
 
@@ -84,6 +79,11 @@ namespace ScrewdriverPlugin
                 {
                     SecondValidate(TextBoxRodWidth, ParameterType.RodWidth);
                 }
+                FirstValidate(TextBoxHandleLength, ParameterType.HandleLength);
+                if (TextBoxHandleLength.BackColor != SystemColors.Window)
+                {
+                    SecondValidate(TextBoxHandleLength, ParameterType.HandleLength);
+                }
             }
         }
 
@@ -94,10 +94,10 @@ namespace ScrewdriverPlugin
             if (TextBoxRodLength.BackColor != SystemColors.Window)
             {
                 SecondValidate(TextBoxRodLength, parameterType);
-                FirstValidate(TextBoxRodWidth, ParameterType.RodWidth);
-                if (TextBoxRodWidth.BackColor != SystemColors.Window)
+                FirstValidate(TextBoxHandleLength, ParameterType.HandleLength);
+                if (TextBoxHandleLength.BackColor != SystemColors.Window)
                 {
-                    SecondValidate(TextBoxRodWidth, ParameterType.RodWidth);
+                    SecondValidate(TextBoxHandleLength, ParameterType.HandleLength);
                 }
             }
         }
@@ -109,6 +109,11 @@ namespace ScrewdriverPlugin
             if (TextBoxRodWidth.BackColor != SystemColors.Window)
             {
                 SecondValidate(TextBoxRodWidth, parameterType);
+                FirstValidate(TextBoxHandleWidth, ParameterType.HandleWidth);
+                if (TextBoxHandleWidth.BackColor != SystemColors.Window)
+                {
+                    SecondValidate(TextBoxHandleWidth, ParameterType.HandleWidth);
+                }
             }
         }
 
@@ -117,16 +122,16 @@ namespace ScrewdriverPlugin
             try
             {
                 int.Parse(textBox.Text);
-                SetColors(parameterType, 3, 0);
+                SetColors(parameterType, 3, 0, "");
             }
-            catch
+            catch (Exception e)
             {
                 textBox.Text = "";
-                SetColors(parameterType, 1, 0);
+                SetColors(parameterType, 1, 0, e.Message);
             }
         }
 
-        private void SetColors(ParameterType parameterType, int whatColor, int whatReason)
+        private void SetColors(ParameterType parameterType, int whatColor, int whatReason, string text)
         {
             if (whatColor == 1)
             {
@@ -163,6 +168,7 @@ namespace ScrewdriverPlugin
                     else
                     {
                         TextBoxHandleLength.BackColor = Color.Red;
+                        toolTip1.SetToolTip(this.TextBoxHandleLength, text);
                         /*if (TextBoxHandleWidth.BackColor != SystemColors.Window)
                         {
                             TextBoxHandleWidth.BackColor = Color.Red;
@@ -190,6 +196,7 @@ namespace ScrewdriverPlugin
                     else
                     {
                         TextBoxHandleWidth.BackColor = Color.Red;
+                        toolTip1.SetToolTip(this.TextBoxHandleWidth, text);
                         /*if (TextBoxRodWidth.BackColor != SystemColors.Window)
                         {
                             TextBoxRodWidth.BackColor = Color.Red;
@@ -207,6 +214,7 @@ namespace ScrewdriverPlugin
                     else
                     {
                         TextBoxRodLength.BackColor = Color.Red;
+                        toolTip1.SetToolTip(this.TextBoxRodLength, text);
                         /*if (TextBoxRodWidth.BackColor != SystemColors.Window)
                         {
                             TextBoxRodWidth.BackColor = Color.Red;
@@ -216,8 +224,17 @@ namespace ScrewdriverPlugin
                 }
                 else if (parameterType == ParameterType.RodWidth)
                 {
-                    TextBoxRodWidth.BackColor = Color.Red;
-                    toolTip1.SetToolTip(this.TextBoxRodWidth, "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
+                    if (whatReason == 1)
+                    {
+                        TextBoxRodWidth.BackColor = Color.Red;
+                        toolTip1.SetToolTip(this.TextBoxRodWidth, "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
+                    }
+                    else
+                    {
+                        TextBoxRodWidth.BackColor = Color.Red;
+                        toolTip1.SetToolTip(this.TextBoxRodWidth, text);
+                    }
+                    
                 }
             }
             else
@@ -232,6 +249,7 @@ namespace ScrewdriverPlugin
                     else
                     {
                         TextBoxHandleLength.BackColor = Color.Green;
+                        toolTip1.SetToolTip(TextBoxHandleLength, null);
                         /*if (TextBoxHandleWidth.BackColor!=SystemColors.Window)
                         {
                             TextBoxHandleWidth.BackColor = Color.Green;
@@ -259,6 +277,7 @@ namespace ScrewdriverPlugin
                     else
                     {
                         TextBoxHandleWidth.BackColor = Color.Green;
+                        toolTip1.SetToolTip(TextBoxHandleLength, null);
                         /*if (TextBoxRodWidth.BackColor != SystemColors.Window)
                         {
                             TextBoxRodWidth.BackColor = Color.Green;
@@ -276,6 +295,7 @@ namespace ScrewdriverPlugin
                     else 
                     {
                         TextBoxRodLength.BackColor = Color.Green;
+                        toolTip1.SetToolTip(TextBoxHandleLength, null);
                         /*if (TextBoxRodWidth.BackColor != SystemColors.Window)
                         {
                             TextBoxRodWidth.BackColor = Color.Green;
@@ -285,8 +305,16 @@ namespace ScrewdriverPlugin
                 }
                 else if (parameterType == ParameterType.RodWidth)
                 {
-                    TextBoxRodWidth.BackColor = Color.Green;
-                    toolTip1.SetToolTip(TextBoxRodWidth, null);
+                    if (whatReason == 1)
+                    {
+                        TextBoxRodWidth.BackColor = Color.Green;
+                        toolTip1.SetToolTip(TextBoxRodWidth, null);
+                    }
+                    else
+                    {
+                        TextBoxRodWidth.BackColor = Color.Green;
+                        toolTip1.SetToolTip(TextBoxRodWidth, null);
+                    }
                 }
             }
         }
@@ -319,9 +347,9 @@ namespace ScrewdriverPlugin
             {
                 parameter.Value=int.Parse(textBox.Text);
             }
-            catch
+            catch (Exception e)
             {
-                SetColors(parameterType, 2, 1);
+                SetColors(parameterType, 2, 1, e.Message);
                 cached = true;
             }
             if (!cached)
@@ -329,11 +357,11 @@ namespace ScrewdriverPlugin
                 try
                 {
                     _parameters.SetParameter(parameterType, parameter);
-                    SetColors(parameterType, 3, 0);
+                    SetColors(parameterType, 3, 0, "");
                 }
-                catch
+                catch (Exception e)
                 {
-                    SetColors(parameterType, 2, 0);
+                    SetColors(parameterType, 2, 0, e.Message);
                 }
             }
         }

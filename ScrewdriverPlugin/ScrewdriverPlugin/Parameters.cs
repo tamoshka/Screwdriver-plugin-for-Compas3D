@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace ScrewdriverPlugin
 
 {
-    internal class Parameters
+    public class Parameters
     {
         private Dictionary<ParameterType, Parameter> _parameter;
 
@@ -50,11 +50,10 @@ namespace ScrewdriverPlugin
             Parameter chainedParameterFirst;
             Parameter chainedParameterSecond;
             Parameter chainedParameterThird;
-            /*if (parameterType == ParameterType.HandleLength)
+            if (parameterType == ParameterType.HandleLength)
             {
                 if (AllParameters.TryGetValue(ParameterType.HandleWidth, out chainedParameterFirst) == true ||
-                    AllParameters.TryGetValue(ParameterType.RodLength, out chainedParameterSecond) == true ||
-                    AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterThird) == true)
+                    AllParameters.TryGetValue(ParameterType.RodLength, out chainedParameterSecond) == true)
                 {
                     if (AllParameters.TryGetValue(ParameterType.HandleWidth, out chainedParameterFirst) == true &&
                          (chainedParameterFirst.Value < parameter.Value / 4 - 5 ||
@@ -62,54 +61,57 @@ namespace ScrewdriverPlugin
                     {
                         if (chainedParameterFirst.Value < parameter.Value / 4 - 5)
                         {
-                            exception += "Диаметр ручки меньше четверти длины ручки - 5 мм, увеличьте заданное значение минимум до "
-                                + (parameter.Value / 4 - 5).ToString();
+                            exception += "Длина ручки более чем в 4 раза больше её диаметра, уменьшите заданное значение минимум до "
+                                + ((chainedParameterFirst.Value+5)*4).ToString()+'\n';
                         }
                         else
                         {
-                            exception += "Диаметр ручки больше четверти длины ручки + 5 мм, уменьшите заданное значение минимум до "
-                                + (parameter.Value / 4 + 5).ToString(); ;
+                            exception += "Длина ручки менее чем в 4 раза больше её диаметра, увеличьте заданное значение минимум до "
+                                + ((chainedParameterFirst.Value -5) * 4).ToString()+'\n';
                         }
                     }
                     if (AllParameters.TryGetValue(ParameterType.RodLength, out chainedParameterSecond) == true &&
                          (chainedParameterSecond.Value < parameter.Value) == true)
                     {
-                        exception += "Длина наконечника меньше длины ручки, увеличьте заданное значение как минимум до "
-                        + (parameter.Value).ToString();
+                        exception += "Длина ручки больше длины наконечника, уменьшите заданное значение минимум до "
+                        + (chainedParameterSecond.Value).ToString()+'\n';
                     }
-                    if (AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterThird) == true &&
-                        AllParameters.TryGetValue(ParameterType.RodLength, out chainedParameterSecond) == true &&
-                        (chainedParameterThird.Value < (parameter.Value + chainedParameterSecond.Value) / 5 - 2 ||
-                        chainedParameterThird.Value > (parameter.Value + chainedParameterSecond.Value) / 5 + 2) == true)
+                }
+            }
+            if (parameterType == ParameterType.HandleWidth)
+            {
+                if (AllParameters.TryGetValue(ParameterType.HandleLength, out chainedParameterFirst) == true ||
+                    AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterSecond) == true)
+                {
+                    if (AllParameters.TryGetValue(ParameterType.HandleLength, out chainedParameterFirst) == true &&
+                    (parameter.Value < chainedParameterFirst.Value / 4 - 5 ||
+                    parameter.Value > chainedParameterFirst.Value / 4 + 5) == true)
                     {
-                        if (chainedParameterThird.Value < (parameter.Value + chainedParameterSecond.Value) / 5 - 2)
+                        if (parameter.Value < chainedParameterFirst.Value / 4 - 5)
                         {
-                            exception += "Диаметр наконечника меньше пятой части от общей длины отвёртки - 2 мм, увеличьте заданное значение минимум до "
-                                + ((parameter.Value + chainedParameterSecond.Value) / 5 - 2).ToString();
+                            exception += "Диаметр ручки меньше четверти длины ручки - 5 мм, увеличьте заданное значение минимум до "
+                                    + (chainedParameterFirst.Value / 4 - 5).ToString()+'\n';
                         }
                         else
                         {
-                            exception += "Диаметр наконечника большей пятой части от общей длины отвёртки + 2 мм, уменьшите заданное значение минимум до "
-                                + ((parameter.Value + chainedParameterSecond.Value) / 5 + 2).ToString();
+                            exception += "Диаметр ручки больше четверти длины ручки + 5 мм, уменьшите заданное значение минимум до "
+                                    + (chainedParameterFirst.Value / 4 + 5).ToString()+'\n'; 
                         }
                     }
-                }
-            }*/
-            if (parameterType == ParameterType.HandleWidth)
-            {
-                if (AllParameters.TryGetValue(ParameterType.HandleLength, out chainedParameterFirst) == true &&
-                    (parameter.Value < chainedParameterFirst.Value / 4 - 5 ||
-                    parameter.Value > chainedParameterFirst.Value / 4 + 5) == true)
-                {
-                    if (parameter.Value < chainedParameterFirst.Value / 4 - 5)
+                    if (AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterSecond) == true)
                     {
-                        exception += "Диаметр ручки меньше четверти длины ручки - 5 мм, увеличьте заданное значение минимум до "
-                                + (chainedParameterFirst.Value / 4 - 5).ToString();
-                    }
-                    else
-                    {
-                        exception += "Диаметр ручки больше четверти длины ручки + 5 мм, уменьшите заданное значение минимум до "
-                                + (chainedParameterFirst.Value / 4 + 5).ToString(); ;
+                        if (AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterSecond) == true &&
+                            (parameter.Value/2<chainedParameterSecond.Value)==true)
+                        {
+                            exception += "Диаметр ручки не превышает диаметр наконечника в 2 раза, увеличьте заданное значение минимум до "
+                               + (chainedParameterSecond.Value *2).ToString()+'\n';
+                        }
+                        else if(AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterSecond) == true &&
+                            (parameter.Value / 2 - 2 > chainedParameterSecond.Value) == true)
+                        {
+                            exception += "Диаметр ручки больше диаметра наконечника более чем в 2 раза, уменьшите заданное значение минимум до "
+                               + ((chainedParameterSecond.Value+2)*2).ToString()+'\n';
+                        }
                     }
                 }
             }
@@ -117,27 +119,11 @@ namespace ScrewdriverPlugin
             {
                 if (AllParameters.TryGetValue(ParameterType.HandleLength, out chainedParameterFirst) == true)
                 {
-                    /*if (AllParameters.TryGetValue(ParameterType.HandleLength, out chainedParameterFirst) == true &&
-                    AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterSecond) == true &&
-                    (chainedParameterSecond.Value < (parameter.Value + chainedParameterFirst.Value) / 5 - 2 ||
-                        chainedParameterSecond.Value > (parameter.Value + chainedParameterFirst.Value) / 5 + 2) == true)                  
-                    {
-                        if (chainedParameterSecond.Value < (parameter.Value + chainedParameterFirst.Value) / 5 - 2)
-                        {
-                            exception += "Диаметр наконечника меньше пятой части от общей длины отвёртки - 2 мм, увеличьте заданное значение минимум до "
-                                + ((parameter.Value + chainedParameterFirst.Value) / 5 - 2).ToString();
-                        }
-                        else
-                        {
-                            exception += "Диаметр наконечника большей пятой части от общей длины отвёртки + 2 мм, уменьшите заданное значение минимум до "
-                                + ((parameter.Value + chainedParameterFirst.Value) / 5 + 2).ToString();
-                        }
-                    }*/
                     if(AllParameters.TryGetValue(ParameterType.HandleLength, out chainedParameterFirst) == true &&
                         parameter.Value<chainedParameterFirst.Value)
                     {
                         exception += "Длина наконечника меньше длины ручки, увеличьте заданное значение как минимум до "
-                        + (chainedParameterFirst.Value).ToString();
+                        + (chainedParameterFirst.Value).ToString()+'\n';
                     }
 
                 }
@@ -145,10 +131,16 @@ namespace ScrewdriverPlugin
             else if (parameterType == ParameterType.RodWidth)
             {
                 if (AllParameters.TryGetValue(ParameterType.HandleWidth, out chainedParameterThird) == true &&
-                    (parameter.Value>chainedParameterThird.Value/2) == true)
+                    (parameter.Value<chainedParameterThird.Value/2-2) == true)
                 {
-                    exception += "Диаметр наконечника большей диаметра ручки, уменьшите заданное значение минимум до "
-                                + (chainedParameterThird.Value/2).ToString();
+                    exception += "Диаметр наконечника меньше половины диаметра ручки, увеличьте заданное значение минимум до "
+                                + (chainedParameterThird.Value/2-2).ToString()+'\n';
+                }
+                else if (AllParameters.TryGetValue(ParameterType.HandleWidth, out chainedParameterThird) == true &&
+                    (parameter.Value > chainedParameterThird.Value / 2)==true)
+                {
+                    exception += "Диаметр наконечника больше половины диаметра ручки, уменьшите заданное значение минимум до "
+                                + (chainedParameterThird.Value / 2).ToString()+'\n';
                 }
             }
             if (exception != "")

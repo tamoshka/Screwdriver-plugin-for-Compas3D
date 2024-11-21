@@ -173,9 +173,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(390, 232);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(253, 20);
+            this.label10.Size = new System.Drawing.Size(211, 20);
             this.label10.TabIndex = 17;
-            this.label10.Text = "1/2 диаметра ручки или меньше";
+            this.label10.Text = "1/2 диаметра ручки (-2 мм)";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // ButtonCreate
