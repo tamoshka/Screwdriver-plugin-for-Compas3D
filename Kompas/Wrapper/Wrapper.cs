@@ -15,7 +15,9 @@ using System.Security.Cryptography;
 
 namespace Kompas
 {
-
+    /// <summary>
+    /// Класс для работы с API Компас
+    /// </summary>
     public class Wrapper 
     {
         private KompasObject _kompas;

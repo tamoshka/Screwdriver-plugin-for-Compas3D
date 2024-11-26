@@ -9,6 +9,9 @@ using Kompas;
 namespace ScrewdriverPlugin
 
 {
+    /// <summary>
+    /// Класс для построения модели отвёртки в Компас
+    /// </summary>
     public class Builder
     {
         private Wrapper _wrapper = new Wrapper();
