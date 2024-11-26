@@ -208,53 +208,49 @@ namespace ScrewdriverPlugin
             {
                 if (parameterType == ParameterType.HandleLength)
                 {
+                    TextBoxHandleLength.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        TextBoxHandleLength.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxHandleLength, "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
                     }
                     else
                     {
-                        TextBoxHandleLength.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxHandleLength, text);
                     }
                 }
                 else if (parameterType == ParameterType.HandleWidth)
                 {
+                    TextBoxHandleWidth.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        TextBoxHandleWidth.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxHandleWidth, "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
                     }
                     else
                     {
-                        TextBoxHandleWidth.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxHandleWidth, text);
                     }
                 }
                 else if (parameterType == ParameterType.RodLength)
                 {
+                    TextBoxRodLength.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        TextBoxRodLength.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxRodLength, "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
                     }
                     else
                     {
-                        TextBoxRodLength.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxRodLength, text);
                     }
                 }
                 else if (parameterType == ParameterType.RodWidth)
                 {
+                    TextBoxRodWidth.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        TextBoxRodWidth.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxRodWidth, "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
                     }
                     else
                     {
-                        TextBoxRodWidth.BackColor = Color.Red;
                         toolTip1.SetToolTip(this.TextBoxRodWidth, text);
                     }
                     
@@ -264,55 +260,23 @@ namespace ScrewdriverPlugin
             {
                 if (parameterType == ParameterType.HandleLength)
                 {
-                    if (whatReason == 1)
-                    {
-                        TextBoxHandleLength.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxHandleLength, null);
-                    }
-                    else
-                    {
-                        TextBoxHandleLength.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxHandleLength, null);
-                    }
+                    TextBoxHandleLength.BackColor = Color.Green;
+                    toolTip1.SetToolTip(TextBoxHandleLength, null);
                 }
                 else if (parameterType == ParameterType.HandleWidth)
                 {
-                    if (whatReason == 1)
-                    {
-                        TextBoxHandleWidth.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxHandleWidth, null);
-                    }
-                    else
-                    {
-                        TextBoxHandleWidth.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxHandleLength, null);
-                    }
+                    TextBoxHandleWidth.BackColor = Color.Green;
+                    toolTip1.SetToolTip(TextBoxHandleLength, null);
                 }
                 else if (parameterType == ParameterType.RodLength)
                 {
-                    if (whatReason == 1)
-                    {
-                        TextBoxRodLength.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxRodLength, null);
-                    }
-                    else 
-                    {
-                        TextBoxRodLength.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxHandleLength, null);
-                    }
+                    TextBoxRodLength.BackColor = Color.Green;
+                    toolTip1.SetToolTip(TextBoxRodLength, null);
                 }
                 else if (parameterType == ParameterType.RodWidth)
                 {
-                    if (whatReason == 1)
-                    {
-                        TextBoxRodWidth.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxRodWidth, null);
-                    }
-                    else
-                    {
-                        TextBoxRodWidth.BackColor = Color.Green;
-                        toolTip1.SetToolTip(TextBoxRodWidth, null);
-                    }
+                    TextBoxRodWidth.BackColor = Color.Green;
+                    toolTip1.SetToolTip(TextBoxRodWidth, null);
                 }
             }
         }
