@@ -37,7 +37,10 @@ namespace Kompas
         private Kompas6API5.ksSketchDefinition _sketchDefForExtrusion;
 
 
-
+        /// <summary>
+        /// Создание эскиза в компасе
+        /// </summary>
+        /// <param name="perspective">Выбранная плоскость</param>
         public void CreateSketch(int perspective)
         {
             _sketchEntity = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
@@ -59,18 +62,36 @@ namespace Kompas
             _sketchEntity.Create(); // Создаем эскиз в модели
         }
 
-        public void CreateLine(double x1, double y1, double x2, double y2, int style)
+        /// <summary>
+        /// Создание линии в компасе
+        /// </summary>
+        /// <param name="pointsArray">Массив точек по которым строятся линии</param>
+        /// <param name="start">Стартовый индекс массива</param>
+        /// <param name="count">Количество считываемых строк из массива</param>
+        public void CreateLine(double[,] pointsArray, int start, int count)///double x1, double y1, double x2, double y2, int style)
         {
             _document2D = (ksDocument2D)_sketchDef.BeginEdit();
-
+            
             if (_document2D != null)
             {
-                _document2D.ksLineSeg(x1, y1, x2, y2, style);
+                for (int i=start;i<start+count;i++)
+                {
+                    _document2D.ksLineSeg(pointsArray[i,0], pointsArray[i, 1], pointsArray[i, 2], pointsArray[i, 3], (int)pointsArray[i,4]);
+                }
                 
                 _sketchDef.EndEdit();
             }
         }
 
+        /// <summary>
+        /// Создание дуги в компасе
+        /// </summary>
+        /// <param name="x1">x координата начальной точки</param>
+        /// <param name="y1">y координата начальной точки</param>
+        /// <param name="x2">x координата промежуточной точки</param>
+        /// <param name="y2">y координата промежуточной точки</param>
+        /// <param name="x3">x координата конечной точки</param>
+        /// <param name="y3">y координата конечной точки</param>
         public void CreateArc(double x1, double y1, double x2, double y2, double x3, double y3)
         {
             _document2D = (ksDocument2D)_sketchDef.BeginEdit();
@@ -82,6 +103,9 @@ namespace Kompas
             }
         }
 
+        /// <summary>
+        /// Задание вращения в компасе
+        /// </summary>
         public void Spin()
         {
             ksEntity entityRotate = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossRotated);
@@ -98,7 +122,11 @@ namespace Kompas
             }
         }
 
-
+        /// <summary>
+        /// Выдавливание в компасе
+        /// </summary>
+        /// <param name="parameter">Метод выдавливания</param>
+        /// <param name="length">Глубина выдавливания</param>
         public void Extrusion(int parameter, double length)
         {
             if (parameter == 1)
@@ -169,6 +197,9 @@ namespace Kompas
             }
         }
 
+        /// <summary>
+        /// Открытие компаса
+        /// </summary>
         public void OpenCAD()
         {
             try
@@ -200,6 +231,9 @@ namespace Kompas
             Console.ReadLine();
         }
 
+        /// <summary>
+        /// Создание документа в компасе
+        /// </summary>
         public void CreateFile()
         {
             _document3D = (ksDocument3D)_kompas.Document3D();

@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrewdriverPlugin", "Screwd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kompas", "..\..\Kompas\Wrapper\Kompas.csproj", "{ACA92215-0309-49D8-98A6-0CDD0DAB1118}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{38DC8D1E-0256-47C9-9E6C-067022919932}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "..\Builder\Builder.csproj", "{D1FFE279-3C5E-4418-8728-2D35638A2955}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38DC8D1E-0256-47C9-9E6C-067022919932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38DC8D1E-0256-47C9-9E6C-067022919932}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38DC8D1E-0256-47C9-9E6C-067022919932}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38DC8D1E-0256-47C9-9E6C-067022919932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1FFE279-3C5E-4418-8728-2D35638A2955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1FFE279-3C5E-4418-8728-2D35638A2955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1FFE279-3C5E-4418-8728-2D35638A2955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1FFE279-3C5E-4418-8728-2D35638A2955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 namespace ScrewdriverPlugin
 
 {
-    public enum HandleType
+    /// <summary>
+    /// Перечисление типов наконечников
+    /// </summary>
+    public enum RodType
     {
-        Prisme,
-        Cylinder
+        Cruciform,
+        Flat
     }
 }
