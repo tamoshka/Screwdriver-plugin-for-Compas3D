@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,21 +74,12 @@ namespace ScrewdriverPlugin
                 };
                 _wrapper.CreateLine(pointsArray, 0, 4);
                 _wrapper.Spin();
-                _wrapper.CreateSketch(1);
-                _wrapper.CreateLine(pointsArray, 4, 5);
-                _wrapper.Extrusion(1, -x1 * 2);
-                _wrapper.CreateSketch(3);
-                _wrapper.CreateLine(pointsArray, 9, 5);
-                _wrapper.Extrusion(1, -x1 * 2);
-                _wrapper.CreateSketch(2);
-                _wrapper.CreateLine(pointsArray, 14, 2);
-                _wrapper.Extrusion(2, y);
-                _wrapper.CreateSketch(1);
-                _wrapper.CreateLine(pointsArray, 16, 6);
-                _wrapper.Extrusion(1, -x1 * 2);
-                _wrapper.CreateSketch(3);
-                _wrapper.CreateLine(pointsArray, 22, 6);
-                _wrapper.Extrusion(1, -x1 * 2);
+                int[] typeExtrusion = { 1, 1, 2, 1, 1 };
+                int[] typeSketch = { 1, 3, 2, 1, 3 };
+                double[] extrusionDepth = { -x1 * 2, -x1 * 2, y, -x1 * 2, -x1 * 2 };
+                int[] start = { 4, 9, 14, 16, 22 };
+                int[] count = { 5, 5, 2, 6, 6 };
+                Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
             }
             else
             {
@@ -105,9 +97,12 @@ namespace ScrewdriverPlugin
                 };
                 _wrapper.CreateLine(pointsArray, 0, 4);
                 _wrapper.Spin();
-                _wrapper.CreateSketch(1);
-                _wrapper.CreateLine(pointsArray, 4, 5);
-                _wrapper.Extrusion(1, -x1*2);
+                int[] typeExtrusion = { 1 };
+                int[] typeSketch = { 1 };
+                double[] extrusionDepth = { -x1*2 };
+                int[] start = { 4 };
+                int[] count = { 5 };
+                Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
             }
         }
 
@@ -130,7 +125,6 @@ namespace ScrewdriverPlugin
             double x3 = -handleWidth.Value - x2 / 10;
             if (parameters.ShapeOfHandle == HandleType.Prisme)
             {
-                _wrapper.CreateSketch(2);
                 double[,] pointsArray = 
                 { 
                     {x2 / 2, 0, x2 / 4, -x2 / 2, 1}, 
@@ -140,8 +134,12 @@ namespace ScrewdriverPlugin
                     {-x2 / 4, x2/2, x2/4, x2 /2, 1}, 
                     {x2 / 4, x2/2, x2/2, 0, 1} 
                 };
-                _wrapper.CreateLine(pointsArray, 0, 6);
-                _wrapper.Extrusion(3, y1);
+                int[] typeExtrusion = {3};
+                int[] typeSketch = {2};
+                double[] extrusionDepth = {y1};
+                int[] start = {0};
+                int[] count = {6};
+                Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
             }
             else
             {
@@ -155,6 +153,16 @@ namespace ScrewdriverPlugin
                 };
                 _wrapper.CreateLine(pointsArray, 0, 3);
                 _wrapper.Spin();
+            }
+        }
+
+        private void Helper(double[,] points, int[] typeExtrusion, int[] typeSketch, double[] extrusionDepth, int[] start, int[] count)
+        {
+            for (int i = 0; i < typeExtrusion.Length; i++)
+            {
+                _wrapper.CreateSketch(typeSketch[i]);
+                _wrapper.CreateLine(points, start[i], count[i]);
+                _wrapper.Extrusion(typeExtrusion[i], extrusionDepth[i]);
             }
         }
 
