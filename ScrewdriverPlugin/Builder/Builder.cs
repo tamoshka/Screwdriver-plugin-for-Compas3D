@@ -159,6 +159,15 @@ namespace ScrewdriverPlugin
             }
         }
 
+        /// <summary>
+        /// Вспомогательный метод для создания эскиза-создания линии-выдавливания
+        /// </summary>
+        /// <param name="points">Точки по которым строятся линии</param>
+        /// <param name="typeExtrusion">Тип выдавливания</param>
+        /// <param name="typeSketch">Плоскость для эскиза</param>
+        /// <param name="extrusionDepth">Глубина выдавливания</param>
+        /// <param name="start">Стартовый индекс массива</param>
+        /// <param name="count">Количество считываемых строк из массива</param>
         private void Helper(double[,] points, int[] typeExtrusion, int[] typeSketch, double[] extrusionDepth, int[] start, int[] count)
         {
             for (int i = 0; i < typeExtrusion.Length; i++)
