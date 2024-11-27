@@ -60,8 +60,10 @@ namespace ScrewdriverPlugin
                     {-x1, -y + y/5, -x1, -y, 1} ,
                     {x1, -y +y/5, x1, -y, 1},
                     {-x1, -y, x1, -y, 1},
-                    {Math.Sqrt(2) / 2 * x1, Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, 1},
-                    {Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, Math.Sqrt(2) / 2 * x1, 1},
+                    {Math.Sqrt(2) / 2 * x1, Math.Sqrt(2) / 2 * x1, 
+                        -Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, 1},
+                    {Math.Sqrt(2) / 2 * x1, -Math.Sqrt(2) / 2 * x1, 
+                        -Math.Sqrt(2) / 2 * x1, Math.Sqrt(2) / 2 * x1, 1},
                     {x1 / 5, y - 1, x1, y - y / 5, 1},
                     {-x1 / 5, y - 1, -x1, y - y / 5, 1},
                     {-x1 / 5, y - 1, x1 / 5, y - 1, 1},
@@ -168,7 +170,8 @@ namespace ScrewdriverPlugin
         /// <param name="extrusionDepth">Глубина выдавливания</param>
         /// <param name="start">Стартовый индекс массива</param>
         /// <param name="count">Количество считываемых строк из массива</param>
-        private void Helper(double[,] points, int[] typeExtrusion, int[] typeSketch, double[] extrusionDepth, int[] start, int[] count)
+        private void Helper(double[,] points, int[] typeExtrusion, int[] typeSketch, 
+            double[] extrusionDepth, int[] start, int[] count)
         {
             for (int i = 0; i < typeExtrusion.Length; i++)
             {

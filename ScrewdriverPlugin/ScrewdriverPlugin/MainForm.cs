@@ -45,10 +45,15 @@ namespace ScrewdriverPlugin
             ComboBoxShapeOfHandle.SelectedIndex =1;
             ComboBoxShapeOfRod.SelectedIndex = 1;
             // Set up the ToolTip text for the Button and Checkbox.
-            toolTip1.SetToolTip(this.TextBoxRodLength, "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
-            toolTip1.SetToolTip(this.TextBoxRodWidth, "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
-            toolTip1.SetToolTip(this.TextBoxHandleWidth, "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
-            toolTip1.SetToolTip(this.TextBoxHandleLength, "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
+            toolTip1.SetToolTip(this.TextBoxRodLength, 
+                "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
+            toolTip1.SetToolTip(this.TextBoxRodWidth, 
+                "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки" +
+                " +/- 2 мм");
+            toolTip1.SetToolTip(this.TextBoxHandleWidth, 
+                "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
+            toolTip1.SetToolTip(this.TextBoxHandleLength, 
+                "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
         }
 
         /// <summary>
@@ -58,9 +63,14 @@ namespace ScrewdriverPlugin
         /// <param name="e"></param>
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
-            if (TextBoxRodLength.BackColor == Color.Red || TextBoxHandleLength.BackColor == Color.Red || TextBoxRodWidth.BackColor == Color.Red 
-                || TextBoxHandleWidth.BackColor == Color.Red || TextBoxRodLength.BackColor == SystemColors.Window || TextBoxRodWidth.BackColor == SystemColors.Window 
-                || TextBoxHandleWidth.BackColor == SystemColors.Window || TextBoxHandleLength.BackColor == SystemColors.Window)
+            if (TextBoxRodLength.BackColor == Color.Red || 
+                TextBoxHandleLength.BackColor == Color.Red || 
+                TextBoxRodWidth.BackColor == Color.Red || 
+                TextBoxHandleWidth.BackColor == Color.Red || 
+                TextBoxRodLength.BackColor == SystemColors.Window || 
+                TextBoxRodWidth.BackColor == SystemColors.Window || 
+                TextBoxHandleWidth.BackColor == SystemColors.Window || 
+                TextBoxHandleLength.BackColor == SystemColors.Window)
             {
                 
             }
@@ -115,7 +125,8 @@ namespace ScrewdriverPlugin
                 FirstValidate(TextBoxHandleLength, ParameterType.HandleLength);
                 if (TextBoxHandleLength.BackColor != SystemColors.Window)
                 {
-                    SecondValidate(TextBoxHandleLength, ParameterType.HandleLength);
+                    SecondValidate(TextBoxHandleLength, 
+                        ParameterType.HandleLength);
                 }
             }
         }
@@ -165,7 +176,8 @@ namespace ScrewdriverPlugin
         /// </summary>
         /// <param name="textBox"></param>
         /// <param name="parameterType"></param>
-        private void FirstValidate(System.Windows.Forms.TextBox textBox, ParameterType parameterType)
+        private void FirstValidate(System.Windows.Forms.TextBox textBox, 
+            ParameterType parameterType)
         {
             try
             {
@@ -186,29 +198,36 @@ namespace ScrewdriverPlugin
         /// <param name="whatColor">Устанавливаемый цвет</param>
         /// <param name="whatReason">Причина установки цвета</param>
         /// <param name="text">Текст устанавливаемый в подсказку</param>
-        private void SetColors(ParameterType parameterType, int whatColor, int whatReason, string text)
+        private void SetColors(ParameterType parameterType, int whatColor, int whatReason, 
+            string text)
         {
             if (whatColor == 1)
             {
                 if (parameterType == ParameterType.HandleLength)
                 {
                     TextBoxHandleLength.BackColor = SystemColors.Window;
-                    toolTip1.SetToolTip(this.TextBoxHandleLength, "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
+                    toolTip1.SetToolTip(this.TextBoxHandleLength, 
+                        "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
                 }
                 else if (parameterType == ParameterType.HandleWidth)
                 {
                     TextBoxHandleWidth.BackColor = SystemColors.Window;
-                    toolTip1.SetToolTip(this.TextBoxHandleWidth, "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
+                    toolTip1.SetToolTip(this.TextBoxHandleWidth, 
+                        "Диаметр ручки должен находиться в диапазоне четверти от длины ручки " +
+                        "+/- 5 мм");
                 }
                 else if (parameterType == ParameterType.RodLength)
                 {
                     TextBoxRodLength.BackColor = SystemColors.Window;
-                    toolTip1.SetToolTip(this.TextBoxRodLength, "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
+                    toolTip1.SetToolTip(this.TextBoxRodLength, 
+                        "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
                 }
                 else if (parameterType == ParameterType.RodWidth)
                 {
                     TextBoxRodWidth.BackColor = SystemColors.Window;
-                    toolTip1.SetToolTip(this.TextBoxRodWidth, "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
+                    toolTip1.SetToolTip(this.TextBoxRodWidth, 
+                        "Диаметр наконечника должен находиться в диапазоне пятой части от " +
+                        "длины отвёртки +/- 2 мм");
                 }
             }
             else if (whatColor == 2) 
@@ -218,7 +237,8 @@ namespace ScrewdriverPlugin
                     TextBoxHandleLength.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        toolTip1.SetToolTip(this.TextBoxHandleLength, "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
+                        toolTip1.SetToolTip(this.TextBoxHandleLength, 
+                            "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
                     }
                     else
                     {
@@ -230,7 +250,9 @@ namespace ScrewdriverPlugin
                     TextBoxHandleWidth.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        toolTip1.SetToolTip(this.TextBoxHandleWidth, "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
+                        toolTip1.SetToolTip(this.TextBoxHandleWidth, 
+                            "Диаметр ручки должен находиться в диапазоне четверти " +
+                            "от длины ручки +/- 5 мм");
                     }
                     else
                     {
@@ -242,7 +264,8 @@ namespace ScrewdriverPlugin
                     TextBoxRodLength.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        toolTip1.SetToolTip(this.TextBoxRodLength, "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
+                        toolTip1.SetToolTip(this.TextBoxRodLength, 
+                            "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
                     }
                     else
                     {
@@ -254,7 +277,9 @@ namespace ScrewdriverPlugin
                     TextBoxRodWidth.BackColor = Color.Red;
                     if (whatReason == 1)
                     {
-                        toolTip1.SetToolTip(this.TextBoxRodWidth, "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
+                        toolTip1.SetToolTip(this.TextBoxRodWidth, 
+                            "Диаметр наконечника должен находиться в диапазоне пятой части " +
+                            "от длины отвёртки +/- 2 мм");
                     }
                     else
                     {
@@ -289,11 +314,13 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Вторичная валидация, попытка создания параметра, попытка добавления корректного параметра в словарь
+        /// Вторичная валидация, попытка создания параметра, попытка добавления 
+        /// корректного параметра в словарь
         /// </summary>
         /// <param name="textBox">Используемый текстбокс</param>
         /// <param name="parameterType">Тип параметра</param>
-        private void SecondValidate(System.Windows.Forms.TextBox textBox, ParameterType parameterType)
+        private void SecondValidate(System.Windows.Forms.TextBox textBox, 
+            ParameterType parameterType)
         {
             bool cached = false;
             Parameter parameter = new Parameter();

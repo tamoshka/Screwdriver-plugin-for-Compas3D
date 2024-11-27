@@ -25,7 +25,8 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест геттера AllParameters.")]
         public void TestProjectGetParameters()
         {
-            Dictionary<ParameterType, Parameter> expected = new Dictionary<ParameterType, Parameter>()
+            Dictionary<ParameterType, Parameter> expected = new Dictionary<ParameterType,
+                Parameter>()
             {
             };
             _parameters.AllParameters = new Dictionary<ParameterType, Parameter>()
@@ -128,27 +129,48 @@ namespace ScrewdriverPlugin.UnitTests
         /// <param name="parameterType">Тип параметра.</param>
         /// <param name="wrongArgument">Неверный аргумент.</param>
         /// <param name="message">Текст ошибки.</param>
-        [TestCase(ParameterType.HandleLength, 121, "Должно возникать исключение, если HandleLength более чем в 4 раза больше HandleWidth",
-            TestName = "Длина ручки более чем в 4 раза больше её диаметра, уменьшите заданное значение минимум до 120")]
-        [TestCase(ParameterType.HandleLength, 79, "Должно возникать исключение, если HandleLength менее чем в 4 раза больше HandleWidth",
-            TestName = "Длина ручки менее чем в 4 раза больше её диаметра, увеличьте заданное значение минимум до 80")]
-        [TestCase(ParameterType.HandleLength, 101, "Должно возникать исключение, если HandleLength больше чем RodLength",
-            TestName = "Длина ручки больше длины наконечника, уменьшите заданное значение минимум до 100")]
-        [TestCase(ParameterType.HandleWidth, 27, "Должно возникать исключение, если HandleWidth более чем в 2 раза больше RodWidth",
-            TestName = "Диаметр ручки больше диаметра наконечника более чем в 2 раза, уменьшите заданное значение минимум до 26")]
-        [TestCase(ParameterType.HandleWidth, 21, "Должно возникать исключение, если HandleWidth менее чем в 2 раза больше RodWidth",
-            TestName = "Диаметр ручки больше диаметра наконечника менее чем в 2 раза, увеличьте заданное значение минимум до 22")]
-        [TestCase(ParameterType.HandleWidth, 19, "Должно возникать исключение, если HandleWidth более чем в 4 раза меньше HandleLength",
-            TestName = "Диаметр ручки меньше четверти длины ручки - 5 мм, увеличьте заданное значение минимум до 20")]
-        [TestCase(ParameterType.HandleWidth, 31, "Должно возникать исключение, если HandleWidth менее чем в 4 раза меньше HandleLength",
-            TestName = "Диаметр ручки больше четверти длины ручки + 5 мм, уменьшите заданное значение минимум до 30")]
-        [TestCase(ParameterType.RodLength, 99, "Должно возникать исключение, если RodLength меньше чем HandleLength",
-            TestName = "Длина наконечника меньше длины ручки, увеличьте заданное значение как минимум до 100")]
-        [TestCase(ParameterType.RodWidth, 13, "Должно возникать исключение, если RodWidth менее чем в 2 раза меньше HandleWidth",
-            TestName = "Диаметр наконечника меньше половины диаметра ручки, увеличьте заданное значение минимум до 12")]
-        [TestCase(ParameterType.RodWidth, 10, "Должно возникать исключение, если RodWidth более чем в 2 раза меньше HandleWidth",
-            TestName = "Диаметр наконечника больше половины диаметра ручки, уменьшите заданное значение минимум до 11")]
-        public void TestSetArgumentException(ParameterType parameterType, int wrongArgument, string message)
+        [TestCase(ParameterType.HandleLength, 121, "Должно возникать исключение, если " +
+            "HandleLength более чем в 4 раза больше HandleWidth",
+            TestName = "Длина ручки более чем в 4 раза больше её диаметра, уменьшите " +
+            "заданное значение минимум до 120")]
+        [TestCase(ParameterType.HandleLength, 79, "Должно возникать исключение, если " +
+            "HandleLength менее чем в 4 раза больше HandleWidth",
+            TestName = "Длина ручки менее чем в 4 раза больше её диаметра, увеличьте " +
+            "заданное значение минимум до 80")]
+        [TestCase(ParameterType.HandleLength, 101, "Должно возникать исключение, если " +
+            "HandleLength больше чем RodLength",
+            TestName = "Длина ручки больше длины наконечника, уменьшите заданное " +
+            "значение минимум до 100")]
+        [TestCase(ParameterType.HandleWidth, 27, "Должно возникать исключение, если HandleWidth " +
+            "более чем в 2 раза больше RodWidth",
+            TestName = "Диаметр ручки больше диаметра наконечника более чем в 2 раза, уменьшите " +
+            "заданное значение минимум до 26")]
+        [TestCase(ParameterType.HandleWidth, 21, "Должно возникать исключение, если HandleWidth " +
+            "менее чем в 2 раза больше RodWidth",
+            TestName = "Диаметр ручки больше диаметра наконечника менее чем в 2 раза, увеличьте " +
+            "заданное значение минимум до 22")]
+        [TestCase(ParameterType.HandleWidth, 19, "Должно возникать исключение, если HandleWidth " +
+            "более чем в 4 раза меньше HandleLength",
+            TestName = "Диаметр ручки меньше четверти длины ручки - 5 мм, увеличьте заданное " +
+            "значение минимум до 20")]
+        [TestCase(ParameterType.HandleWidth, 31, "Должно возникать исключение, если HandleWidth " +
+            "менее чем в 4 раза меньше HandleLength",
+            TestName = "Диаметр ручки больше четверти длины ручки + 5 мм, уменьшите заданное " +
+            "значение минимум до 30")]
+        [TestCase(ParameterType.RodLength, 99, "Должно возникать исключение, если RodLength " +
+            "меньше чем HandleLength",
+            TestName = "Длина наконечника меньше длины ручки, увеличьте заданное значение " +
+            "как минимум до 100")]
+        [TestCase(ParameterType.RodWidth, 13, "Должно возникать исключение, если RodWidth" +
+            " менее чем в 2 раза меньше HandleWidth",
+            TestName = "Диаметр наконечника меньше половины диаметра ручки, " +
+            "увеличьте заданное значение минимум до 12")]
+        [TestCase(ParameterType.RodWidth, 10, "Должно возникать исключение, " +
+            "если RodWidth более чем в 2 раза меньше HandleWidth",
+            TestName = "Диаметр наконечника больше половины диаметра ручки, " +
+            "уменьшите заданное значение минимум до 11")]
+        public void TestSetArgumentException(ParameterType parameterType, 
+            int wrongArgument, string message)
         {
             Parameter handleLength = new Parameter();
             handleLength.MaxValue = 150;

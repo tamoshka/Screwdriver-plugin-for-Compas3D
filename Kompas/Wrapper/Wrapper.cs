@@ -72,7 +72,7 @@ namespace Kompas
         /// <param name="pointsArray">Массив точек по которым строятся линии</param>
         /// <param name="start">Стартовый индекс массива</param>
         /// <param name="count">Количество считываемых строк из массива</param>
-        public void CreateLine(double[,] pointsArray, int start, int count)///double x1, double y1, double x2, double y2, int style)
+        public void CreateLine(double[,] pointsArray, int start, int count)
         {
             ksDocument2D document2D;
             ksSketchDefinition sketchDef;
@@ -83,7 +83,8 @@ namespace Kompas
             {
                 for (int i=start;i<start+count;i++)
                 {
-                    document2D.ksLineSeg(pointsArray[i,0], pointsArray[i, 1], pointsArray[i, 2], pointsArray[i, 3], (int)pointsArray[i,4]);
+                    document2D.ksLineSeg(pointsArray[i,0], pointsArray[i, 1], 
+                        pointsArray[i, 2], pointsArray[i, 3], (int)pointsArray[i,4]);
                 }
                 
                 sketchDef.EndEdit();
@@ -121,10 +122,11 @@ namespace Kompas
             ksEntity entityRotate = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossRotated);
             if (entityRotate != null)
             {
-                ksBossRotatedDefinition rotateDef = (ksBossRotatedDefinition)entityRotate.GetDefinition(); // интерфейс базовой операции вращения
+                ksBossRotatedDefinition rotateDef = 
+                    (ksBossRotatedDefinition)entityRotate.GetDefinition(); 
                 if (rotateDef != null)
                 {
-                    rotateDef.directionType = (short)Direction_Type.dtNormal;   // тонкая стенка в два направления
+                    rotateDef.directionType = (short)Direction_Type.dtNormal;
                     rotateDef.SetSideParam(false, 360);
                     rotateDef.SetSketch(_sketchEntity);  // эскиз операции вращения
                     entityRotate.Create();              // создать операцию
@@ -141,18 +143,22 @@ namespace Kompas
         {
             if (parameter == 1)
             {
-                ksEntity entityExtr = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
+                ksEntity entityExtr = 
+                    (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
                 if (entityExtr != null)
                 {
-                    ksEntity entityCutExtr = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+                    ksEntity entityCutExtr = 
+                        (ksEntity)_part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
                     if (entityCutExtr != null)
                     {
-                        ksCutExtrusionDefinition cutExtrDef = (ksCutExtrusionDefinition)entityCutExtr.GetDefinition();
+                        ksCutExtrusionDefinition cutExtrDef = 
+                            (ksCutExtrusionDefinition)entityCutExtr.GetDefinition();
                         if (cutExtrDef != null)
                         {
-                            cutExtrDef.SetSketch(_sketchEntity);    // установим эскиз операции
-                            cutExtrDef.directionType = (short)Direction_Type.dtBoth; //прямое направление
-                            cutExtrDef.SetSideParam(true, (short)End_Type.etBlind, length, 0, false);
+                            cutExtrDef.SetSketch(_sketchEntity);    
+                            cutExtrDef.directionType = (short)Direction_Type.dtBoth; 
+                            cutExtrDef.SetSideParam(true, 
+                                (short)End_Type.etBlind, length, 0, false);
                             cutExtrDef.SetThinParam(false, 0, 0, 0);
                         }
 
@@ -162,18 +168,20 @@ namespace Kompas
             }
             else if (parameter == 2)
             {
-                ksEntity entityExtr = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
+                ksEntity entityExtr = 
+                    (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
                 if (entityExtr != null)
                 {
                     // интерфейс свойств базовой операции выдавливания
-                    ksBossExtrusionDefinition extrusionDef = (ksBossExtrusionDefinition)entityExtr.GetDefinition(); // интерфейс базовой операции выдавливания
+                    ksBossExtrusionDefinition extrusionDef = 
+                        (ksBossExtrusionDefinition)entityExtr.GetDefinition(); 
                     if (extrusionDef != null)
                     {
-                        extrusionDef.directionType = (short)Direction_Type.dtNormal;         // направление выдавливания
+                        extrusionDef.directionType = (short)Direction_Type.dtNormal; 
                         extrusionDef.SetSideParam(true, // прямое направление
                             (short)End_Type.etBlind,    // строго на глубину
                             length, 0, false);
-                        extrusionDef.SetThinParam(true, (short)Direction_Type.dtBoth, 0.25, 0.25); // тонкая стенка в два направления
+                        extrusionDef.SetThinParam(true, (short)Direction_Type.dtBoth, 0.25, 0.25);
                         extrusionDef.SetSketch(_sketchEntity);   // эскиз операции выдавливания
                         entityExtr.Create();                    // создать операцию
                     }
@@ -181,26 +189,29 @@ namespace Kompas
             }
             else if (parameter == 3)
             {
-                ksEntity entityExtr = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
+                ksEntity entityExtr = 
+                    (ksEntity)_part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
                 if (entityExtr != null)
                 {
                     // интерфейс свойств базовой операции выдавливания
-                    ksBossExtrusionDefinition extrusionDef = (ksBossExtrusionDefinition)entityExtr.GetDefinition(); // интерфейс базовой операции выдавливания
+                    ksBossExtrusionDefinition extrusionDef = 
+                        (ksBossExtrusionDefinition)entityExtr.GetDefinition(); 
                     if (extrusionDef != null)
                     {
-                        ksExtrusionParam extrProp = (ksExtrusionParam)extrusionDef.ExtrusionParam(); // интерфейс структуры параметров выдавливания
-                        ksThinParam thinProp = (ksThinParam)extrusionDef.ThinParam();      // интерфейс структуры параметров тонкой стенки
+                        ksExtrusionParam extrProp = 
+                            (ksExtrusionParam)extrusionDef.ExtrusionParam();
+                        ksThinParam thinProp = (ksThinParam)extrusionDef.ThinParam();
                         if (extrProp != null && thinProp != null)
                         {
-                            extrusionDef.SetSketch(_sketchEntity); // эскиз операции выдавливания
+                            extrusionDef.SetSketch(_sketchEntity); 
 
-                            extrProp.direction = (short)Direction_Type.dtNormal;      // направление выдавливания (прямое)
-                            extrProp.typeNormal = (short)End_Type.etBlind;      // тип выдавливания (строго на глубину)
-                            extrProp.depthNormal = length;         // глубина выдавливания
+                            extrProp.direction = (short)Direction_Type.dtNormal;     
+                            extrProp.typeNormal = (short)End_Type.etBlind;      
+                            extrProp.depthNormal = length;       
 
-                            thinProp.thin = false;              // без тонкой стенки
+                            thinProp.thin = false;             
 
-                            entityExtr.Create();                // создадим операцию
+                            entityExtr.Create();               
                         }
                     }
                 }
