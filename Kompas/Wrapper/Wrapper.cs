@@ -20,24 +20,25 @@ namespace Kompas
     /// </summary>
     public class Wrapper 
     {
+        /// <summary>
+        /// Поле для хранения приложения Компас
+        /// </summary>
         private KompasObject _kompas;
 
-        private Kompas6API5.ksDocument3D _document3D;
-
+        /// <summary>
+        /// Поле для хранения выбранной 3d детали
+        /// </summary>
         private Kompas6API5.ksPart _part;
 
+        /// <summary>
+        /// Поле для хранения выбранного эскиза
+        /// </summary>
         private Kompas6API5.ksEntity _sketchEntity;
 
+        /// <summary>
+        /// Поле для хранения выбранной плоскости
+        /// </summary>
         private Kompas6API5.ksEntity _plane;
-
-        private Kompas6API5.ksSketchDefinition _sketchDef;
-
-        private Kompas6API5.ksDocument2D _document2D;
-
-        private Kompas6API5.ksEntity _sketchForExtrusion;
-
-        private Kompas6API5.ksSketchDefinition _sketchDefForExtrusion;
-
 
         /// <summary>
         /// Создание эскиза в компасе
@@ -45,8 +46,9 @@ namespace Kompas
         /// <param name="perspective">Выбранная плоскость</param>
         public void CreateSketch(int perspective)
         {
+            ksSketchDefinition sketchDef;
             _sketchEntity = (ksEntity)_part.NewEntity((short)Obj3dType.o3d_sketch);
-            _sketchDef = (ksSketchDefinition)_sketchEntity.GetDefinition();
+            sketchDef = (ksSketchDefinition)_sketchEntity.GetDefinition();
 
             if (perspective == 1)
             {
@@ -60,7 +62,7 @@ namespace Kompas
             {
                 _plane = (ksEntity)_part.GetDefaultEntity((short)Obj3dType.o3d_planeYOZ);
             }
-            _sketchDef.SetPlane(_plane);
+            sketchDef.SetPlane(_plane);
             _sketchEntity.Create(); // Создаем эскиз в модели
         }
 
@@ -72,16 +74,19 @@ namespace Kompas
         /// <param name="count">Количество считываемых строк из массива</param>
         public void CreateLine(double[,] pointsArray, int start, int count)///double x1, double y1, double x2, double y2, int style)
         {
-            _document2D = (ksDocument2D)_sketchDef.BeginEdit();
+            ksDocument2D document2D;
+            ksSketchDefinition sketchDef;
+            sketchDef = (ksSketchDefinition)_sketchEntity.GetDefinition();
+            document2D = (ksDocument2D)sketchDef.BeginEdit();
             
-            if (_document2D != null)
+            if (document2D != null)
             {
                 for (int i=start;i<start+count;i++)
                 {
-                    _document2D.ksLineSeg(pointsArray[i,0], pointsArray[i, 1], pointsArray[i, 2], pointsArray[i, 3], (int)pointsArray[i,4]);
+                    document2D.ksLineSeg(pointsArray[i,0], pointsArray[i, 1], pointsArray[i, 2], pointsArray[i, 3], (int)pointsArray[i,4]);
                 }
                 
-                _sketchDef.EndEdit();
+                sketchDef.EndEdit();
             }
         }
 
@@ -96,12 +101,15 @@ namespace Kompas
         /// <param name="y3">y координата конечной точки</param>
         public void CreateArc(double x1, double y1, double x2, double y2, double x3, double y3)
         {
-            _document2D = (ksDocument2D)_sketchDef.BeginEdit();
+            ksDocument2D document2D;
+            ksSketchDefinition sketchDef;
+            sketchDef = (ksSketchDefinition)_sketchEntity.GetDefinition();
+            document2D = (ksDocument2D)sketchDef.BeginEdit();
 
-            if (_document2D != null)
+            if (document2D != null)
             {
-                _document2D.ksArcBy3Points(x1, y1, x2, y2, x3, y3, 1);
-                _sketchDef.EndEdit();
+                document2D.ksArcBy3Points(x1, y1, x2, y2, x3, y3, 1);
+                sketchDef.EndEdit();
             }
         }
 
@@ -238,9 +246,10 @@ namespace Kompas
         /// </summary>
         public void CreateFile()
         {
-            _document3D = (ksDocument3D)_kompas.Document3D();
-            _document3D.Create();
-            _part = (ksPart)_document3D.GetPart((short)Part_Type.pTop_Part);
+            ksDocument3D document3D;
+            document3D = (ksDocument3D)_kompas.Document3D();
+            document3D.Create();
+            _part = (ksPart)document3D.GetPart((short)Part_Type.pTop_Part);
         }
 
     }

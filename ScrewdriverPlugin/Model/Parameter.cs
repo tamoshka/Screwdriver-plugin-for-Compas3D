@@ -12,8 +12,19 @@ namespace ScrewdriverPlugin
     /// </summary>
     public class Parameter
     {
+        /// <summary>
+        /// Поле для максимального значения параметра
+        /// </summary>
         private int _maxValue;
+
+        /// <summary>
+        /// Поле для минимального значения параметра
+        /// </summary>
         private int _minValue;
+
+        /// <summary>
+        /// Поле для значения параметра
+        /// </summary>
         private int _value;
 
         /// <summary>
@@ -57,8 +68,15 @@ namespace ScrewdriverPlugin
             }
             set
             {
-                _value = value;
-                Validator();
+                try
+                {
+                    _value = value;
+                    Validator();
+                }
+                catch (Exception ex) 
+                {
+                    throw new ArgumentException(ex.Message);
+                }
             }
         }
 

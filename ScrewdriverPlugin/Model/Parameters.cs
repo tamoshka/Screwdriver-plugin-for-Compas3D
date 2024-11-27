@@ -13,16 +13,28 @@ namespace ScrewdriverPlugin
     /// </summary>
     public class Parameters
     {
+        /// <summary>
+        /// Поле хранящее в себе текущий параметр
+        /// </summary>
         private Dictionary<ParameterType, Parameter> _parameter;
 
+        /// <summary>
+        /// Поле хранящее в себе словарь всех параметров
+        /// </summary>
         private Dictionary<ParameterType, Parameter> _parameters;
 
+        /// <summary>
+        /// Поле хранящее в себе тип ручки
+        /// </summary>
         private HandleType _handleType;
 
+        /// <summary>
+        /// Поле хранящее в себе тип наконечника
+        /// </summary>
         private RodType _rodType;
 
         /// <summary>
-        /// Свойство для _parameters содержащее в себе словарь всех параметров
+        /// Свойство для _parameters
         /// </summary>
         public Dictionary<ParameterType, Parameter> AllParameters
         {
@@ -43,13 +55,20 @@ namespace ScrewdriverPlugin
         /// <param name="parameter">Параметр</param>
         public void SetParameter(ParameterType parameterType, Parameter parameter)
         {
-            _parameter = new Dictionary<ParameterType, Parameter>()
+            try
             {
-                {parameterType, parameter }
-            };
-            AllParameters.Remove(parameterType);
-            AllParameters.Add(parameterType, parameter);
-            ValidateParameters();
+                _parameter = new Dictionary<ParameterType, Parameter>()
+                {
+                    {parameterType, parameter }
+                };
+                AllParameters.Remove(parameterType);
+                AllParameters.Add(parameterType, parameter);
+                ValidateParameters();
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
         }
 
         /// <summary>
@@ -108,12 +127,12 @@ namespace ScrewdriverPlugin
                         if (parameter.Value < lowerQuarter)
                         {
                             exception += "Диаметр ручки меньше четверти длины ручки - 5 мм, увеличьте заданное значение минимум до "
-                                    + lowerQuarter.ToString()+'\n';
+                                    + Math.Ceiling(lowerQuarter).ToString()+'\n';
                         }
                         else if (parameter.Value > upperQuarter)
                         {
                             exception += "Диаметр ручки больше четверти длины ручки + 5 мм, уменьшите заданное значение минимум до "
-                                    + upperQuarter.ToString()+'\n'; 
+                                    + Math.Floor(upperQuarter).ToString()+'\n'; 
                         }
                     }
                     if (AllParameters.TryGetValue(ParameterType.RodWidth, out chainedParameterSecond) == true)
@@ -155,12 +174,12 @@ namespace ScrewdriverPlugin
                     if (parameter.Value < lowerHalfOfWidth)
                     {
                         exception += "Диаметр наконечника меньше половины диаметра ручки, увеличьте заданное значение минимум до "
-                                    + lowerHalfOfWidth.ToString() + '\n';
+                                    + Math.Ceiling(lowerHalfOfWidth).ToString() + '\n';
                     }
                     else if (parameter.Value > upperHalfOfWidth)
                     {
                         exception += "Диаметр наконечника больше половины диаметра ручки, уменьшите заданное значение минимум до "
-                                    + upperHalfOfWidth.ToString() + '\n';
+                                    + Math.Floor(upperHalfOfWidth).ToString() + '\n';
                     }
                 }
             }

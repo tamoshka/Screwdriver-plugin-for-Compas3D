@@ -16,7 +16,14 @@ namespace ScrewdriverPlugin
     /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Поле хранящее в себе объект класса Builder
+        /// </summary>
         private Builder _builder=new Builder();
+
+        /// <summary>
+        /// Поле хранящее в себе объект класса Parameters
+        /// </summary>
         private Parameters _parameters = new Parameters();
 
         /// <summary>
