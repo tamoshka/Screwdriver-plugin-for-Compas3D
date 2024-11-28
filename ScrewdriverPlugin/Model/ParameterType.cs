@@ -1,20 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScrewdriverPlugin
+﻿namespace ScrewdriverPlugin
 
 {
     /// <summary>
-    /// Перечисление типов параметров
+    /// Перечисление типов параметров.
     /// </summary>
     public enum ParameterType
     {
+        /// <summary>
+        /// Длина ручки.
+        /// </summary>
         HandleLength,
+
+        /// <summary>
+        /// Диаметр ручки.
+        /// </summary>
         HandleWidth,
+
+        /// <summary>
+        /// Длина наконечника.
+        /// </summary>
         RodLength,
-        RodWidth
+
+        /// <summary>
+        /// Диаметр наконечника.
+        /// </summary>
+        RodWidth,
     }
 }

@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScrewdriverPlugin
-
+﻿namespace ScrewdriverPlugin
 {
     /// <summary>
-    /// Перечисление типов наконечников
+    /// Перечисление типов наконечников.
     /// </summary>
     public enum RodType
     {
+        /// <summary>
+        /// Крестовая.
+        /// </summary>
         Cruciform,
-        Flat
+
+        /// <summary>
+        /// Плоская.
+        /// </summary>
+        Flat,
     }
 }

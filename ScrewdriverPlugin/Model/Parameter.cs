@@ -1,79 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrewdriverPlugin
-
 {
     /// <summary>
-    /// Класс параметр
+    /// Класс параметр.
     /// </summary>
     public class Parameter
     {
         /// <summary>
-        /// Поле для максимального значения параметра
+        /// Поле для максимального значения параметра.
         /// </summary>
         private int _maxValue;
 
         /// <summary>
-        /// Поле для минимального значения параметра
+        /// Поле для минимального значения параметра.
         /// </summary>
         private int _minValue;
 
         /// <summary>
-        /// Поле для значения параметра
+        /// Поле для значения параметра.
         /// </summary>
         private int _value;
 
         /// <summary>
-        /// Свойство для поля _maxValue (максимальное значение)
+        /// Gets or sets для поля _maxValue (максимальное значение).
         /// </summary>
         public int MaxValue
         {
             get
             {
-                return _maxValue;
+                return this._maxValue;
             }
+
             set
             {
-                _maxValue = value;
+                this._maxValue = value;
             }
         }
 
         /// <summary>
-        /// Свойство для поля _minValue (минимальное значение)
+        /// Gets or sets для поля _minValue (минимальное значение).
         /// </summary>
         public int MinValue
         {
             get
             {
-                return _minValue;
+                return this._minValue;
             }
+
             set
             {
-                _minValue = value;
+                this._minValue = value;
             }
         }
 
         /// <summary>
-        /// Свойство для поля _value (значение)
+        /// Gets or sets для поля _value (значение).
         /// </summary>
         public int Value
         {
             get
             {
-                return _value;
+                return this._value;
             }
+
             set
             {
                 try
                 {
-                    _value = value;
-                    Validator();
+                    this._value = value;
+                    this.Validator();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     throw new ArgumentException(ex.Message);
                 }
@@ -81,12 +79,12 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Валидация вводимого значения _value в параметр
+        /// Валидация вводимого значения _value в параметр.
         /// </summary>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentException">Текст ошибки.</exception>
         private void Validator()
         {
-            if (Value<_minValue || Value>_maxValue)
+            if (this.Value < this._minValue || this.Value > this._maxValue)
             {
                 throw new ArgumentException("Простая ошибка");
             }

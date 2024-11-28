@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace ScrewdriverPlugin.UnitTests
@@ -15,10 +10,9 @@ namespace ScrewdriverPlugin.UnitTests
     public class ParameterTests
     {
         /// <summary>
-        /// Тестовый параметр
+        /// Тестовый параметр.
         /// </summary>
         private Parameter _parameter = new Parameter();
-        
 
         /// <summary>
         /// Позитивный тест геттера MaxValue.
@@ -27,21 +21,21 @@ namespace ScrewdriverPlugin.UnitTests
         public void TestProjectGetMaxValue()
         {
             var expected = 15;
-            _parameter.MaxValue = 15;
-            var actual = _parameter.MaxValue;
+            this._parameter.MaxValue = 15;
+            var actual = this._parameter.MaxValue;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Позитивный тест сеттера MaxValue
+        /// Позитивный тест сеттера MaxValue.
         /// </summary>
         [Test(Description = "Позитивный тест сеттера MaxValue.")]
         public void TestProjectSetMaxValue()
         {
             Parameter expected = new Parameter();
-            _parameter.MaxValue = 15;
+            this._parameter.MaxValue = 15;
             expected.MaxValue = 15;
-            var actual = _parameter;
+            var actual = this._parameter;
             Assert.AreEqual(expected.MaxValue, actual.MaxValue);
         }
 
@@ -51,22 +45,22 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест геттера MinValue.")]
         public void TestProjectGetMinValue()
         {
-            var expected=15;
-            _parameter.MinValue = 15;
-            var actual = _parameter.MinValue;
+            var expected = 15;
+            this._parameter.MinValue = 15;
+            var actual = this._parameter.MinValue;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Позитивный тест сеттера MinValue
+        /// Позитивный тест сеттера MinValue.
         /// </summary>
         [Test(Description = "Позитивный тест сеттера MinValue.")]
         public void TestProjectSetMinValue()
         {
             Parameter expected = new Parameter();
-            _parameter.MinValue = 15;
+            this._parameter.MinValue = 15;
             expected.MinValue = 15;
-            var actual = _parameter;
+            var actual = this._parameter;
             Assert.AreEqual(expected.MinValue, actual.MinValue);
         }
 
@@ -77,27 +71,27 @@ namespace ScrewdriverPlugin.UnitTests
         public void TestProjectGetValue()
         {
             var expected = 15;
-            _parameter.MinValue = 15;
-            _parameter.MaxValue = 15;
-            _parameter.Value = 15;
-            var actual = _parameter.Value;
+            this._parameter.MinValue = 15;
+            this._parameter.MaxValue = 15;
+            this._parameter.Value = 15;
+            var actual = this._parameter.Value;
             Assert.AreEqual(expected, actual);
         }
 
         /// <summary>
-        /// Позитивный тест сеттера Value
+        /// Позитивный тест сеттера Value.
         /// </summary>
         [Test(Description = "Позитивный тест сеттера Value.")]
         public void TestProjectSetValue()
         {
             Parameter expected = new Parameter();
-            _parameter.MinValue = 15;
-            _parameter.MaxValue = 15;
-            _parameter.Value = 15;
+            this._parameter.MinValue = 15;
+            this._parameter.MaxValue = 15;
+            this._parameter.Value = 15;
             expected.MinValue = 15;
             expected.MaxValue = 15;
             expected.Value = 15;
-            var actual = _parameter.Value;
+            var actual = this._parameter.Value;
             Assert.AreEqual(expected.Value, actual);
         }
 
@@ -106,18 +100,21 @@ namespace ScrewdriverPlugin.UnitTests
         /// </summary>
         /// <param name="wrongValue">Неверное поле текст.</param>
         /// <param name="message">Текст ошибки.</param>
-        [TestCase(10, "Должно возникать исключение, если значение меньше MinValue",
+        [TestCase(
+            10,
+            "Должно возникать исключение, если значение меньше MinValue",
             TestName = "Простая ошибка")]
-        [TestCase(20, "Должно возникать исключение, если значение больше MaxValue",
+        [TestCase(
+            20,
+            "Должно возникать исключение, если значение больше MaxValue",
             TestName = "Простая ошибка")]
         public void TestSetArgumentException(int wrongValue, string message)
         {
-            _parameter.MaxValue = 15;
-            _parameter.MinValue = 15;
+            this._parameter.MaxValue = 15;
+            this._parameter.MinValue = 15;
             Assert.Throws<ArgumentException>(
-            () => { _parameter.Value = wrongValue; },
+            () => { this._parameter.Value = wrongValue; },
             message);
         }
-
     }
 }
