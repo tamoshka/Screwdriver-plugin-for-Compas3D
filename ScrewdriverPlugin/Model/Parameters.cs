@@ -121,14 +121,12 @@ namespace ScrewdriverPlugin
                         ParameterType.RodLength,
                         out chainedParameterSecond) == true)
                 {
-                    double maxValue = (chainedParameterFirst.Value + 5) * 4;
-                    double minValue = (chainedParameterFirst.Value - 5) * 4;
                     if (this.AllParameters.TryGetValue(
                             ParameterType.HandleWidth,
-                            out chainedParameterFirst) == true &&
-                        (parameter.Value < minValue ||
-                        parameter.Value > maxValue) == true)
+                            out chainedParameterFirst) == true)
                     {
+                        double maxValue = (chainedParameterFirst.Value + 5) * 4;
+                        double minValue = (chainedParameterFirst.Value - 5) * 4;
                         if (parameter.Value > maxValue)
                         {
                             exception += "Длина ручки более чем в 4 раза больше её диаметра" +
