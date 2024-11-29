@@ -8,6 +8,9 @@ namespace ScrewdriverPlugin
     /// </summary>
     public class Builder
     {
+        /// <summary>
+        /// Экземпляр класс Wrapper.
+        /// </summary>
         private Wrapper _wrapper = new Wrapper();
 
         /// <summary>
