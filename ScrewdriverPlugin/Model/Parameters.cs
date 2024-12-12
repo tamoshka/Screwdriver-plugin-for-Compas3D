@@ -228,8 +228,10 @@ namespace ScrewdriverPlugin
                         ParameterType.HandleWidth,
                         out chainedParameterThird) == true)
                 {
-                    double upperHalfOfWidth = (double)chainedParameterThird.Value / 2;
-                    double lowerHalfOfWidth = (double)((chainedParameterThird.Value / 2) - 2);
+                    double upperHalfOfWidth = (double)chainedParameterThird.Value;
+                    upperHalfOfWidth = upperHalfOfWidth / 2;
+                    double lowerHalfOfWidth = (double)chainedParameterThird.Value;
+                    lowerHalfOfWidth = (lowerHalfOfWidth / 2) - 2;
                     if (parameter.Value < lowerHalfOfWidth)
                     {
                         exception += "Диаметр наконечника меньше половины диаметра ручки, " +
