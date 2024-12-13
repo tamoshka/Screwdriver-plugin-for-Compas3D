@@ -110,7 +110,7 @@
             this.TextBoxRodLength.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxRodLength.Location = new System.Drawing.Point(228, 189);
             this.TextBoxRodLength.Name = "TextBoxRodLength";
-            this.TextBoxRodLength.Size = new System.Drawing.Size(133, 26);
+            this.TextBoxRodLength.Size = new System.Drawing.Size(163, 26);
             this.TextBoxRodLength.TabIndex = 10;
             this.TextBoxRodLength.Leave += new System.EventHandler(this.TextBoxRodLength_Leave);
             // 
@@ -119,7 +119,7 @@
             this.TextBoxRodWidth.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxRodWidth.Location = new System.Drawing.Point(228, 229);
             this.TextBoxRodWidth.Name = "TextBoxRodWidth";
-            this.TextBoxRodWidth.Size = new System.Drawing.Size(133, 26);
+            this.TextBoxRodWidth.Size = new System.Drawing.Size(163, 26);
             this.TextBoxRodWidth.TabIndex = 11;
             this.TextBoxRodWidth.Leave += new System.EventHandler(this.TextBoxRodWidth_Leave);
             // 
@@ -128,7 +128,7 @@
             this.TextBoxHandleWidth.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxHandleWidth.Location = new System.Drawing.Point(228, 89);
             this.TextBoxHandleWidth.Name = "TextBoxHandleWidth";
-            this.TextBoxHandleWidth.Size = new System.Drawing.Size(133, 26);
+            this.TextBoxHandleWidth.Size = new System.Drawing.Size(163, 26);
             this.TextBoxHandleWidth.TabIndex = 12;
             this.TextBoxHandleWidth.Leave += new System.EventHandler(this.TextBoxHandleWidth_Leave);
             // 
@@ -137,14 +137,14 @@
             this.TextBoxHandleLength.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxHandleLength.Location = new System.Drawing.Point(228, 49);
             this.TextBoxHandleLength.Name = "TextBoxHandleLength";
-            this.TextBoxHandleLength.Size = new System.Drawing.Size(133, 26);
+            this.TextBoxHandleLength.Size = new System.Drawing.Size(163, 26);
             this.TextBoxHandleLength.TabIndex = 13;
             this.TextBoxHandleLength.Leave += new System.EventHandler(this.TextBoxHandleLength_Leave);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(390, 52);
+            this.label7.Location = new System.Drawing.Point(410, 52);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 20);
             this.label7.TabIndex = 14;
@@ -153,7 +153,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(390, 92);
+            this.label8.Location = new System.Drawing.Point(410, 92);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(277, 20);
             this.label8.TabIndex = 15;
@@ -162,7 +162,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(390, 192);
+            this.label9.Location = new System.Drawing.Point(410, 192);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(283, 20);
             this.label9.TabIndex = 16;
@@ -171,7 +171,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(390, 232);
+            this.label10.Location = new System.Drawing.Point(410, 232);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(211, 20);
             this.label10.TabIndex = 17;
@@ -198,10 +198,10 @@
             this.ComboBoxShapeOfHandle.FormattingEnabled = true;
             this.ComboBoxShapeOfHandle.Items.AddRange(new object[] {
             "Цилиндрическая",
-            "Шестиугольная призма"});
+            "Шестиугольная"});
             this.ComboBoxShapeOfHandle.Location = new System.Drawing.Point(228, 9);
             this.ComboBoxShapeOfHandle.Name = "ComboBoxShapeOfHandle";
-            this.ComboBoxShapeOfHandle.Size = new System.Drawing.Size(133, 28);
+            this.ComboBoxShapeOfHandle.Size = new System.Drawing.Size(163, 28);
             this.ComboBoxShapeOfHandle.TabIndex = 20;
             this.ComboBoxShapeOfHandle.SelectedIndexChanged += new System.EventHandler(this.ComboBoxShapeOfHandle_SelectedIndexChanged);
             // 
@@ -213,23 +213,23 @@
             "Плоская"});
             this.ComboBoxShapeOfRod.Location = new System.Drawing.Point(228, 149);
             this.ComboBoxShapeOfRod.Name = "ComboBoxShapeOfRod";
-            this.ComboBoxShapeOfRod.Size = new System.Drawing.Size(133, 28);
+            this.ComboBoxShapeOfRod.Size = new System.Drawing.Size(163, 28);
             this.ComboBoxShapeOfRod.TabIndex = 21;
             this.ComboBoxShapeOfRod.SelectedIndexChanged += new System.EventHandler(this.ComboBoxShapeOfRod_SelectedIndexChanged);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(390, 12);
+            this.label11.Location = new System.Drawing.Point(410, 12);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(319, 20);
+            this.label11.Size = new System.Drawing.Size(260, 20);
             this.label11.TabIndex = 22;
-            this.label11.Text = "Шестиугольная призма/Цилиндрическая";
+            this.label11.Text = "Шестиугольная/Цилиндрическая";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(390, 152);
+            this.label12.Location = new System.Drawing.Point(410, 152);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(203, 20);
             this.label12.TabIndex = 23;
