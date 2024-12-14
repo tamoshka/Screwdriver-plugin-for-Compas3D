@@ -94,6 +94,10 @@
       <Project>{38dc8d1e-0256-47c9-9e6c-067022919932}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StressTesting\StressTesting.csproj">
+      <Project>{1f71ea72-c0f0-4559-9499-1f7abfd17ecd}</Project>
+      <Name>StressTesting</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />

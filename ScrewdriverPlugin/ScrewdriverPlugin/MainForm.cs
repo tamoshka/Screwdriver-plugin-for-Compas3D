@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using StressTesting;
 
 namespace ScrewdriverPlugin
 {
@@ -26,6 +27,8 @@ namespace ScrewdriverPlugin
         public MainForm()
         {
             this.InitializeComponent();
+            // StressTester stress = new StressTester();
+            // stress.StressTesting();
         }
 
         /// <summary>
@@ -76,7 +79,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Обработчик выхода из текстбокса "Длина ручки".
+        /// Обработчик выхода из текстБокса "Длина ручки".
         /// </summary>
         /// <param name="sender">Объект.</param>
         /// <param name="e">Аргумент.</param>
@@ -102,7 +105,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Обработчик выхода из текстбокса "Диаметр ручки".
+        /// Обработчик выхода из текстБокса "Диаметр ручки".
         /// </summary>
         /// <param name="sender">Объект.</param>
         /// <param name="e">Аргумент.</param>
@@ -130,7 +133,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Обработчик выхода из текстбокса "Длина наконечника".
+        /// Обработчик выхода из текстБокса "Длина наконечника".
         /// </summary>
         /// <param name="sender">Объект.</param>
         /// <param name="e">Аргумент.</param>
@@ -150,7 +153,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// /// Обработчик выхода из текстбокса "Диаметр наконечника".
+        /// /// Обработчик выхода из текстБокса "Диаметр наконечника".
         /// </summary>
         /// <param name="sender">Объект.</param>
         /// <param name="e">Аргумент.</param>
@@ -170,9 +173,9 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Первичная валидация (проверка на введение в текстбоксы целых чисел.
+        /// Первичная валидация (проверка на введение в текстБоксы целых чисел.
         /// </summary>
-        /// <param name="textBox">Текстбокс.</param>
+        /// <param name="textBox">ТекстБокс.</param>
         /// <param name="parameterType">Тип параметра.</param>
         private void FirstValidate(
             System.Windows.Forms.TextBox textBox,
@@ -191,7 +194,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Вспомогательный метод для установки цвета для текстбокса.
+        /// Вспомогательный метод для установки цвета для текстБокса.
         /// </summary>
         /// <param name="parameterType">Тип параметра.</param>
         /// <param name="whatColor">Устанавливаемый цвет.</param>
@@ -322,7 +325,7 @@ namespace ScrewdriverPlugin
         /// Вторичная валидация, попытка создания параметра, попытка добавления
         /// корректного параметра в словарь.
         /// </summary>
-        /// <param name="textBox">Используемый текстбокс.</param>
+        /// <param name="textBox">Используемый текстБокс.</param>
         /// <param name="parameterType">Тип параметра.</param>
         private void SecondValidate(
             System.Windows.Forms.TextBox textBox,
@@ -376,7 +379,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Обработчик изменения выбранного индекса у комбобокса форма ручки.
+        /// Обработчик изменения выбранного индекса у комбоБокса форма ручки.
         /// </summary>
         /// <param name="sender">Объект.</param>
         /// <param name="e">Аргумент.</param>
@@ -393,7 +396,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Обработчик изменения выбранного индекса у комбобокса форма наконечника.
+        /// Обработчик изменения выбранного индекса у комбоБокса форма наконечника.
         /// </summary>
         /// <param name="sender">Объект.</param>
         /// <param name="e">Аргумент.</param>

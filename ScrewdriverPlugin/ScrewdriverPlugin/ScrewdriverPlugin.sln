@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "..\Builder\Build
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrewdriverPlugin.UnitTests", "..\ScrewdriverPlugin.UnitTests\ScrewdriverPlugin.UnitTests.csproj", "{0564B64D-C6CE-4270-96B2-46106478C191}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StressTesting", "..\StressTesting\StressTesting.csproj", "{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{0564B64D-C6CE-4270-96B2-46106478C191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0564B64D-C6CE-4270-96B2-46106478C191}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0564B64D-C6CE-4270-96B2-46106478C191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
