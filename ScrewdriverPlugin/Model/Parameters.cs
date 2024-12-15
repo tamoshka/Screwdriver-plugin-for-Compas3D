@@ -162,14 +162,12 @@ namespace ScrewdriverPlugin
                         ParameterType.RodWidth,
                         out chainedParameterSecond) == true)
                 {
-                    double lowerQuarter = (double)((chainedParameterFirst.Value / 4) - 5);
-                    double upperQuarter = (double)((chainedParameterFirst.Value / 4) + 5);
                     if (this.AllParameters.TryGetValue(
                             ParameterType.HandleLength,
-                            out chainedParameterFirst) == true &&
-                       (parameter.Value < lowerQuarter ||
-                       parameter.Value > upperQuarter) == true)
+                            out chainedParameterFirst) == true)
                     {
+                        double lowerQuarter = (double)((chainedParameterFirst.Value / 4) - 5);
+                        double upperQuarter = (double)((chainedParameterFirst.Value / 4) + 5);
                         if (parameter.Value < lowerQuarter)
                         {
                             exception += "Диаметр ручки меньше четверти длины ручки - 5 мм" +

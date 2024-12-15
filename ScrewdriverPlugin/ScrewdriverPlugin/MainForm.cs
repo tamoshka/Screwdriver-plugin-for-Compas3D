@@ -188,6 +188,7 @@ namespace ScrewdriverPlugin
             }
             catch (Exception e)
             {
+                this._parameters.AllParameters.Remove(parameterType);
                 textBox.Text = string.Empty;
                 this.SetColors(parameterType, 1, 0, e.Message);
             }
@@ -373,6 +374,7 @@ namespace ScrewdriverPlugin
                 }
                 catch (Exception e)
                 {
+                    this._parameters.AllParameters.Remove(parameterType);
                     this.SetColors(parameterType, 2, 0, e.Message);
                 }
             }
