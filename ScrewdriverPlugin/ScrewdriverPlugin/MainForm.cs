@@ -374,7 +374,6 @@ namespace ScrewdriverPlugin
                 }
                 catch (Exception e)
                 {
-                    this._parameters.AllParameters.Remove(parameterType);
                     this.SetColors(parameterType, 2, 0, e.Message);
                 }
             }

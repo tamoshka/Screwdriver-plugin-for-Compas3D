@@ -233,9 +233,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(410, 152);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(203, 20);
+            this.label12.Size = new System.Drawing.Size(300, 20);
             this.label12.TabIndex = 23;
-            this.label12.Text = "Крестообразная/Плоская";
+            this.label12.Text = "Крестообразная/Плоская/Квадратная";
             // 
             // CheckBoxIsHoleExist
             // 
