@@ -30,6 +30,11 @@ namespace ScrewdriverPlugin
         private RodType _rodType;
 
         /// <summary>
+        /// Поле хранящее в себе информацию о наличии отверстия для возможности "повесить" отвёртку.
+        /// </summary>
+        private bool _isHoleExist;
+
+        /// <summary>
         /// Gets or sets для _parameters.
         /// </summary>
         public Dictionary<ParameterType, Parameter> AllParameters
@@ -74,6 +79,22 @@ namespace ScrewdriverPlugin
             set
             {
                 this._rodType = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether для поля _isHoleExist (наличие отверстия).
+        /// </summary>
+        public bool IsHoleExist
+        {
+            get
+            {
+                return this._isHoleExist;
+            }
+
+            set
+            {
+                this._isHoleExist = value;
             }
         }
 

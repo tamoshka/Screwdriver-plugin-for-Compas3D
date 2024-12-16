@@ -412,9 +412,21 @@ namespace ScrewdriverPlugin
             {
                 this._parameters.ShapeOfRod = RodType.Flat;
             }
-            else
+            else if (this.ComboBoxShapeOfRod.SelectedIndex == 2)
             {
                 this._parameters.ShapeOfRod = RodType.Rectangle;
+            }
+        }
+
+        private void CheckBoxIsHoleExist_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.CheckBoxIsHoleExist.Checked)
+            {
+                this._parameters.IsHoleExist = true;
+            }
+            else
+            {
+                this._parameters.IsHoleExist = false;
             }
         }
     }

@@ -87,7 +87,7 @@ namespace ScrewdriverPlugin
                 int[] count = { 5, 5, 2, 6, 6 };
                 this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
             }
-            else
+            else if (parameters.ShapeOfRod == RodType.Flat)
             {
                 double[,] pointsArray =
                 {
@@ -108,6 +108,40 @@ namespace ScrewdriverPlugin
                 double[] extrusionDepth = { -x1 * 2 };
                 int[] start = { 4 };
                 int[] count = { 5 };
+                this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+            }
+            else if (parameters.ShapeOfRod == RodType.Rectangle)
+            {
+                double[,] pointsArray =
+                {
+                    { 0, 0, x1, 0, 1 },
+                    { 0, 0, 0, y, 3 },
+                    { x1, 0, x1, y, 1 },
+                    { 0, y, x1, y, 1 },
+                    { x1 - (x1 / 5), y - 1, x1 - (x1 / 5), y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { x1 - (x1 / 5), y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), x1, y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { -x1 + (x1 / 5), y - 1, -x1 + (x1 / 5), y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { -x1 + (x1 / 5), y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), -x1, y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { -x1 + (x1 / 5), y - 1, x1 - (x1 / 5), y - 1, 1 },
+                    { -x1, y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), -x1, y, 1 },
+                    { x1, y - (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), x1, y, 1 },
+                    { -x1, y, x1, y, 1 },
+                    { x1 - (x1 / 5), -y + 1, x1 - (x1 / 5), -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { x1 - (x1 / 5), -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), x1, -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { -x1 + (x1 / 5), -y + 1, -x1 + (x1 / 5), -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { -x1 + (x1 / 5), -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), -x1, -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), 1 },
+                    { -x1 + (x1 / 5), -y + 1, x1 - (x1 / 5), -y + 1, 1 },
+                    { -x1, -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), -x1, -y, 1 },
+                    { x1, -y + (y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45))), x1, -y, 1 },
+                    { -x1, -y, x1, -y, 1 },
+                };
+                this._wrapper.CreateLine(pointsArray, 0, 4);
+                this._wrapper.Spin();
+                int[] typeExtrusion = { 1, 1 };
+                int[] typeSketch = { 1, 3 };
+                double[] extrusionDepth = { -x1 * 2, -x1 * 2 };
+                int[] start = { 4, 12 };
+                int[] count = { 8, 8 };
                 this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
             }
         }
@@ -147,7 +181,7 @@ namespace ScrewdriverPlugin
                 int[] count = { 6 };
                 this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
             }
-            else
+            else if (parameters.ShapeOfHandle == HandleType.Cylinder)
             {
                 this._wrapper.CreateSketch(1);
                 this._wrapper.CreateArc(x1 / 2, y1, x2 / 2, y2, x3 / 2, y3);
@@ -159,6 +193,14 @@ namespace ScrewdriverPlugin
                 };
                 this._wrapper.CreateLine(pointsArray, 0, 3);
                 this._wrapper.Spin();
+            }
+
+            if (parameters.IsHoleExist == true)
+            {
+                this._wrapper.CreateSketch(1);
+                this._wrapper.CreateArc(0, y1 * 5 / 6, x2 / 4, y1 * 4.5 / 6, 0, y1 * 2 / 3);
+                this._wrapper.CreateArc(0, y1 * 5 / 6, -x2 / 4, y1 * 4.5 / 6, 0, y1 * 2 / 3);
+                this._wrapper.Extrusion(1, -x2);
             }
         }
 

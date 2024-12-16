@@ -49,6 +49,7 @@
             this.ComboBoxShapeOfRod = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.CheckBoxIsHoleExist = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -179,7 +180,7 @@
             // 
             // ButtonCreate
             // 
-            this.ButtonCreate.Location = new System.Drawing.Point(330, 285);
+            this.ButtonCreate.Location = new System.Drawing.Point(330, 322);
             this.ButtonCreate.Name = "ButtonCreate";
             this.ButtonCreate.Size = new System.Drawing.Size(140, 35);
             this.ButtonCreate.TabIndex = 18;
@@ -236,11 +237,23 @@
             this.label12.TabIndex = 23;
             this.label12.Text = "Крестообразная/Плоская";
             // 
+            // CheckBoxIsHoleExist
+            // 
+            this.CheckBoxIsHoleExist.AutoSize = true;
+            this.CheckBoxIsHoleExist.Location = new System.Drawing.Point(310, 282);
+            this.CheckBoxIsHoleExist.Name = "CheckBoxIsHoleExist";
+            this.CheckBoxIsHoleExist.Size = new System.Drawing.Size(190, 24);
+            this.CheckBoxIsHoleExist.TabIndex = 24;
+            this.CheckBoxIsHoleExist.Text = "Наличие отверстия ";
+            this.CheckBoxIsHoleExist.UseVisualStyleBackColor = true;
+            this.CheckBoxIsHoleExist.CheckedChanged += new System.EventHandler(this.CheckBoxIsHoleExist_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 364);
+            this.ClientSize = new System.Drawing.Size(787, 376);
+            this.Controls.Add(this.CheckBoxIsHoleExist);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.ComboBoxShapeOfRod);
@@ -290,6 +303,7 @@
         private System.Windows.Forms.ComboBox ComboBoxShapeOfRod;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox CheckBoxIsHoleExist;
     }
 }
 

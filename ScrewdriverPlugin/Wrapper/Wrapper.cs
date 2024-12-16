@@ -153,7 +153,13 @@ namespace Kompas
                             cutExtrusionDef.directionType = (short)Direction_Type.dtBoth;
                             cutExtrusionDef.SetSideParam(
                                 true,
-                                (short)End_Type.etBlind,
+                                (short)End_Type.etThroughAll,
+                                length,
+                                0,
+                                false);
+                            cutExtrusionDef.SetSideParam(
+                                false,
+                                (short)End_Type.etThroughAll,
                                 length,
                                 0,
                                 false);
