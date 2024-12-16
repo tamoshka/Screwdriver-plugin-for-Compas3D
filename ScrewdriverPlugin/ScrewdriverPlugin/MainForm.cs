@@ -408,9 +408,13 @@ namespace ScrewdriverPlugin
             {
                 this._parameters.ShapeOfRod = RodType.Cruciform;
             }
-            else
+            else if (this.ComboBoxShapeOfRod.SelectedIndex == 1)
             {
                 this._parameters.ShapeOfRod = RodType.Flat;
+            }
+            else
+            {
+                this._parameters.ShapeOfRod = RodType.Rectangle;
             }
         }
     }

@@ -5,8 +5,6 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrewdriverPlugin", "ScrewdriverPlugin.csproj", "{2580780E-46B3-4FF4-A07B-428157F07E05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kompas", "..\..\Kompas\Wrapper\Kompas.csproj", "{ACA92215-0309-49D8-98A6-0CDD0DAB1118}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{38DC8D1E-0256-47C9-9E6C-067022919932}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "..\Builder\Builder.csproj", "{D1FFE279-3C5E-4418-8728-2D35638A2955}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrewdriverPlugin.UnitTests", "..\ScrewdriverPlugin.UnitTests\ScrewdriverPlugin.UnitTests.csproj", "{0564B64D-C6CE-4270-96B2-46106478C191}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StressTesting", "..\StressTesting\StressTesting.csproj", "{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kompas", "..\Wrapper\Kompas.csproj", "{ACA92215-0309-49D8-98A6-0CDD0DAB1118}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{2580780E-46B3-4FF4-A07B-428157F07E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2580780E-46B3-4FF4-A07B-428157F07E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2580780E-46B3-4FF4-A07B-428157F07E05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38DC8D1E-0256-47C9-9E6C-067022919932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38DC8D1E-0256-47C9-9E6C-067022919932}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38DC8D1E-0256-47C9-9E6C-067022919932}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F71EA72-C0F0-4559-9499-1F7ABFD17ECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA92215-0309-49D8-98A6-0CDD0DAB1118}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

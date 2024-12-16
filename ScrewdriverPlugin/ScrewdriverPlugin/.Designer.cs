@@ -210,7 +210,8 @@
             this.ComboBoxShapeOfRod.FormattingEnabled = true;
             this.ComboBoxShapeOfRod.Items.AddRange(new object[] {
             "Крестообразная",
-            "Плоская"});
+            "Плоская",
+            "Квадратная"});
             this.ComboBoxShapeOfRod.Location = new System.Drawing.Point(228, 149);
             this.ComboBoxShapeOfRod.Name = "ComboBoxShapeOfRod";
             this.ComboBoxShapeOfRod.Size = new System.Drawing.Size(163, 28);

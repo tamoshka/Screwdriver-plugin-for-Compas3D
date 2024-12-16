@@ -14,5 +14,10 @@
         /// Плоская.
         /// </summary>
         Flat,
+
+        /// <summary>
+        /// Квадратная.
+        /// </summary>
+        Rectangle,
     }
 }

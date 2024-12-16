@@ -82,10 +82,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kompas\Wrapper\Kompas.csproj">
-      <Project>{aca92215-0309-49d8-98a6-0cdd0dab1118}</Project>
-      <Name>Kompas</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Builder\Builder.csproj">
       <Project>{d1ffe279-3c5e-4418-8728-2d35638a2955}</Project>
       <Name>Builder</Name>

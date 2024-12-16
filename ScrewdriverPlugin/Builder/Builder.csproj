@@ -45,13 +45,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Kompas\Wrapper\Kompas.csproj">
-      <Project>{aca92215-0309-49d8-98a6-0cdd0dab1118}</Project>
-      <Name>Kompas</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{38dc8d1e-0256-47c9-9e6c-067022919932}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrapper\Kompas.csproj">
+      <Project>{aca92215-0309-49d8-98a6-0cdd0dab1118}</Project>
+      <Name>Kompas</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
