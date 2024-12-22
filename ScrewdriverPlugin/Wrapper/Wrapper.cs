@@ -2,7 +2,6 @@
 using System.Runtime.InteropServices;
 using Kompas6API5;
 using Kompas6Constants3D;
-using KompasAPI7;
 
 namespace Kompas
 {
