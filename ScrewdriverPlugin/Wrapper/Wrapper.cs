@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using Kompas6API5;
 using Kompas6Constants3D;
+using KompasAPI7;
 
 namespace Kompas
 {
@@ -39,22 +40,21 @@ namespace Kompas
             ksSketchDefinition sketchDef;
             this._sketchEntity = (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_sketch);
             sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
-
-            if (perspective == 1)
+            switch (perspective)
             {
-                this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY);
-            }
-            else if (perspective == 2)
-            {
-               this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ);
-            }
-            else if (perspective == 3)
-            {
-                this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeYOZ);
+                case 1:
+                    this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY);
+                    break;
+                case 2:
+                    this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ);
+                    break;
+                case 3:
+                    this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeYOZ);
+                    break;
             }
 
             sketchDef.SetPlane(this._plane);
-            this._sketchEntity.Create(); // Создаем эскиз в модели
+            this._sketchEntity.Create();
         }
 
         /// <summary>
@@ -122,8 +122,8 @@ namespace Kompas
                 {
                     rotateDef.directionType = (short)Direction_Type.dtNormal;
                     rotateDef.SetSideParam(false, 360);
-                    rotateDef.SetSketch(this._sketchEntity);  // эскиз операции вращения
-                    entityRotate.Create();              // создать операцию
+                    rotateDef.SetSketch(this._sketchEntity);
+                    entityRotate.Create();
                 }
             }
         }
@@ -135,93 +135,95 @@ namespace Kompas
         /// <param name="length">Глубина выдавливания.</param>
         public void Extrusion(int parameter, double length)
         {
-            if (parameter == 1)
+            ksEntity entityExtrusion;
+            switch (parameter)
             {
-                ksEntity entityExtrusion =
+                case 1:
+                    entityExtrusion =
                     (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
-                if (entityExtrusion != null)
-                {
-                    ksEntity entityCutExtrusion =
-                        (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
-                    if (entityCutExtrusion != null)
+                    if (entityExtrusion != null)
                     {
-                        ksCutExtrusionDefinition cutExtrusionDef =
-                            (ksCutExtrusionDefinition)entityCutExtrusion.GetDefinition();
-                        if (cutExtrusionDef != null)
+                        ksEntity entityCutExtrusion =
+                            (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+                        if (entityCutExtrusion != null)
                         {
-                            cutExtrusionDef.SetSketch(this._sketchEntity);
-                            cutExtrusionDef.directionType = (short)Direction_Type.dtBoth;
-                            cutExtrusionDef.SetSideParam(
-                                true,
-                                (short)End_Type.etThroughAll,
-                                length,
-                                0,
-                                false);
-                            cutExtrusionDef.SetSideParam(
-                                false,
-                                (short)End_Type.etThroughAll,
-                                length,
-                                0,
-                                false);
-                            cutExtrusionDef.SetThinParam(false, 0, 0, 0);
+                            ksCutExtrusionDefinition cutExtrusionDef =
+                                (ksCutExtrusionDefinition)entityCutExtrusion.GetDefinition();
+                            if (cutExtrusionDef != null)
+                            {
+                                cutExtrusionDef.SetSketch(this._sketchEntity);
+                                cutExtrusionDef.directionType = (short)Direction_Type.dtBoth;
+                                cutExtrusionDef.SetSideParam(
+                                    true,
+                                    (short)End_Type.etThroughAll,
+                                    length,
+                                    0,
+                                    false);
+                                cutExtrusionDef.SetSideParam(
+                                    false,
+                                    (short)End_Type.etThroughAll,
+                                    length,
+                                    0,
+                                    false);
+                                cutExtrusionDef.SetThinParam(false, 0, 0, 0);
+                            }
+
+                            entityCutExtrusion.Create();
                         }
+                    }
 
-                        entityCutExtrusion.Create(); // создадим операцию вырезание выдавливанием
-                    }
-                }
-            }
-            else if (parameter == 2)
-            {
-                ksEntity entityExtrusion =
+                    break;
+                case 2:
+                    entityExtrusion =
                     (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
-                if (entityExtrusion != null)
-                {
-                    // интерфейс свойств базовой операции выдавливания
-                    ksBossExtrusionDefinition extrusionDef =
-                        (ksBossExtrusionDefinition)entityExtrusion.GetDefinition();
-                    if (extrusionDef != null)
+                    if (entityExtrusion != null)
                     {
-                        extrusionDef.directionType = (short)Direction_Type.dtNormal;
-                        extrusionDef.SetSideParam(
-                            true, // прямое направление
-                            (short)End_Type.etBlind,    // строго на глубину
-                            length,
-                            0,
-                            false);
-                        extrusionDef.SetThinParam(true, (short)Direction_Type.dtBoth, 0.25, 0.25);
-                        extrusionDef.SetSketch(this._sketchEntity);   // эскиз операции выдавливания
-                        entityExtrusion.Create();                    // создать операцию
-                    }
-                }
-            }
-            else if (parameter == 3)
-            {
-                ksEntity entityExtrusion =
-                    (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
-                if (entityExtrusion != null)
-                {
-                    // интерфейс свойств базовой операции выдавливания
-                    ksBossExtrusionDefinition extrusionDef =
-                        (ksBossExtrusionDefinition)entityExtrusion.GetDefinition();
-                    if (extrusionDef != null)
-                    {
-                        ksExtrusionParam extrusionProp =
-                            (ksExtrusionParam)extrusionDef.ExtrusionParam();
-                        ksThinParam thinProp = (ksThinParam)extrusionDef.ThinParam();
-                        if (extrusionProp != null && thinProp != null)
+                        ksBossExtrusionDefinition extrusionDef =
+                            (ksBossExtrusionDefinition)entityExtrusion.GetDefinition();
+                        if (extrusionDef != null)
                         {
+                            extrusionDef.directionType = (short)Direction_Type.dtNormal;
+                            extrusionDef.SetSideParam(
+                                true,
+                                (short)End_Type.etBlind,
+                                length,
+                                0,
+                                false);
+                            extrusionDef.SetThinParam(true, (short)Direction_Type.dtBoth, 0.25, 0.25);
                             extrusionDef.SetSketch(this._sketchEntity);
-
-                            extrusionProp.direction = (short)Direction_Type.dtNormal;
-                            extrusionProp.typeNormal = (short)End_Type.etBlind;
-                            extrusionProp.depthNormal = length;
-
-                            thinProp.thin = false;
-
                             entityExtrusion.Create();
                         }
                     }
-                }
+
+                    break;
+                case 3:
+                    entityExtrusion =
+                    (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
+                    if (entityExtrusion != null)
+                    {
+                        ksBossExtrusionDefinition extrusionDef =
+                            (ksBossExtrusionDefinition)entityExtrusion.GetDefinition();
+                        if (extrusionDef != null)
+                        {
+                            ksExtrusionParam extrusionProp =
+                                (ksExtrusionParam)extrusionDef.ExtrusionParam();
+                            ksThinParam thinProp = (ksThinParam)extrusionDef.ThinParam();
+                            if (extrusionProp != null && thinProp != null)
+                            {
+                                extrusionDef.SetSketch(this._sketchEntity);
+
+                                extrusionProp.direction = (short)Direction_Type.dtNormal;
+                                extrusionProp.typeNormal = (short)End_Type.etBlind;
+                                extrusionProp.depthNormal = length;
+
+                                thinProp.thin = false;
+
+                                entityExtrusion.Create();
+                            }
+                        }
+                    }
+
+                    break;
             }
         }
 
@@ -232,13 +234,11 @@ namespace Kompas
         {
             try
             {
-                // Попытка подключения к существующему процессу Kompas3D
                 this._kompas = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
                 Console.WriteLine("Kompas3D уже запущен.");
             }
             catch
             {
-                // Если процесс не найден, создаем новый экземпляр
                 Type kompasType = Type.GetTypeFromProgID("KOMPAS.Application.5");
                 this._kompas = (KompasObject)Activator.CreateInstance(kompasType);
                 Console.WriteLine("Запущен новый экземпляр Kompas3D.");
@@ -246,7 +246,6 @@ namespace Kompas
 
             if (this._kompas != null)
             {
-                // Делаем окно приложения видимым
                 this._kompas.Visible = true;
                 this._kompas.ActivateControllerAPI();
                 Console.WriteLine("Kompas3D успешно запущен и доступен.");

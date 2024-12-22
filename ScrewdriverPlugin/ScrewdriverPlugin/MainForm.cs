@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 using StressTesting;
 
@@ -27,6 +28,7 @@ namespace ScrewdriverPlugin
         public MainForm()
         {
             this.InitializeComponent();
+
             // StressTester stress = new StressTester();
             // stress.StressTesting();
         }
@@ -62,17 +64,10 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void ButtonCreate_Click(object sender, EventArgs e)
         {
-            if (this.TextBoxRodLength.BackColor == Color.Red ||
-                this.TextBoxHandleLength.BackColor == Color.Red ||
-                this.TextBoxRodWidth.BackColor == Color.Red ||
-                this.TextBoxHandleWidth.BackColor == Color.Red ||
-                this.TextBoxRodLength.BackColor == SystemColors.Window ||
-                this.TextBoxRodWidth.BackColor == SystemColors.Window ||
-                this.TextBoxHandleWidth.BackColor == SystemColors.Window ||
-                this.TextBoxHandleLength.BackColor == SystemColors.Window)
-            {
-            }
-            else
+            if (this.TextBoxRodLength.BackColor == Color.Green &&
+                this.TextBoxHandleLength.BackColor == Color.Green &&
+                this.TextBoxRodWidth.BackColor == Color.Green &&
+                this.TextBoxHandleWidth.BackColor == Color.Green)
             {
                 this._builder.Build(this._parameters);
             }
@@ -184,141 +179,69 @@ namespace ScrewdriverPlugin
             try
             {
                 int.Parse(textBox.Text);
-                this.SetColors(parameterType, 3, 0, string.Empty);
+                this.SetColors(textBox, parameterType, 3, 0, string.Empty);
             }
-            catch (Exception e)
+            catch
             {
-                this._parameters.AllParameters.Remove(parameterType);
-                textBox.Text = string.Empty;
-                this.SetColors(parameterType, 1, 0, e.Message);
+                if (textBox.Text != string.Empty)
+                {
+                    this.SetColors(textBox, parameterType, 1, 0, "Ошибка");
+                }
+                else
+                {
+                    this.SetColors(textBox, parameterType, 1, 0, string.Empty);
+                }
             }
         }
 
         /// <summary>
         /// Вспомогательный метод для установки цвета для текстБокса.
         /// </summary>
+        /// <param name="textBox">Передаваемый текстБокс.</param>
         /// <param name="parameterType">Тип параметра.</param>
         /// <param name="whatColor">Устанавливаемый цвет.</param>
         /// <param name="whatReason">Причина установки цвета.</param>
         /// <param name="text">Текст устанавливаемый в подсказку.</param>
         private void SetColors(
+            System.Windows.Forms.TextBox textBox,
             ParameterType parameterType,
             int whatColor,
             int whatReason,
             string text)
         {
-            if (whatColor == 1)
+            Parameter parameter = new Parameter();
+            parameter.TypeOfParameter = parameterType;
+            switch (whatColor)
             {
-                if (parameterType == ParameterType.HandleLength)
-                {
-                    this.TextBoxHandleLength.BackColor = SystemColors.Window;
-                    this.toolTip1.SetToolTip(
-                        this.TextBoxHandleLength,
-                        "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
-                }
-                else if (parameterType == ParameterType.HandleWidth)
-                {
-                    this.TextBoxHandleWidth.BackColor = SystemColors.Window;
-                    this.toolTip1.SetToolTip(
-                        this.TextBoxHandleWidth,
-                        "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
-                }
-                else if (parameterType == ParameterType.RodLength)
-                {
-                    this.TextBoxRodLength.BackColor = SystemColors.Window;
-                    this.toolTip1.SetToolTip(
-                        this.TextBoxRodLength,
-                        "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
-                }
-                else if (parameterType == ParameterType.RodWidth)
-                {
-                    this.TextBoxRodWidth.BackColor = SystemColors.Window;
-                    this.toolTip1.SetToolTip(
-                        this.TextBoxRodWidth,
-                        "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
-                }
-            }
-            else if (whatColor == 2)
-            {
-                if (parameterType == ParameterType.HandleLength)
-                {
-                    this.TextBoxHandleLength.BackColor = Color.Red;
-                    if (whatReason == 1)
+                case 1:
+                    textBox.BackColor = SystemColors.Window;
+                    if (text != string.Empty)
                     {
-                        this.toolTip1.SetToolTip(
-                            this.TextBoxHandleLength,
-                            "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
+                        this.toolTip1.SetToolTip(textBox, "Доступны только целочисленные значения");
                     }
-                    else
+
+                    textBox.Text = string.Empty;
+                    break;
+                case 2:
+                    textBox.BackColor = Color.Red;
+                    if (whatReason == 0)
                     {
-                        this.toolTip1.SetToolTip(this.TextBoxHandleLength, text);
+                        string toolTipText = "Введите значения от " +
+                            parameter.MinValue.ToString() +
+                            " до " + parameter.MaxValue.ToString() +
+                            " мм";
+                        this.toolTip1.SetToolTip(textBox, toolTipText);
                     }
-                }
-                else if (parameterType == ParameterType.HandleWidth)
-                {
-                    this.TextBoxHandleWidth.BackColor = Color.Red;
-                    if (whatReason == 1)
+                    else if (whatReason == 1)
                     {
-                        this.toolTip1.SetToolTip(
-                            this.TextBoxHandleWidth,
-                            "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
+                        this.toolTip1.SetToolTip(textBox, text);
                     }
-                    else
-                    {
-                        this.toolTip1.SetToolTip(this.TextBoxHandleWidth, text);
-                    }
-                }
-                else if (parameterType == ParameterType.RodLength)
-                {
-                    this.TextBoxRodLength.BackColor = Color.Red;
-                    if (whatReason == 1)
-                    {
-                        this.toolTip1.SetToolTip(
-                            this.TextBoxRodLength,
-                            "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
-                    }
-                    else
-                    {
-                        this.toolTip1.SetToolTip(this.TextBoxRodLength, text);
-                    }
-                }
-                else if (parameterType == ParameterType.RodWidth)
-                {
-                    this.TextBoxRodWidth.BackColor = Color.Red;
-                    if (whatReason == 1)
-                    {
-                        this.toolTip1.SetToolTip(
-                            this.TextBoxRodWidth,
-                            "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм");
-                    }
-                    else
-                    {
-                        this.toolTip1.SetToolTip(this.TextBoxRodWidth, text);
-                    }
-                }
-            }
-            else
-            {
-                if (parameterType == ParameterType.HandleLength)
-                {
-                    this.TextBoxHandleLength.BackColor = Color.Green;
-                    this.toolTip1.SetToolTip(this.TextBoxHandleLength, null);
-                }
-                else if (parameterType == ParameterType.HandleWidth)
-                {
-                    this.TextBoxHandleWidth.BackColor = Color.Green;
-                    this.toolTip1.SetToolTip(this.TextBoxHandleWidth, null);
-                }
-                else if (parameterType == ParameterType.RodLength)
-                {
-                    this.TextBoxRodLength.BackColor = Color.Green;
-                    this.toolTip1.SetToolTip(this.TextBoxRodLength, null);
-                }
-                else if (parameterType == ParameterType.RodWidth)
-                {
-                    this.TextBoxRodWidth.BackColor = Color.Green;
-                    this.toolTip1.SetToolTip(this.TextBoxRodWidth, null);
-                }
+
+                    break;
+                case 3:
+                    textBox.BackColor = Color.Green;
+                    this.toolTip1.SetToolTip(textBox, string.Empty);
+                    break;
             }
         }
 
@@ -334,34 +257,14 @@ namespace ScrewdriverPlugin
         {
             bool cached = false;
             Parameter parameter = new Parameter();
-            if (parameterType == ParameterType.HandleLength)
-            {
-                parameter.MaxValue = 150;
-                parameter.MinValue = 45;
-            }
-            else if (parameterType == ParameterType.HandleWidth)
-            {
-                parameter.MaxValue = 42;
-                parameter.MinValue = 7;
-            }
-            else if (parameterType == ParameterType.RodLength)
-            {
-                parameter.MaxValue = 500;
-                parameter.MinValue = 45;
-            }
-            else if (parameterType == ParameterType.RodWidth)
-            {
-                parameter.MaxValue = 21;
-                parameter.MinValue = 3;
-            }
-
+            parameter.TypeOfParameter = parameterType;
             try
             {
                 parameter.Value = int.Parse(textBox.Text);
             }
             catch (Exception e)
             {
-                this.SetColors(parameterType, 2, 1, e.Message);
+                this.SetColors(textBox, parameterType, 2, 0, e.Message);
                 cached = true;
             }
 
@@ -370,11 +273,11 @@ namespace ScrewdriverPlugin
                 try
                 {
                     this._parameters.SetParameter(parameterType, parameter);
-                    this.SetColors(parameterType, 3, 0, string.Empty);
+                    this.SetColors(textBox, parameterType, 3, 0, string.Empty);
                 }
                 catch (Exception e)
                 {
-                    this.SetColors(parameterType, 2, 0, e.Message);
+                    this.SetColors(textBox, parameterType, 2, 1, e.Message);
                 }
             }
         }
@@ -386,13 +289,14 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void ComboBoxShapeOfHandle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ComboBoxShapeOfHandle.SelectedIndex == 0)
+            switch (this.ComboBoxShapeOfHandle.SelectedIndex)
             {
-                this._parameters.ShapeOfHandle = HandleType.Cylinder;
-            }
-            else
-            {
-                this._parameters.ShapeOfHandle = HandleType.Prisme;
+                case 0:
+                    this._parameters.ShapeOfHandle = HandleType.Cylinder;
+                    break;
+                case 1:
+                    this._parameters.ShapeOfHandle = HandleType.Prisme;
+                    break;
             }
         }
 
@@ -403,29 +307,30 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void ComboBoxShapeOfRod_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.ComboBoxShapeOfRod.SelectedIndex == 0)
+            switch (this.ComboBoxShapeOfRod.SelectedIndex)
             {
-                this._parameters.ShapeOfRod = RodType.Cruciform;
-            }
-            else if (this.ComboBoxShapeOfRod.SelectedIndex == 1)
-            {
-                this._parameters.ShapeOfRod = RodType.Flat;
-            }
-            else if (this.ComboBoxShapeOfRod.SelectedIndex == 2)
-            {
-                this._parameters.ShapeOfRod = RodType.Rectangle;
+                case 0:
+                    this._parameters.ShapeOfRod = RodType.Cruciform;
+                    break;
+                case 1:
+                    this._parameters.ShapeOfRod = RodType.Flat;
+                    break;
+                case 2:
+                    this._parameters.ShapeOfRod = RodType.Rectangle;
+                    break;
             }
         }
 
         private void CheckBoxIsHoleExist_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.CheckBoxIsHoleExist.Checked)
+            switch (this.CheckBoxIsHoleExist.Checked)
             {
-                this._parameters.IsHoleExist = true;
-            }
-            else
-            {
-                this._parameters.IsHoleExist = false;
+                case true:
+                    this._parameters.IsHoleExist = true;
+                    break;
+                case false:
+                    this._parameters.IsHoleExist = false;
+                    break;
             }
         }
     }

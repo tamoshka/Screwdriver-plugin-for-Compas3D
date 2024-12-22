@@ -23,6 +23,11 @@ namespace ScrewdriverPlugin
         private int _value;
 
         /// <summary>
+        /// Поле для значения типа параметра.
+        /// </summary>
+        private ParameterType _typeOfParameter;
+
+        /// <summary>
         /// Gets or sets для поля _maxValue (максимальное значение).
         /// </summary>
         public int MaxValue
@@ -75,6 +80,49 @@ namespace ScrewdriverPlugin
                 {
                     throw new ArgumentException(ex.Message);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets для поля _typeOfParameter (значение).
+        /// </summary>
+        public ParameterType TypeOfParameter
+        {
+            get
+            {
+                return this._typeOfParameter;
+            }
+
+            set
+            {
+                this._typeOfParameter = value;
+                this.DefineMinMax();
+            }
+        }
+
+        /// <summary>
+        /// Функция определяющая _maxValue и _minValue для parameter.
+        /// </summary>
+        private void DefineMinMax()
+        {
+            switch (this._typeOfParameter)
+            {
+                case ParameterType.HandleLength:
+                    this.MinValue = 45;
+                    this.MaxValue = 150;
+                    break;
+                case ParameterType.HandleWidth:
+                    this.MinValue = 7;
+                    this.MaxValue = 42;
+                    break;
+                case ParameterType.RodLength:
+                    this.MinValue = 45;
+                    this.MaxValue = 500;
+                    break;
+                case ParameterType.RodWidth:
+                    this.MinValue = 3;
+                    this.MaxValue = 21;
+                    break;
             }
         }
 

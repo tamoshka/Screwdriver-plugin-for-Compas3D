@@ -50,10 +50,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.CheckBoxIsHoleExist = new System.Windows.Forms.CheckBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 52);
             this.label1.Name = "label1";
@@ -63,8 +68,11 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 192);
+            this.label2.Location = new System.Drawing.Point(22, 222);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(159, 20);
             this.label2.TabIndex = 1;
@@ -72,6 +80,9 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(22, 92);
             this.label3.Name = "label3";
@@ -81,8 +92,11 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 232);
+            this.label4.Location = new System.Drawing.Point(22, 262);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(187, 20);
             this.label4.TabIndex = 3;
@@ -90,6 +104,9 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(22, 12);
             this.label5.Name = "label5";
@@ -99,8 +116,11 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 152);
+            this.label6.Location = new System.Drawing.Point(22, 182);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(163, 20);
             this.label6.TabIndex = 5;
@@ -108,8 +128,12 @@
             // 
             // TextBoxRodLength
             // 
+            this.TextBoxRodLength.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxRodLength.BackColor = System.Drawing.SystemColors.Window;
-            this.TextBoxRodLength.Location = new System.Drawing.Point(228, 189);
+            this.TextBoxRodLength.Location = new System.Drawing.Point(228, 259);
+            this.TextBoxRodLength.MinimumSize = new System.Drawing.Size(163, 0);
             this.TextBoxRodLength.Name = "TextBoxRodLength";
             this.TextBoxRodLength.Size = new System.Drawing.Size(163, 26);
             this.TextBoxRodLength.TabIndex = 10;
@@ -117,8 +141,12 @@
             // 
             // TextBoxRodWidth
             // 
+            this.TextBoxRodWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxRodWidth.BackColor = System.Drawing.SystemColors.Window;
-            this.TextBoxRodWidth.Location = new System.Drawing.Point(228, 229);
+            this.TextBoxRodWidth.Location = new System.Drawing.Point(228, 219);
+            this.TextBoxRodWidth.MinimumSize = new System.Drawing.Size(163, 0);
             this.TextBoxRodWidth.Name = "TextBoxRodWidth";
             this.TextBoxRodWidth.Size = new System.Drawing.Size(163, 26);
             this.TextBoxRodWidth.TabIndex = 11;
@@ -126,8 +154,12 @@
             // 
             // TextBoxHandleWidth
             // 
+            this.TextBoxHandleWidth.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxHandleWidth.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxHandleWidth.Location = new System.Drawing.Point(228, 89);
+            this.TextBoxHandleWidth.MinimumSize = new System.Drawing.Size(163, 0);
             this.TextBoxHandleWidth.Name = "TextBoxHandleWidth";
             this.TextBoxHandleWidth.Size = new System.Drawing.Size(163, 26);
             this.TextBoxHandleWidth.TabIndex = 12;
@@ -135,8 +167,12 @@
             // 
             // TextBoxHandleLength
             // 
+            this.TextBoxHandleLength.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxHandleLength.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxHandleLength.Location = new System.Drawing.Point(228, 49);
+            this.TextBoxHandleLength.MinimumSize = new System.Drawing.Size(163, 0);
             this.TextBoxHandleLength.Name = "TextBoxHandleLength";
             this.TextBoxHandleLength.Size = new System.Drawing.Size(163, 26);
             this.TextBoxHandleLength.TabIndex = 13;
@@ -144,6 +180,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(410, 52);
             this.label7.Name = "label7";
@@ -153,6 +190,7 @@
             // 
             // label8
             // 
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(410, 92);
             this.label8.Name = "label8";
@@ -162,8 +200,9 @@
             // 
             // label9
             // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(410, 192);
+            this.label9.Location = new System.Drawing.Point(410, 222);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(283, 20);
             this.label9.TabIndex = 16;
@@ -171,8 +210,9 @@
             // 
             // label10
             // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(410, 232);
+            this.label10.Location = new System.Drawing.Point(410, 262);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(211, 20);
             this.label10.TabIndex = 17;
@@ -180,7 +220,11 @@
             // 
             // ButtonCreate
             // 
+            this.ButtonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonCreate.Location = new System.Drawing.Point(330, 322);
+            this.ButtonCreate.MinimumSize = new System.Drawing.Size(140, 35);
             this.ButtonCreate.Name = "ButtonCreate";
             this.ButtonCreate.Size = new System.Drawing.Size(140, 35);
             this.ButtonCreate.TabIndex = 18;
@@ -196,11 +240,15 @@
             // 
             // ComboBoxShapeOfHandle
             // 
+            this.ComboBoxShapeOfHandle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ComboBoxShapeOfHandle.FormattingEnabled = true;
             this.ComboBoxShapeOfHandle.Items.AddRange(new object[] {
             "Цилиндрическая",
             "Шестиугольная"});
             this.ComboBoxShapeOfHandle.Location = new System.Drawing.Point(228, 9);
+            this.ComboBoxShapeOfHandle.MinimumSize = new System.Drawing.Size(163, 0);
             this.ComboBoxShapeOfHandle.Name = "ComboBoxShapeOfHandle";
             this.ComboBoxShapeOfHandle.Size = new System.Drawing.Size(163, 28);
             this.ComboBoxShapeOfHandle.TabIndex = 20;
@@ -208,12 +256,16 @@
             // 
             // ComboBoxShapeOfRod
             // 
+            this.ComboBoxShapeOfRod.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ComboBoxShapeOfRod.FormattingEnabled = true;
             this.ComboBoxShapeOfRod.Items.AddRange(new object[] {
             "Крестообразная",
             "Плоская",
             "Квадратная"});
-            this.ComboBoxShapeOfRod.Location = new System.Drawing.Point(228, 149);
+            this.ComboBoxShapeOfRod.Location = new System.Drawing.Point(228, 179);
+            this.ComboBoxShapeOfRod.MinimumSize = new System.Drawing.Size(163, 0);
             this.ComboBoxShapeOfRod.Name = "ComboBoxShapeOfRod";
             this.ComboBoxShapeOfRod.Size = new System.Drawing.Size(163, 28);
             this.ComboBoxShapeOfRod.TabIndex = 21;
@@ -221,6 +273,7 @@
             // 
             // label11
             // 
+            this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(410, 12);
             this.label11.Name = "label11";
@@ -230,8 +283,9 @@
             // 
             // label12
             // 
+            this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(410, 152);
+            this.label12.Location = new System.Drawing.Point(410, 182);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(300, 20);
             this.label12.TabIndex = 23;
@@ -239,8 +293,12 @@
             // 
             // CheckBoxIsHoleExist
             // 
+            this.CheckBoxIsHoleExist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CheckBoxIsHoleExist.AutoSize = true;
-            this.CheckBoxIsHoleExist.Location = new System.Drawing.Point(310, 282);
+            this.CheckBoxIsHoleExist.Location = new System.Drawing.Point(22, 132);
+            this.CheckBoxIsHoleExist.MinimumSize = new System.Drawing.Size(190, 24);
             this.CheckBoxIsHoleExist.Name = "CheckBoxIsHoleExist";
             this.CheckBoxIsHoleExist.Size = new System.Drawing.Size(190, 24);
             this.CheckBoxIsHoleExist.TabIndex = 24;
@@ -248,36 +306,50 @@
             this.CheckBoxIsHoleExist.UseVisualStyleBackColor = true;
             this.CheckBoxIsHoleExist.CheckedChanged += new System.EventHandler(this.CheckBoxIsHoleExist_CheckedChanged);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.ButtonCreate);
+            this.groupBox1.Controls.Add(this.CheckBoxIsHoleExist);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.ComboBoxShapeOfRod);
+            this.groupBox1.Controls.Add(this.TextBoxRodWidth);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.TextBoxRodLength);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.TextBoxHandleWidth);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.ComboBoxShapeOfHandle);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.TextBoxHandleLength);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Location = new System.Drawing.Point(-4, 1);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(795, 375);
+            this.groupBox1.TabIndex = 25;
+            this.groupBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(787, 376);
-            this.Controls.Add(this.CheckBoxIsHoleExist);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.ComboBoxShapeOfRod);
-            this.Controls.Add(this.ComboBoxShapeOfHandle);
-            this.Controls.Add(this.ButtonCreate);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.TextBoxHandleLength);
-            this.Controls.Add(this.TextBoxHandleWidth);
-            this.Controls.Add(this.TextBoxRodWidth);
-            this.Controls.Add(this.TextBoxRodLength);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.groupBox1);
+            this.MinimumSize = new System.Drawing.Size(809, 432);
             this.Name = "MainForm";
             this.Text = "Отвёртка";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -304,6 +376,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox CheckBoxIsHoleExist;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
