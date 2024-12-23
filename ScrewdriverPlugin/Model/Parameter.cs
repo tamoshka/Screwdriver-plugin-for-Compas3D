@@ -71,15 +71,7 @@ namespace ScrewdriverPlugin
 
             set
             {
-                try
-                {
-                    this._value = value;
-                    this.Validator();
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException(ex.Message);
-                }
+                this._value = value;
             }
         }
 
@@ -96,34 +88,6 @@ namespace ScrewdriverPlugin
             set
             {
                 this._typeOfParameter = value;
-                this.DefineMinMax();
-            }
-        }
-
-        //TODO: extract
-        /// <summary>
-        /// Функция определяющая _maxValue и _minValue для parameter.
-        /// </summary>
-        private void DefineMinMax()
-        {
-            switch (this._typeOfParameter)
-            {
-                case ParameterType.HandleLength:
-                    this.MinValue = 45;
-                    this.MaxValue = 150;
-                    break;
-                case ParameterType.HandleWidth:
-                    this.MinValue = 7;
-                    this.MaxValue = 42;
-                    break;
-                case ParameterType.RodLength:
-                    this.MinValue = 45;
-                    this.MaxValue = 500;
-                    break;
-                case ParameterType.RodWidth:
-                    this.MinValue = 3;
-                    this.MaxValue = 21;
-                    break;
             }
         }
 
@@ -131,11 +95,16 @@ namespace ScrewdriverPlugin
         /// Валидация вводимого значения _value в параметр.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        private void Validator()
+        public void Validator()
         {
-            if (this.Value < this._minValue || this.Value > this._maxValue)
+            if (this._maxValue < this._minValue)
             {
-                throw new ArgumentException("Простая ошибка");
+                throw new ArgumentException("Нарушение в определении граничных условий");
+            }
+
+            if (this._value < this._minValue || this._value > this._maxValue)
+            {
+                throw new ArgumentException("Значение за граничными пределами");
             }
         }
     }

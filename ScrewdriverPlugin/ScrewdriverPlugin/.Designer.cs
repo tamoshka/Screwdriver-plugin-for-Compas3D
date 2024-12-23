@@ -51,6 +51,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.CheckBoxIsHoleExist = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelWarning = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,12 +133,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxRodLength.BackColor = System.Drawing.SystemColors.Window;
-            this.TextBoxRodLength.Location = new System.Drawing.Point(228, 259);
-            this.TextBoxRodLength.MinimumSize = new System.Drawing.Size(163, 0);
+            this.TextBoxRodLength.Location = new System.Drawing.Point(228, 219);
+            this.TextBoxRodLength.MinimumSize = new System.Drawing.Size(163, 4);
             this.TextBoxRodLength.Name = "TextBoxRodLength";
             this.TextBoxRodLength.Size = new System.Drawing.Size(163, 26);
             this.TextBoxRodLength.TabIndex = 10;
-            this.TextBoxRodLength.Leave += new System.EventHandler(this.TextBoxRodLength_Leave);
+            this.TextBoxRodLength.Leave += new System.EventHandler(this.TextBoxRod_Leave);
             // 
             // TextBoxRodWidth
             // 
@@ -145,12 +146,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxRodWidth.BackColor = System.Drawing.SystemColors.Window;
-            this.TextBoxRodWidth.Location = new System.Drawing.Point(228, 219);
-            this.TextBoxRodWidth.MinimumSize = new System.Drawing.Size(163, 0);
+            this.TextBoxRodWidth.Location = new System.Drawing.Point(228, 259);
+            this.TextBoxRodWidth.MinimumSize = new System.Drawing.Size(163, 4);
             this.TextBoxRodWidth.Name = "TextBoxRodWidth";
             this.TextBoxRodWidth.Size = new System.Drawing.Size(163, 26);
             this.TextBoxRodWidth.TabIndex = 11;
-            this.TextBoxRodWidth.Leave += new System.EventHandler(this.TextBoxRodWidth_Leave);
+            this.TextBoxRodWidth.Leave += new System.EventHandler(this.TextBoxRod_Leave);
             // 
             // TextBoxHandleWidth
             // 
@@ -159,11 +160,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxHandleWidth.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxHandleWidth.Location = new System.Drawing.Point(228, 89);
-            this.TextBoxHandleWidth.MinimumSize = new System.Drawing.Size(163, 0);
+            this.TextBoxHandleWidth.MinimumSize = new System.Drawing.Size(163, 4);
             this.TextBoxHandleWidth.Name = "TextBoxHandleWidth";
             this.TextBoxHandleWidth.Size = new System.Drawing.Size(163, 26);
             this.TextBoxHandleWidth.TabIndex = 12;
-            this.TextBoxHandleWidth.Leave += new System.EventHandler(this.TextBoxHandleWidth_Leave);
+            this.TextBoxHandleWidth.Leave += new System.EventHandler(this.TextBoxHandle_Leave);
             // 
             // TextBoxHandleLength
             // 
@@ -172,11 +173,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBoxHandleLength.BackColor = System.Drawing.SystemColors.Window;
             this.TextBoxHandleLength.Location = new System.Drawing.Point(228, 49);
-            this.TextBoxHandleLength.MinimumSize = new System.Drawing.Size(163, 0);
+            this.TextBoxHandleLength.MinimumSize = new System.Drawing.Size(163, 4);
             this.TextBoxHandleLength.Name = "TextBoxHandleLength";
             this.TextBoxHandleLength.Size = new System.Drawing.Size(163, 26);
             this.TextBoxHandleLength.TabIndex = 13;
-            this.TextBoxHandleLength.Leave += new System.EventHandler(this.TextBoxHandleLength_Leave);
+            this.TextBoxHandleLength.Leave += new System.EventHandler(this.TextBoxHandle_Leave);
             // 
             // label7
             // 
@@ -220,10 +221,8 @@
             // 
             // ButtonCreate
             // 
-            this.ButtonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonCreate.Location = new System.Drawing.Point(330, 322);
+            this.ButtonCreate.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.ButtonCreate.Location = new System.Drawing.Point(330, 342);
             this.ButtonCreate.MinimumSize = new System.Drawing.Size(140, 35);
             this.ButtonCreate.Name = "ButtonCreate";
             this.ButtonCreate.Size = new System.Drawing.Size(140, 35);
@@ -243,6 +242,7 @@
             this.ComboBoxShapeOfHandle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ComboBoxShapeOfHandle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxShapeOfHandle.FormattingEnabled = true;
             this.ComboBoxShapeOfHandle.Items.AddRange(new object[] {
             "Цилиндрическая",
@@ -259,6 +259,7 @@
             this.ComboBoxShapeOfRod.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ComboBoxShapeOfRod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxShapeOfRod.FormattingEnabled = true;
             this.ComboBoxShapeOfRod.Items.AddRange(new object[] {
             "Крестообразная",
@@ -311,6 +312,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.labelWarning);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.ButtonCreate);
             this.groupBox1.Controls.Add(this.CheckBoxIsHoleExist);
@@ -333,17 +335,25 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Location = new System.Drawing.Point(-4, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(795, 375);
+            this.groupBox1.Size = new System.Drawing.Size(795, 395);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
+            // 
+            // labelWarning
+            // 
+            this.labelWarning.AutoSize = true;
+            this.labelWarning.Location = new System.Drawing.Point(372, 309);
+            this.labelWarning.Name = "labelWarning";
+            this.labelWarning.Size = new System.Drawing.Size(0, 20);
+            this.labelWarning.TabIndex = 25;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 376);
+            this.ClientSize = new System.Drawing.Size(787, 396);
             this.Controls.Add(this.groupBox1);
-            this.MinimumSize = new System.Drawing.Size(809, 432);
+            this.MinimumSize = new System.Drawing.Size(809, 452);
             this.Name = "MainForm";
             this.Text = "Отвёртка";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -377,6 +387,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox CheckBoxIsHoleExist;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label labelWarning;
     }
 }
 

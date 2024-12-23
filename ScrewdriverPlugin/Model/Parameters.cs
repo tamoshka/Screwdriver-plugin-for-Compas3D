@@ -10,10 +10,6 @@ namespace ScrewdriverPlugin
     public class Parameters
     {
         //TODO: refactor
-        /// <summary>
-        /// Поле хранящее в себе текущий параметр.
-        /// </summary>
-        private Dictionary<ParameterType, Parameter> _parameter;
 
         /// <summary>
         /// Поле хранящее в себе словарь всех параметров.
@@ -34,6 +30,26 @@ namespace ScrewdriverPlugin
         /// Поле хранящее в себе информацию о наличии отверстия для возможности "повесить" отвёртку.
         /// </summary>
         private bool _isHoleExist;
+
+        /// <summary>
+        /// Увеличивает в четыре раза.
+        /// </summary>
+        private const double FOURPLE = 4;
+
+        /// <summary>
+        /// Размер изменённой части наконечника.
+        /// </summary>
+        private const double DIF = 5;
+
+        /// <summary>
+        /// Определяет разницу в диаметре.
+        /// </summary>
+        private const double DIAMETERDIF = 2;
+
+        /// <summary>
+        /// Определяет половину размера.
+        /// </summary>
+        private const double HALF = 2;
 
         /// <summary>
         /// Gets or sets для _parameters.
@@ -102,19 +118,16 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Метод для добавления нового параметра в словарь.
         /// </summary>
-        /// <param name="parameterType">Тип добавляемого параметра.</param>
         /// <param name="parameter">Параметр.</param>
-        public void SetParameter(ParameterType parameterType, Parameter parameter)
+        public void SetParameter(Parameter parameter)
         {
             try
             {
-                this._parameter = new Dictionary<ParameterType, Parameter>()
-                {
-                    { parameterType, parameter },
-                };
-                this.AllParameters.Remove(parameterType);
-                this.AllParameters.Add(parameterType, parameter);
-                this.ValidateParameters();
+                this.DefineMinMax(parameter);
+                parameter.Validator();
+                this.AllParameters.Remove(parameter.TypeOfParameter);
+                this.AllParameters.Add(parameter.TypeOfParameter, parameter);
+                this.ValidateParameters(parameter);
             }
             catch (Exception ex)
             {
@@ -123,37 +136,62 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
+        /// Функция определяющая _maxValue и _minValue для parameter.
+        /// </summary>
+        /// <param name="parameter">Параметр.</param>
+        /// <exception cref="ArgumentException">Ошибка.</exception>
+        public void DefineMinMax(Parameter parameter)
+        {
+            switch (parameter.TypeOfParameter)
+            {
+                case ParameterType.HandleLength:
+                    parameter.MinValue = 45;
+                    parameter.MaxValue = 150;
+                    break;
+                case ParameterType.HandleWidth:
+                    parameter.MinValue = 7;
+                    parameter.MaxValue = 42;
+                    break;
+                case ParameterType.RodLength:
+                    parameter.MinValue = 45;
+                    parameter.MaxValue = 500;
+                    break;
+                case ParameterType.RodWidth:
+                    parameter.MinValue = 3;
+                    parameter.MaxValue = 21;
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Валидация зависимых параметров.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        private void ValidateParameters()
+        private void ValidateParameters(Parameter parameter)
         {
             //TODO: rename
             string exception = string.Empty;
-            ParameterType parameterType = this._parameter.ElementAt(0).Key;
-            Parameter parameter = this._parameter.ElementAt(0).Value;
+            ParameterType parameterType = parameter.TypeOfParameter;
             //TODO: redo
-            Parameter chainedParameterFirst;
-            Parameter chainedParameterSecond;
-            Parameter chainedParameterThird;
             switch (parameterType)
             {
                 //TODO: RSDN
                 case ParameterType.HandleLength:
+                {
                     if (this.AllParameters.TryGetValue(
                         ParameterType.HandleWidth,
-                        out chainedParameterFirst) ||
+                        out Parameter chainedParameterFirst) ||
                     this.AllParameters.TryGetValue(
                         ParameterType.RodLength,
-                        out chainedParameterSecond))
+                        out Parameter chainedParameterSecond))
                     {
                         if (this.AllParameters.TryGetValue(
                                 ParameterType.HandleWidth,
                                 out chainedParameterFirst))
                         {
                             //TODO: const
-                            double maxValue = (chainedParameterFirst.Value + 5) * 4;
-                            double minValue = (chainedParameterFirst.Value - 5) * 4;
+                            double maxValue = (chainedParameterFirst.Value + DIF) * FOURPLE;
+                            double minValue = (chainedParameterFirst.Value - DIF) * FOURPLE;
                             if (parameter.Value > maxValue)
                             {
                                 exception += "Длина ручки более чем в 4 раза больше её диаметра" +
@@ -180,21 +218,24 @@ namespace ScrewdriverPlugin
                     }
 
                     break;
+                }
+
                 case ParameterType.HandleWidth:
+                {
                     if (this.AllParameters.TryGetValue(
                         ParameterType.HandleLength,
-                        out chainedParameterFirst) == true ||
+                        out Parameter chainedParameterFirst) == true ||
                     this.AllParameters.TryGetValue(
                         ParameterType.RodWidth,
-                        out chainedParameterSecond) == true)
+                        out Parameter chainedParameterSecond) == true)
                     {
                         if (this.AllParameters.TryGetValue(
                                 ParameterType.HandleLength,
                                 out chainedParameterFirst) == true)
                         {
                             //TODO: const
-                            double lowerQuarter = (double)((chainedParameterFirst.Value / 4) - 5);
-                            double upperQuarter = (double)((chainedParameterFirst.Value / 4) + 5);
+                            double lowerQuarter = (double)((chainedParameterFirst.Value / FOURPLE) - DIF);
+                            double upperQuarter = (double)((chainedParameterFirst.Value / FOURPLE) + DIF);
                             if (parameter.Value < lowerQuarter)
                             {
                                 exception += "Диаметр ручки меньше четверти длины ручки - 5 мм" +
@@ -214,8 +255,8 @@ namespace ScrewdriverPlugin
                                 out chainedParameterSecond) == true)
                         {
                             //TODO: const
-                            double minValue = chainedParameterSecond.Value * 2;
-                            double maxValue = (chainedParameterSecond.Value + 2) * 2;
+                            double minValue = chainedParameterSecond.Value * HALF;
+                            double maxValue = (chainedParameterSecond.Value + DIAMETERDIF) * HALF;
                             if (parameter.Value < minValue)
                             {
                                 exception += "Диаметр ручки не превышает диаметр наконечника " +
@@ -232,10 +273,13 @@ namespace ScrewdriverPlugin
                     }
 
                     break;
+                }
+
                 case ParameterType.RodLength:
+                {
                     if (this.AllParameters.TryGetValue(
                         ParameterType.HandleLength,
-                        out chainedParameterFirst) == true)
+                        out Parameter chainedParameterFirst) == true)
                     {
                         if (this.AllParameters.TryGetValue(
                                 ParameterType.HandleLength,
@@ -249,15 +293,18 @@ namespace ScrewdriverPlugin
                     }
 
                     break;
+                }
+
                 case ParameterType.RodWidth:
+                {
                     if (this.AllParameters.TryGetValue(
                         ParameterType.HandleWidth,
-                        out chainedParameterThird) == true)
+                        out Parameter chainedParameterThird) == true)
                     {
                         double upperHalfOfWidth = (double)chainedParameterThird.Value;
-                        upperHalfOfWidth = upperHalfOfWidth / 2;
+                        upperHalfOfWidth = upperHalfOfWidth / HALF;
                         double lowerHalfOfWidth = (double)chainedParameterThird.Value;
-                        lowerHalfOfWidth = (lowerHalfOfWidth / 2) - 2;
+                        lowerHalfOfWidth = (lowerHalfOfWidth / HALF) - DIAMETERDIF;
                         if (parameter.Value < lowerHalfOfWidth)
                         {
                             exception += "Диаметр наконечника меньше половины диаметра ручки, " +
@@ -273,6 +320,7 @@ namespace ScrewdriverPlugin
                     }
 
                     break;
+                }
             }
 
             if (exception != string.Empty)

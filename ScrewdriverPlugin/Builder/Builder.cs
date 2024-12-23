@@ -9,6 +9,56 @@ namespace ScrewdriverPlugin
     public class Builder
     {
         /// <summary>
+        /// Одна вторая.
+        /// </summary>
+        private const double ONESECOND = 0.5;
+
+        /// <summary>
+        /// Одна четвёртая.
+        /// </summary>
+        private const double ONEFOURTH = 0.25;
+
+        /// <summary>
+        /// Одна пятая.
+        /// </summary>
+        private const double ONEFIVED = 0.2;
+
+        /// <summary>
+        /// Две третьих.
+        /// </summary>
+        private const double TWOTHIRD = 0.66;
+
+        /// <summary>
+        /// Четыре целых пять десятых поделённое на шесть.
+        /// </summary>
+        private const double FOURWITHHALFSIXED = 0.75;
+
+        /// <summary>
+        /// Одна седьмая.
+        /// </summary>
+        private const double ONESEVENED = 0.143;
+
+        /// <summary>
+        /// Одна сорок пятая.
+        /// </summary>
+        private const double ONEFOURTYFIVED = 0.0222;
+
+        /// <summary>
+        /// Пять шестых.
+        /// </summary>
+        private const double FIVESIXED = 0.8333;
+
+        /// <summary>
+        /// Корень из 2.
+        /// </summary>
+        private const double SQRT2 = 1.414;
+
+        /// <summary>
+        /// Одна десятая.
+        /// </summary>
+        private const double ONETENTH = 0.1;
+
+        /// <summary>
         /// Экземпляр класс Wrapper.
         /// </summary>
         private Wrapper _wrapper = new Wrapper();
@@ -32,125 +82,123 @@ namespace ScrewdriverPlugin
         private void BuildRod(Parameters parameters)
         {
             this._wrapper.CreateSketch(1);
-            Parameter rodLength;
-            parameters.AllParameters.TryGetValue(ParameterType.RodLength, out rodLength);
+            parameters.AllParameters.TryGetValue(ParameterType.RodLength, out Parameter rodLength);
             int y = rodLength.Value;
-            Parameter rodWidth;
-            parameters.AllParameters.TryGetValue(ParameterType.RodWidth, out rodWidth);
-            double x1 = -rodWidth.Value;
-            x1 = x1 / 2;
+            parameters.AllParameters.TryGetValue(ParameterType.RodWidth, out Parameter rodWidth);
+            double x1 = -((double)rodWidth.Value);
+            double x3 = x1 * ONESECOND;
             //TODO: const
-            double fivedX = x1 / 5;
-            double newY = y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45));
+            double fivedX = x1 * ONEFIVED;
+            double newY = y * ONEFIVED / Math.Log10(y * ONEFIVED) / (y / (-x3 * 2) * ONESEVENED / Math.Sqrt(y * ONEFOURTYFIVED));
             switch (parameters.ShapeOfRod)
             {
                 case RodType.Cruciform:
-                    double sqrtX = Math.Sqrt(2) / 2 * x1;
-                    double[,] pointsArrayCruciform =
                     {
-                        { 0, 0, x1, 0, 1 },
-                        { 0, 0, 0, y, 3 },
-                        { x1, 0, x1, y, 1 },
-                        { 0, y, x1, y, 1 },
-                        { 0, y - 1, x1, y - newY, 1 },
-                        { 0, y - 1, -x1, y - newY, 1 },
-                        { -x1, y - newY, -x1, y, 1 },
-                        { x1, y - newY, x1, y, 1 },
-                        { -x1, y, x1, y, 1 },
-                        { 0, -y + 1, x1, -y + newY, 1 },
-                        { 0, -y + 1, -x1, -y + newY, 1 },
-                        { -x1, -y + newY, -x1, -y, 1 },
-                        { x1, -y + newY, x1, -y, 1 },
-                        { -x1, -y, x1, -y, 1 },
+                        double sqrtX = SQRT2 * ONESECOND * x3;
+                        double[,] pointsArray =
                         {
-                            sqrtX, sqrtX,
-                            -sqrtX, -sqrtX, 1,
-                        },
-                        {
-                            sqrtX, -sqrtX,
-                            -sqrtX, sqrtX, 1,
-                        },
-                        { fivedX, y - 1, x1, y - newY, 1 },
-                        { -fivedX, y - 1, -x1, y - newY, 1 },
-                        { -fivedX, y - 1, fivedX, y - 1, 1 },
-                        { -x1, y - newY, -x1, y, 1 },
-                        { x1, y - newY, x1, y, 1 },
-                        { -x1, y, x1, y, 1 },
-                        { fivedX, -y + 1, x1, -y + newY, 1 },
-                        { -fivedX, -y + 1, -x1, -y + newY, 1 },
-                        { -fivedX, -y + 1, fivedX, -y + 1, 1 },
-                        { -x1, -y + newY, -x1, -y, 1 },
-                        { x1, -y + newY, x1, -y, 1 },
-                        { -x1, -y, x1, -y, 1 },
-                    };
-                    this._wrapper.CreateLine(pointsArrayCruciform, 0, 4);
-                    this._wrapper.Spin();
-                    int[] typeExtrusionCruciform = { 1, 1, 2, 1, 1 };
-                    int[] typeSketchCruciform = { 1, 3, 2, 1, 3 };
-                    double[] extrusionDepthCruciform = { -x1 * 2, -x1 * 2, y, -x1 * 2, -x1 * 2 };
-                    int[] startCruciform = { 4, 9, 14, 16, 22 };
-                    int[] countCruciform = { 5, 5, 2, 6, 6 };
-                    //TODO: RSDN
-                    this.Helper(pointsArrayCruciform, typeExtrusionCruciform, typeSketchCruciform, extrusionDepthCruciform, startCruciform, countCruciform);
-                    break;
+                            { 0, 0, x3, 0, 1 },
+                            { 0, 0, 0, y, 3 },
+                            { x3, 0, x3, y, 1 },
+                            { 0, y, x3, y, 1 },
+                            { 0, y - 1, x3, y - newY, 1 },
+                            { 0, y - 1, -x3, y - newY, 1 },
+                            { -x3, y - newY, -x3, y, 1 },
+                            { x3, y - newY, x3, y, 1 },
+                            { -x3, y, x3, y, 1 },
+                            { 0, -y + 1, x3, -y + newY, 1 },
+                            { 0, -y + 1, -x3, -y + newY, 1 },
+                            { -x3, -y + newY, -x3, -y, 1 },
+                            { x3, -y + newY, x3, -y, 1 },
+                            { -x3, -y, x3, -y, 1 },
+                            { sqrtX, sqrtX, -sqrtX, -sqrtX, 1, },
+                            { sqrtX, -sqrtX, -sqrtX, sqrtX, 1, },
+                            { fivedX, y - 1, x3, y - newY, 1 },
+                            { -fivedX, y - 1, -x3, y - newY, 1 },
+                            { -fivedX, y - 1, fivedX, y - 1, 1 },
+                            { -x3, y - newY, -x3, y, 1 },
+                            { x3, y - newY, x3, y, 1 },
+                            { -x3, y, x3, y, 1 },
+                            { fivedX, -y + 1, x3, -y + newY, 1 },
+                            { -fivedX, -y + 1, -x3, -y + newY, 1 },
+                            { -fivedX, -y + 1, fivedX, -y + 1, 1 },
+                            { -x3, -y + newY, -x3, -y, 1 },
+                            { x3, -y + newY, x3, -y, 1 },
+                            { -x3, -y, x3, -y, 1 },
+                        };
+                        this._wrapper.CreateLine(pointsArray, 0, 4);
+                        this._wrapper.Spin();
+                        int[] typeExtrusion = { 1, 1, 2, 1, 1 };
+                        int[] typeSketch = { 1, 3, 2, 1, 3 };
+                        double[] extrusionDepth = { -x1, -x1, y, -x1, -x1 };
+                        int[] start = { 4, 9, 14, 16, 22 };
+                        int[] count = { 5, 5, 2, 6, 6 };
+                        //TODO: RSDN
+                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        break;
+                    }
+
                 case RodType.Flat:
-                    double[,] pointsArrayFlat =
                     {
-                        { 0, 0, x1, 0, 1 },
-                        { 0, 0, 0, y, 3 },
-                        { x1, 0, x1, y, 1 },
-                        { 0, y, x1, y, 1 },
-                        { 0, y - 1, x1, y - newY, 1 },
-                        { 0, y - 1, -x1, y - newY, 1 },
-                        { -x1, y - newY, -x1, y, 1 },
-                        { x1, y - newY, x1, y, 1 },
-                        { -x1, y, x1, y, 1 },
-                    };
-                    this._wrapper.CreateLine(pointsArrayFlat, 0, 4);
-                    this._wrapper.Spin();
-                    int[] typeExtrusionFlat = { 1 };
-                    int[] typeSketchFlat = { 1 };
-                    double[] extrusionDepthFlat = { -x1 * 2 };
-                    int[] startFlat = { 4 };
-                    int[] countFlat = { 5 };
-                    this.Helper(pointsArrayFlat, typeExtrusionFlat, typeSketchFlat, extrusionDepthFlat, startFlat, countFlat);
-                    break;
+                        double[,] pointsArray =
+                        {
+                            { 0, 0, x3, 0, 1 },
+                            { 0, 0, 0, y, 3 },
+                            { x3, 0, x3, y, 1 },
+                            { 0, y, x3, y, 1 },
+                            { 0, y - 1, x3, y - newY, 1 },
+                            { 0, y - 1, -x3, y - newY, 1 },
+                            { -x3, y - newY, -x3, y, 1 },
+                            { x3, y - newY, x3, y, 1 },
+                            { -x3, y, x3, y, 1 },
+                        };
+                        this._wrapper.CreateLine(pointsArray, 0, 4);
+                        this._wrapper.Spin();
+                        int[] typeExtrusion = { 1 };
+                        int[] typeSketch = { 1 };
+                        double[] extrusionDepth = { -x1 };
+                        int[] start = { 4 };
+                        int[] count = { 5 };
+                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        break;
+                    }
+
                 case RodType.Rectangle:
-                    double[,] pointsArrayRectangle =
                     {
-                        { 0, 0, x1, 0, 1 },
-                        { 0, 0, 0, y, 3 },
-                        { x1, 0, x1, y, 1 },
-                        { 0, y, x1, y, 1 },
-                        { x1 - fivedX, y - 1, x1 - fivedX, y - newY, 1 },
-                        { x1 - fivedX, y - newY, x1, y - newY, 1 },
-                        { -x1 + fivedX, y - 1, -x1 + fivedX, y - newY, 1 },
-                        { -x1 + fivedX, y - newY, -x1, y - newY, 1 },
-                        { -x1 + fivedX, y - 1, x1 - fivedX, y - 1, 1 },
-                        { -x1, y - newY, -x1, y, 1 },
-                        { x1, y - newY, x1, y, 1 },
-                        { -x1, y, x1, y, 1 },
-                        { x1 - fivedX, -y + 1, x1 - fivedX, -y + newY, 1 },
-                        { x1 - fivedX, -y + newY, x1, -y + newY, 1 },
-                        { -x1 + fivedX, -y + 1, -x1 + fivedX, -y + newY, 1 },
-                        { -x1 + fivedX, -y + newY, -x1, -y + newY, 1 },
-                        { -x1 + fivedX, -y + 1, x1 - fivedX, -y + 1, 1 },
-                        { -x1, -y + newY, -x1, -y, 1 },
-                        { x1, -y + newY, x1, -y, 1 },
-                        { -x1, -y, x1, -y, 1 },
-                    };
-                    this._wrapper.CreateLine(pointsArrayRectangle, 0, 4);
-                    this._wrapper.Spin();
-                    int[] typeExtrusionRectangle = { 1, 1 };
-                    int[] typeSketchRectangle = { 1, 3 };
-                    double[] extrusionDepthRectangle = { -x1 * 2, -x1 * 2 };
-                    int[] startRectangle = { 4, 12 };
-                    int[] countRectangle = { 8, 8 };
-                    //TODO: RSDN
-                    this.Helper(pointsArrayRectangle, typeExtrusionRectangle, 
-                        typeSketchRectangle, extrusionDepthRectangle, 
-                        startRectangle, countRectangle);
-                    break;
+                        double[,] pointsArray =
+                        {
+                            { 0, 0, x3, 0, 1 },
+                            { 0, 0, 0, y, 3 },
+                            { x3, 0, x3, y, 1 },
+                            { 0, y, x3, y, 1 },
+                            { x3 - fivedX, y - 1, x3 - fivedX, y - newY, 1 },
+                            { x3 - fivedX, y - newY, x3, y - newY, 1 },
+                            { -x3 + fivedX, y - 1, -x3 + fivedX, y - newY, 1 },
+                            { -x3 + fivedX, y - newY, -x3, y - newY, 1 },
+                            { -x3 + fivedX, y - 1, x3 - fivedX, y - 1, 1 },
+                            { -x3, y - newY, -x3, y, 1 },
+                            { x3, y - newY, x3, y, 1 },
+                            { -x3, y, x3, y, 1 },
+                            { x3 - fivedX, -y + 1, x3 - fivedX, -y + newY, 1 },
+                            { x3 - fivedX, -y + newY, x3, -y + newY, 1 },
+                            { -x3 + fivedX, -y + 1, -x3 + fivedX, -y + newY, 1 },
+                            { -x3 + fivedX, -y + newY, -x3, -y + newY, 1 },
+                            { -x3 + fivedX, -y + 1, x3 - fivedX, -y + 1, 1 },
+                            { -x3, -y + newY, -x3, -y, 1 },
+                            { x3, -y + newY, x3, -y, 1 },
+                            { -x3, -y, x3, -y, 1 },
+                        };
+                        this._wrapper.CreateLine(pointsArray, 0, 4);
+                        this._wrapper.Spin();
+                        int[] typeExtrusion = { 1, 1 };
+                        int[] typeSketch = { 1, 3 };
+                        double[] extrusionDepth = { -x3 * 2, -x3 * 2 };
+                        int[] start = { 4, 12 };
+                        int[] count = { 8, 8 };
+                        //TODO: RSDN
+                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        break;
+                    }
             }
         }
 
@@ -160,59 +208,62 @@ namespace ScrewdriverPlugin
         /// <param name="parameters">Параметры отвёртки.</param>
         private void BuildHandle(Parameters parameters)
         {
-            Parameter handleLength;
-            parameters.AllParameters.TryGetValue(ParameterType.HandleLength, out handleLength);
+            parameters.AllParameters.TryGetValue(ParameterType.HandleLength, out Parameter handleLength);
             double y1 = -handleLength.Value;
             double y2 = -handleLength.Value;
-            y2 = y2 / 2;
+            y2 = y2 * ONESECOND;
             double y3 = 0;
-            Parameter handleWidth;
-            parameters.AllParameters.TryGetValue(ParameterType.HandleWidth, out handleWidth);
+            parameters.AllParameters.TryGetValue(ParameterType.HandleWidth, out Parameter handleWidth);
             double x2 = -handleWidth.Value;
             //TODO: const
-            double x1 = -handleWidth.Value - (x2 / 10);
-            double x3 = -handleWidth.Value - (x2 / 10);
-            double quarterX = x2 / 4;
-            double halfX = x2 / 2;
+            double x1 = -handleWidth.Value - (x2 * ONETENTH);
+            double x3 = -handleWidth.Value - (x2 * ONETENTH);
+            double quarterX = x2 * ONEFOURTH;
+            double halfX = x2 * ONESECOND;
             switch (parameters.ShapeOfHandle)
             {
                 case HandleType.Prisme:
-                    double[,] pointsArrayPrisme =
                     {
-                        { halfX, 0, quarterX, -halfX, 1 },
-                        { quarterX, -halfX, -quarterX, -halfX, 1 },
-                        { -quarterX, -halfX, -halfX, 0, 1 },
-                        { -halfX, 0, -quarterX, halfX, 1 },
-                        { -quarterX, halfX, quarterX, halfX, 1 },
-                        { quarterX, halfX, halfX, 0, 1 },
-                    };
-                    int[] typeExtrusionPrisme = { 3 };
-                    int[] typeSketchPrisme = { 2 };
-                    double[] extrusionDepthPrisme = { y1 };
-                    int[] startPrisme = { 0 };
-                    int[] countPrisme = { 6 };
-                    //TODO: RSDN
-                    this.Helper(pointsArrayPrisme, typeExtrusionPrisme, typeSketchPrisme, extrusionDepthPrisme, startPrisme, countPrisme);
-                    break;
+                        double[,] pointsArray =
+                        {
+                            { halfX, 0, quarterX, -halfX, 1 },
+                            { quarterX, -halfX, -quarterX, -halfX, 1 },
+                            { -quarterX, -halfX, -halfX, 0, 1 },
+                            { -halfX, 0, -quarterX, halfX, 1 },
+                            { -quarterX, halfX, quarterX, halfX, 1 },
+                            { quarterX, halfX, halfX, 0, 1 },
+                        };
+                        int[] typeExtrusion = { 3 };
+                        int[] typeSketch = { 2 };
+                        double[] extrusionDepth = { y1 };
+                        int[] start = { 0 };
+                        int[] count = { 6 };
+                        //TODO: RSDN
+                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        break;
+                    }
+
                 case HandleType.Cylinder:
-                    this._wrapper.CreateSketch(1);
-                    this._wrapper.CreateArc(x1 / 2, y1, halfX, y2, x3 / 2, y3);
-                    double[,] pointsArrayCylinder =
                     {
-                        { 0, y1, 0, y3, 3 },
-                        { 0, y1, x1 / 2, y1, 1 },
-                        { 0, y3, x3 / 2, y3, 1 },
-                    };
-                    this._wrapper.CreateLine(pointsArrayCylinder, 0, 3);
-                    this._wrapper.Spin();
-                    break;
+                        this._wrapper.CreateSketch(1);
+                        this._wrapper.CreateArc(x1 / 2, y1, halfX, y2, x3 / 2, y3);
+                        double[,] pointsArray =
+                        {
+                            { 0, y1, 0, y3, 3 },
+                            { 0, y1, x1 / 2, y1, 1 },
+                            { 0, y3, x3 / 2, y3, 1 },
+                        };
+                        this._wrapper.CreateLine(pointsArray, 0, 3);
+                        this._wrapper.Spin();
+                        break;
+                    }
             }
 
             if (parameters.IsHoleExist == true)
             {
                 this._wrapper.CreateSketch(1);
-                this._wrapper.CreateArc(0, y1 * 5 / 6, x2 / 4, y1 * 4.5 / 6, 0, y1 * 2 / 3);
-                this._wrapper.CreateArc(0, y1 * 5 / 6, -x2 / 4, y1 * 4.5 / 6, 0, y1 * 2 / 3);
+                this._wrapper.CreateArc(0, y1 * FIVESIXED, x2 * ONEFOURTH, y1 * FOURWITHHALFSIXED, 0, y1 * TWOTHIRD);
+                this._wrapper.CreateArc(0, y1 * FIVESIXED, -x2 * ONEFOURTH, y1 * FOURWITHHALFSIXED, 0, y1 * TWOTHIRD);
                 this._wrapper.Extrusion(1, -x2);
             }
         }

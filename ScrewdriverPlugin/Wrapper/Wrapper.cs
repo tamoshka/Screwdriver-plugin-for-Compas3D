@@ -37,20 +37,27 @@ namespace Kompas
         public void CreateSketch(int perspective)
         {
             //TODO: RSDN
-            ksSketchDefinition sketchDef;
             this._sketchEntity = (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_sketch);
-            sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
+            ksSketchDefinition sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
             switch (perspective)
             {
                 case 1:
+                {
                     this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeXOY);
                     break;
+                }
+
                 case 2:
+                {
                     this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeXOZ);
                     break;
+                }
+
                 case 3:
+                {
                     this._plane = (ksEntity)this._part.GetDefaultEntity((short)Obj3dType.o3d_planeYOZ);
                     break;
+                }
             }
 
             sketchDef.SetPlane(this._plane);
@@ -66,10 +73,8 @@ namespace Kompas
         public void CreateLine(double[,] pointsArray, int start, int count)
         {
             //TODO: RSDN
-            ksDocument2D document2D;
-            ksSketchDefinition sketchDef;
-            sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
-            document2D = (ksDocument2D)sketchDef.BeginEdit();
+            ksSketchDefinition sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
+            ksDocument2D document2D = (ksDocument2D)sketchDef.BeginEdit();
             if (document2D != null)
             {
                 for (int i = start; i < start + count; i++)
@@ -98,11 +103,8 @@ namespace Kompas
         public void CreateArc(double x1, double y1, double x2, double y2, double x3, double y3)
         {
             //TODO: RSDN
-            ksDocument2D document2D;
-            ksSketchDefinition sketchDef;
-            sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
-            document2D = (ksDocument2D)sketchDef.BeginEdit();
-
+            ksSketchDefinition sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
+            ksDocument2D document2D = (ksDocument2D)sketchDef.BeginEdit();
             if (document2D != null)
             {
                 document2D.ksArcBy3Points(x1, y1, x2, y2, x3, y3, 1);
@@ -137,12 +139,12 @@ namespace Kompas
         /// <param name="length">Глубина выдавливания.</param>
         public void Extrusion(int parameter, double length)
         {
-            ksEntity entityExtrusion;
             switch (parameter)
             {
                 //TODO: RSDN
                 case 1:
-                    entityExtrusion =
+                {
+                    ksEntity entityExtrusion =
                     (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
                     if (entityExtrusion != null)
                     {
@@ -170,14 +172,16 @@ namespace Kompas
                                     false);
                                 cutExtrusionDef.SetThinParam(false, 0, 0, 0);
                             }
-
                             entityCutExtrusion.Create();
                         }
                     }
 
                     break;
+                }
+
                 case 2:
-                    entityExtrusion =
+                {
+                    ksEntity entityExtrusion =
                     (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
                     if (entityExtrusion != null)
                     {
@@ -199,8 +203,11 @@ namespace Kompas
                     }
 
                     break;
+                }
+
                 case 3:
-                    entityExtrusion =
+                {
+                    ksEntity entityExtrusion =
                     (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
                     if (entityExtrusion != null)
                     {
@@ -214,19 +221,17 @@ namespace Kompas
                             if (extrusionProp != null && thinProp != null)
                             {
                                 extrusionDef.SetSketch(this._sketchEntity);
-
                                 extrusionProp.direction = (short)Direction_Type.dtNormal;
                                 extrusionProp.typeNormal = (short)End_Type.etBlind;
                                 extrusionProp.depthNormal = length;
-
                                 thinProp.thin = false;
-
                                 entityExtrusion.Create();
                             }
                         }
                     }
 
                     break;
+                }
             }
         }
 
@@ -267,8 +272,7 @@ namespace Kompas
         public void CreateFile()
         {
             //TODO: RSDN
-            ksDocument3D document3D;
-            document3D = (ksDocument3D)this._kompas.Document3D();
+            ksDocument3D document3D = (ksDocument3D)this._kompas.Document3D();
             document3D.Create();
             this._part = (ksPart)document3D.GetPart((short)Part_Type.pTop_Part);
         }
