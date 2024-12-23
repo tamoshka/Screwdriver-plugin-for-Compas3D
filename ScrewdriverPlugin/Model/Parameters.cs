@@ -139,7 +139,6 @@ namespace ScrewdriverPlugin
         /// Функция определяющая _maxValue и _minValue для parameter.
         /// </summary>
         /// <param name="parameter">Параметр.</param>
-        /// <exception cref="ArgumentException">Ошибка.</exception>
         public void DefineMinMax(Parameter parameter)
         {
             switch (parameter.TypeOfParameter)

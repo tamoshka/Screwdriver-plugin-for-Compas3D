@@ -102,18 +102,19 @@ namespace ScrewdriverPlugin.UnitTests
         /// <param name="message">Текст ошибки.</param>
         [TestCase(
             10,
-            "Должно возникать исключение, если значение меньше MinValue",
-            TestName = "Простая ошибка")]
+            "Нарушение в определении граничных условий",
+            TestName = "Нарушение в определении граничных условий")]
         [TestCase(
             20,
             "Должно возникать исключение, если значение больше MaxValue",
             TestName = "Простая ошибка")]
         public void TestSetArgumentException(int wrongValue, string message)
         {
-            this._parameter.MaxValue = 15;
-            this._parameter.MinValue = 15;
+            this._parameter.MaxValue = 16;
+            this._parameter.MinValue = 14;
+            this._parameter.Value = wrongValue;
             Assert.Throws<ArgumentException>(
-            () => { this._parameter.Value = wrongValue; },
+            () => { this._parameter.Validator(); },
             message);
         }
     }

@@ -106,14 +106,13 @@ namespace ScrewdriverPlugin.UnitTests
         public void TestProjectSetParameter()
         {
             Parameter parameter = new Parameter();
-            parameter.MaxValue = 20;
-            parameter.MinValue = 10;
+            parameter.TypeOfParameter = ParameterType.HandleWidth;
             parameter.Value = 15;
             Parameters expected = new Parameters();
             this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
             expected.AllParameters = new Dictionary<ParameterType, Parameter>();
-            this._parameters.SetParameter(ParameterType.HandleWidth, parameter);
-            expected.SetParameter(ParameterType.HandleWidth, parameter);
+            this._parameters.SetParameter(parameter);
+            expected.SetParameter(parameter);
             var actual = this._parameters;
             Assert.AreEqual(expected.AllParameters, actual.AllParameters);
         }
@@ -180,32 +179,27 @@ namespace ScrewdriverPlugin.UnitTests
             string message)
         {
             Parameter handleLength = new Parameter();
-            handleLength.MaxValue = 150;
-            handleLength.MinValue = 45;
+            handleLength.TypeOfParameter = ParameterType.HandleLength;
             handleLength.Value = 100;
             Parameter handleWidth = new Parameter();
-            handleWidth.MaxValue = 42;
-            handleWidth.MinValue = 7;
+            handleWidth.TypeOfParameter = ParameterType.HandleWidth;
             handleWidth.Value = 25;
             Parameter rodLength = new Parameter();
-            rodLength.MaxValue = 500;
-            rodLength.MinValue = 45;
+            rodLength.TypeOfParameter = ParameterType.RodLength;
             rodLength.Value = 100;
             Parameter rodWidth = new Parameter();
-            rodWidth.MaxValue = 21;
-            rodWidth.MinValue = 3;
+            rodWidth.TypeOfParameter = ParameterType.RodWidth;
             rodWidth.Value = 11;
             this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
-            this._parameters.SetParameter(ParameterType.HandleLength, handleLength);
-            this._parameters.SetParameter(ParameterType.HandleWidth, handleWidth);
-            this._parameters.SetParameter(ParameterType.RodLength, rodLength);
-            this._parameters.SetParameter(ParameterType.RodWidth, rodWidth);
+            this._parameters.SetParameter(handleLength);
+            this._parameters.SetParameter(handleWidth);
+            this._parameters.SetParameter(rodLength);
+            this._parameters.SetParameter(rodWidth);
             Parameter newParameter = new Parameter();
-            newParameter.MaxValue = 500;
-            newParameter.MinValue = 3;
+            newParameter.TypeOfParameter = parameterType;
             newParameter.Value = wrongArgument;
             Assert.Throws<ArgumentException>(
-            () => { this._parameters.SetParameter(parameterType, newParameter); },
+            () => { this._parameters.SetParameter(newParameter); },
             message);
         }
     }
