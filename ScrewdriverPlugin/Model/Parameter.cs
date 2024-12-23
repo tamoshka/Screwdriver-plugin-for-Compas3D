@@ -100,6 +100,7 @@ namespace ScrewdriverPlugin
             }
         }
 
+        //TODO: extract
         /// <summary>
         /// Функция определяющая _maxValue и _minValue для parameter.
         /// </summary>

@@ -9,6 +9,7 @@ namespace ScrewdriverPlugin
     /// </summary>
     public class Parameters
     {
+        //TODO: refactor
         /// <summary>
         /// Поле хранящее в себе текущий параметр.
         /// </summary>
@@ -127,26 +128,30 @@ namespace ScrewdriverPlugin
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
         private void ValidateParameters()
         {
+            //TODO: rename
             string exception = string.Empty;
             ParameterType parameterType = this._parameter.ElementAt(0).Key;
             Parameter parameter = this._parameter.ElementAt(0).Value;
+            //TODO: redo
             Parameter chainedParameterFirst;
             Parameter chainedParameterSecond;
             Parameter chainedParameterThird;
             switch (parameterType)
             {
+                //TODO: RSDN
                 case ParameterType.HandleLength:
                     if (this.AllParameters.TryGetValue(
                         ParameterType.HandleWidth,
-                        out chainedParameterFirst) == true ||
+                        out chainedParameterFirst) ||
                     this.AllParameters.TryGetValue(
                         ParameterType.RodLength,
-                        out chainedParameterSecond) == true)
+                        out chainedParameterSecond))
                     {
                         if (this.AllParameters.TryGetValue(
                                 ParameterType.HandleWidth,
-                                out chainedParameterFirst) == true)
+                                out chainedParameterFirst))
                         {
+                            //TODO: const
                             double maxValue = (chainedParameterFirst.Value + 5) * 4;
                             double minValue = (chainedParameterFirst.Value - 5) * 4;
                             if (parameter.Value > maxValue)
@@ -187,6 +192,7 @@ namespace ScrewdriverPlugin
                                 ParameterType.HandleLength,
                                 out chainedParameterFirst) == true)
                         {
+                            //TODO: const
                             double lowerQuarter = (double)((chainedParameterFirst.Value / 4) - 5);
                             double upperQuarter = (double)((chainedParameterFirst.Value / 4) + 5);
                             if (parameter.Value < lowerQuarter)
@@ -207,6 +213,7 @@ namespace ScrewdriverPlugin
                                 ParameterType.RodWidth,
                                 out chainedParameterSecond) == true)
                         {
+                            //TODO: const
                             double minValue = chainedParameterSecond.Value * 2;
                             double maxValue = (chainedParameterSecond.Value + 2) * 2;
                             if (parameter.Value < minValue)

@@ -43,6 +43,7 @@ namespace ScrewdriverPlugin
             this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
             this.ComboBoxShapeOfHandle.SelectedIndex = 1;
             this.ComboBoxShapeOfRod.SelectedIndex = 1;
+            //TODO: refactor
             this.toolTip1.SetToolTip(
                 this.TextBoxRodLength,
                 "Длина наконечника должна находиться в диапазоне от 45 до 500 мм");
@@ -52,6 +53,7 @@ namespace ScrewdriverPlugin
             this.toolTip1.SetToolTip(
                 this.TextBoxHandleWidth,
                 "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм");
+            //TODO: refactor
             this.toolTip1.SetToolTip(
                 this.TextBoxHandleLength,
                 "Длина ручки должна находиться в диапазоне от 45 до 150 мм");
@@ -134,6 +136,7 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void TextBoxRodLength_Leave(object sender, EventArgs e)
         {
+             //TODO: duplication
             ParameterType parameterType = ParameterType.RodLength;
             this.FirstValidate(this.TextBoxRodLength, parameterType);
             if (this.TextBoxRodLength.BackColor != SystemColors.Window)
@@ -154,6 +157,7 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void TextBoxRodWidth_Leave(object sender, EventArgs e)
         {
+             //TODO: duplication
             ParameterType parameterType = ParameterType.RodWidth;
             this.FirstValidate(this.TextBoxRodWidth, parameterType);
             if (this.TextBoxRodWidth.BackColor != SystemColors.Window)
@@ -183,14 +187,11 @@ namespace ScrewdriverPlugin
             }
             catch
             {
-                if (textBox.Text != string.Empty)
-                {
-                    this.SetColors(textBox, parameterType, 1, 0, "Ошибка");
-                }
-                else
-                {
-                    this.SetColors(textBox, parameterType, 1, 0, string.Empty);
-                }
+                var message = textBox.Text != string.Empty
+                    ? "Ошибка"
+                    : string.Empty;
+
+                this.SetColors(textBox, parameterType, 1, 0, message);
             }
         }
 
@@ -255,6 +256,7 @@ namespace ScrewdriverPlugin
             System.Windows.Forms.TextBox textBox,
             ParameterType parameterType)
         {
+            //TODO: mistype
             bool cached = false;
             Parameter parameter = new Parameter();
             parameter.TypeOfParameter = parameterType;
@@ -262,6 +264,7 @@ namespace ScrewdriverPlugin
             {
                 parameter.Value = int.Parse(textBox.Text);
             }
+            //TODO: FormatException
             catch (Exception e)
             {
                 this.SetColors(textBox, parameterType, 2, 0, e.Message);
@@ -321,17 +324,10 @@ namespace ScrewdriverPlugin
             }
         }
 
+        //TODO:XML
         private void CheckBoxIsHoleExist_CheckedChanged(object sender, EventArgs e)
         {
-            switch (this.CheckBoxIsHoleExist.Checked)
-            {
-                case true:
-                    this._parameters.IsHoleExist = true;
-                    break;
-                case false:
-                    this._parameters.IsHoleExist = false;
-                    break;
-            }
+            _parameters.IsHoleExist = CheckBoxIsHoleExist.Checked;
         }
     }
 }

@@ -39,6 +39,7 @@ namespace ScrewdriverPlugin
             parameters.AllParameters.TryGetValue(ParameterType.RodWidth, out rodWidth);
             double x1 = -rodWidth.Value;
             x1 = x1 / 2;
+            //TODO: const
             double fivedX = x1 / 5;
             double newY = y / 5 / Math.Log10(y / 5) / (y / (-x1 * 2) / 7 / Math.Sqrt(y / 45));
             switch (parameters.ShapeOfRod)
@@ -89,6 +90,7 @@ namespace ScrewdriverPlugin
                     double[] extrusionDepthCruciform = { -x1 * 2, -x1 * 2, y, -x1 * 2, -x1 * 2 };
                     int[] startCruciform = { 4, 9, 14, 16, 22 };
                     int[] countCruciform = { 5, 5, 2, 6, 6 };
+                    //TODO: RSDN
                     this.Helper(pointsArrayCruciform, typeExtrusionCruciform, typeSketchCruciform, extrusionDepthCruciform, startCruciform, countCruciform);
                     break;
                 case RodType.Flat:
@@ -144,7 +146,10 @@ namespace ScrewdriverPlugin
                     double[] extrusionDepthRectangle = { -x1 * 2, -x1 * 2 };
                     int[] startRectangle = { 4, 12 };
                     int[] countRectangle = { 8, 8 };
-                    this.Helper(pointsArrayRectangle, typeExtrusionRectangle, typeSketchRectangle, extrusionDepthRectangle, startRectangle, countRectangle);
+                    //TODO: RSDN
+                    this.Helper(pointsArrayRectangle, typeExtrusionRectangle, 
+                        typeSketchRectangle, extrusionDepthRectangle, 
+                        startRectangle, countRectangle);
                     break;
             }
         }
@@ -164,6 +169,7 @@ namespace ScrewdriverPlugin
             Parameter handleWidth;
             parameters.AllParameters.TryGetValue(ParameterType.HandleWidth, out handleWidth);
             double x2 = -handleWidth.Value;
+            //TODO: const
             double x1 = -handleWidth.Value - (x2 / 10);
             double x3 = -handleWidth.Value - (x2 / 10);
             double quarterX = x2 / 4;
@@ -185,6 +191,7 @@ namespace ScrewdriverPlugin
                     double[] extrusionDepthPrisme = { y1 };
                     int[] startPrisme = { 0 };
                     int[] countPrisme = { 6 };
+                    //TODO: RSDN
                     this.Helper(pointsArrayPrisme, typeExtrusionPrisme, typeSketchPrisme, extrusionDepthPrisme, startPrisme, countPrisme);
                     break;
                 case HandleType.Cylinder:

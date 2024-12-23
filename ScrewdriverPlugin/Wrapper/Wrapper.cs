@@ -36,6 +36,7 @@ namespace Kompas
         /// <param name="perspective">Выбранная плоскость.</param>
         public void CreateSketch(int perspective)
         {
+            //TODO: RSDN
             ksSketchDefinition sketchDef;
             this._sketchEntity = (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_sketch);
             sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
@@ -64,6 +65,7 @@ namespace Kompas
         /// <param name="count">Количество считываемых строк из массива.</param>
         public void CreateLine(double[,] pointsArray, int start, int count)
         {
+            //TODO: RSDN
             ksDocument2D document2D;
             ksSketchDefinition sketchDef;
             sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
@@ -95,6 +97,7 @@ namespace Kompas
         /// <param name="y3">y координата конечной точки.</param>
         public void CreateArc(double x1, double y1, double x2, double y2, double x3, double y3)
         {
+            //TODO: RSDN
             ksDocument2D document2D;
             ksSketchDefinition sketchDef;
             sketchDef = (ksSketchDefinition)this._sketchEntity.GetDefinition();
@@ -137,6 +140,7 @@ namespace Kompas
             ksEntity entityExtrusion;
             switch (parameter)
             {
+                //TODO: RSDN
                 case 1:
                     entityExtrusion =
                     (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossExtrusion);
@@ -262,6 +266,7 @@ namespace Kompas
         /// </summary>
         public void CreateFile()
         {
+            //TODO: RSDN
             ksDocument3D document3D;
             document3D = (ksDocument3D)this._kompas.Document3D();
             document3D.Create();
