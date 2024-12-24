@@ -12,26 +12,6 @@ namespace ScrewdriverPlugin
         //TODO: refactor
 
         /// <summary>
-        /// Поле хранящее в себе словарь всех параметров.
-        /// </summary>
-        private Dictionary<ParameterType, Parameter> _parameters;
-
-        /// <summary>
-        /// Поле хранящее в себе тип ручки.
-        /// </summary>
-        private HandleType _handleType;
-
-        /// <summary>
-        /// Поле хранящее в себе тип наконечника.
-        /// </summary>
-        private RodType _rodType;
-
-        /// <summary>
-        /// Поле хранящее в себе информацию о наличии отверстия для возможности "повесить" отвёртку.
-        /// </summary>
-        private bool _isHoleExist;
-
-        /// <summary>
         /// Увеличивает в четыре раза.
         /// </summary>
         private const double FOURPLE = 4;
@@ -50,6 +30,26 @@ namespace ScrewdriverPlugin
         /// Определяет половину размера.
         /// </summary>
         private const double HALF = 2;
+
+        /// <summary>
+        /// Поле хранящее в себе словарь всех параметров.
+        /// </summary>
+        private Dictionary<ParameterType, Parameter> _parameters;
+
+        /// <summary>
+        /// Поле хранящее в себе тип ручки.
+        /// </summary>
+        private HandleType _handleType;
+
+        /// <summary>
+        /// Поле хранящее в себе тип наконечника.
+        /// </summary>
+        private RodType _rodType;
+
+        /// <summary>
+        /// Поле хранящее в себе информацию о наличии отверстия для возможности "повесить" отвёртку.
+        /// </summary>
+        private bool _isHoleExist;
 
         /// <summary>
         /// Gets or sets для _parameters.
