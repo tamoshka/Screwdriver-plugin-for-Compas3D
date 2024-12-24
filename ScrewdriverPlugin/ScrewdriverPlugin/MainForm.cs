@@ -178,21 +178,11 @@ namespace ScrewdriverPlugin
                 }
             }
 
-            this.FirstValidate(textBox, parameterType);
+            this.SecondValidate(textBox, parameterType);
             if (textBox.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(textBox, parameterType);
-                this.FirstValidate(chainedTextBox, chainedParameterType);
-                if (chainedTextBox.BackColor != SystemColors.Window)
-                {
-                    this.SecondValidate(chainedTextBox, chainedParameterType);
-                }
-
-                this.FirstValidate(secondChainedTextBox, secondChainedParameterType);
-                if (secondChainedTextBox.BackColor != SystemColors.Window)
-                {
-                    this.SecondValidate(secondChainedTextBox, secondChainedParameterType);
-                }
+                this.SecondValidate(chainedTextBox, chainedParameterType);
+                this.SecondValidate(secondChainedTextBox, secondChainedParameterType);
             }
         }
 
@@ -228,15 +218,10 @@ namespace ScrewdriverPlugin
                 }
             }
 
-            this.FirstValidate(textBox, parameterType);
+            this.SecondValidate(textBox, parameterType);
             if (textBox.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(textBox, parameterType);
-                this.FirstValidate(chainedTextBox, chainedParameterType);
-                if (chainedTextBox.BackColor != SystemColors.Window)
-                {
-                    this.SecondValidate(chainedTextBox, chainedParameterType);
-                }
+                this.SecondValidate(chainedTextBox, chainedParameterType);
             }
         }
 
@@ -282,7 +267,7 @@ namespace ScrewdriverPlugin
             }
         }*/
 
-        /// <summary>
+        /*/// <summary>
         /// Первичная валидация (проверка на введение в текстБоксы целых чисел.
         /// </summary>
         /// <param name="textBox">ТекстБокс.</param>
@@ -304,7 +289,7 @@ namespace ScrewdriverPlugin
 
                 this.SetColors(textBox, 1, message);
             }
-        }
+        }*/
 
         /// <summary>
         /// Вспомогательный метод для установки цвета для текстБокса.
@@ -387,21 +372,31 @@ namespace ScrewdriverPlugin
                 switch (e.Message)
                 {
                     case "Значение за граничными пределами":
-                        {
-                            this._parameters.DefineMinMax(parameter);
-                            string toolTipText = "Введите значения от " +
-                            parameter.MinValue.ToString() +
-                            " до " + parameter.MaxValue.ToString() +
-                            " мм";
-                            this.SetColors(textBox, 2, toolTipText);
-                            break;
-                        }
+                    {
+                        this._parameters.DefineMinMax(parameter);
+                        string toolTipText = "Введите значения от " +
+                        parameter.MinValue.ToString() +
+                        " до " + parameter.MaxValue.ToString() +
+                        " мм";
+                        this.SetColors(textBox, 2, toolTipText);
+                        break;
+                    }
+
+                    case "Входная строка имела неверный формат.":
+                    {
+                        var message = textBox.Text != string.Empty
+                            ? "Ошибка"
+                            : string.Empty;
+
+                        this.SetColors(textBox, 1, message);
+                        break;
+                    }
 
                     default:
-                        {
-                            this.SetColors(textBox, 2, e.Message);
-                            break;
-                        }
+                    {
+                        this.SetColors(textBox, 2, e.Message);
+                        break;
+                    }
                 }
             }
         }
