@@ -169,10 +169,9 @@ namespace ScrewdriverPlugin
         private void ValidateParameters(Parameter parameter)
         {
             //TODO: rename
-            string exception = string.Empty;
-            ParameterType parameterType = parameter.TypeOfParameter;
+            string message = string.Empty;
             //TODO: redo
-            switch (parameterType)
+            switch (parameter.TypeOfParameter)
             {
                 //TODO: RSDN
                 case ParameterType.HandleLength:
@@ -193,13 +192,13 @@ namespace ScrewdriverPlugin
                             double minValue = (chainedParameterFirst.Value - DIF) * FOURPLE;
                             if (parameter.Value > maxValue)
                             {
-                                exception += "Длина ручки более чем в 4 раза больше её диаметра" +
+                                message += "Длина ручки более чем в 4 раза больше её диаметра" +
                                     ", уменьшите заданное значение минимум до "
                                     + maxValue.ToString() + '\n';
                             }
                             else if (parameter.Value < minValue)
                             {
-                                exception += "Длина ручки менее чем в 4 раза больше её диаметра" +
+                                message += "Длина ручки менее чем в 4 раза больше её диаметра" +
                                     ", увеличьте заданное значение минимум до "
                                     + minValue.ToString() + '\n';
                             }
@@ -210,7 +209,7 @@ namespace ScrewdriverPlugin
                                 out chainedParameterSecond) == true &&
                             (chainedParameterSecond.Value < parameter.Value) == true)
                         {
-                            exception += "Длина ручки больше длины наконечника, " +
+                            message += "Длина ручки больше длины наконечника, " +
                                 "уменьшите заданное значение минимум до "
                             + chainedParameterSecond.Value.ToString() + '\n';
                         }
@@ -237,13 +236,13 @@ namespace ScrewdriverPlugin
                             double upperQuarter = (double)((chainedParameterFirst.Value / FOURPLE) + DIF);
                             if (parameter.Value < lowerQuarter)
                             {
-                                exception += "Диаметр ручки меньше четверти длины ручки - 5 мм" +
+                                message += "Диаметр ручки меньше четверти длины ручки - 5 мм" +
                                     ", увеличьте заданное значение минимум до "
                                         + Math.Ceiling(lowerQuarter).ToString() + '\n';
                             }
                             else if (parameter.Value > upperQuarter)
                             {
-                                exception += "Диаметр ручки больше четверти длины ручки + 5 мм" +
+                                message += "Диаметр ручки больше четверти длины ручки + 5 мм" +
                                     ", уменьшите заданное значение минимум до "
                                         + Math.Floor(upperQuarter).ToString() + '\n';
                             }
@@ -258,13 +257,13 @@ namespace ScrewdriverPlugin
                             double maxValue = (chainedParameterSecond.Value + DIAMETERDIF) * HALF;
                             if (parameter.Value < minValue)
                             {
-                                exception += "Диаметр ручки не превышает диаметр наконечника " +
+                                message += "Диаметр ручки не превышает диаметр наконечника " +
                                     "в 2 раза, увеличьте заданное значение минимум до "
                                    + minValue.ToString() + '\n';
                             }
                             else if (parameter.Value > maxValue)
                             {
-                                exception += "Диаметр ручки больше диаметра наконечника " +
+                                message += "Диаметр ручки больше диаметра наконечника " +
                                     "более чем в 2 раза, уменьшите заданное значение минимум до "
                                    + maxValue.ToString() + '\n';
                             }
@@ -285,7 +284,7 @@ namespace ScrewdriverPlugin
                                 out chainedParameterFirst) == true &&
                             parameter.Value < chainedParameterFirst.Value)
                         {
-                            exception += "Длина наконечника меньше длины ручки, " +
+                            message += "Длина наконечника меньше длины ручки, " +
                                 "увеличьте заданное значение как минимум до "
                             + chainedParameterFirst.Value.ToString() + '\n';
                         }
@@ -306,13 +305,13 @@ namespace ScrewdriverPlugin
                         lowerHalfOfWidth = (lowerHalfOfWidth / HALF) - DIAMETERDIF;
                         if (parameter.Value < lowerHalfOfWidth)
                         {
-                            exception += "Диаметр наконечника меньше половины диаметра ручки, " +
+                            message += "Диаметр наконечника меньше половины диаметра ручки, " +
                                 "увеличьте заданное значение минимум до "
                                         + Math.Ceiling(lowerHalfOfWidth).ToString() + '\n';
                         }
                         else if (parameter.Value > upperHalfOfWidth)
                         {
-                            exception += "Диаметр наконечника больше половины диаметра ручки, " +
+                            message += "Диаметр наконечника больше половины диаметра ручки, " +
                                 "уменьшите заданное значение минимум до "
                                         + Math.Floor(upperHalfOfWidth).ToString() + '\n';
                         }
@@ -322,9 +321,9 @@ namespace ScrewdriverPlugin
                 }
             }
 
-            if (exception != string.Empty)
+            if (message != string.Empty)
             {
-                throw new ArgumentException(exception);
+                throw new ArgumentException(message);
             }
         }
     }
