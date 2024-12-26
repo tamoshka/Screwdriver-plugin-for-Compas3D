@@ -97,17 +97,17 @@ namespace ScrewdriverPlugin
             this.FirstValidate(this.TextBoxHandleLength, parameterType);
             if (this.TextBoxHandleLength.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(this.TextBoxHandleLength, parameterType);
+                this.Validator(this.TextBoxHandleLength, parameterType);
                 this.FirstValidate(this.TextBoxHandleWidth, ParameterType.HandleWidth);
                 if (this.TextBoxHandleWidth.BackColor != SystemColors.Window)
                 {
-                    this.SecondValidate(this.TextBoxHandleWidth, ParameterType.HandleWidth);
+                    this.Validator(this.TextBoxHandleWidth, ParameterType.HandleWidth);
                 }
 
                 this.FirstValidate(this.TextBoxRodLength, ParameterType.RodLength);
                 if (this.TextBoxRodLength.BackColor != SystemColors.Window)
                 {
-                    this.SecondValidate(this.TextBoxRodLength, ParameterType.RodLength);
+                    this.Validator(this.TextBoxRodLength, ParameterType.RodLength);
                 }
             }
         }*/
@@ -123,17 +123,17 @@ namespace ScrewdriverPlugin
             this.FirstValidate(this.TextBoxHandleWidth, parameterType);
             if (this.TextBoxHandleWidth.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(this.TextBoxHandleWidth, parameterType);
+                this.Validator(this.TextBoxHandleWidth, parameterType);
                 this.FirstValidate(this.TextBoxRodWidth, ParameterType.RodWidth);
                 if (this.TextBoxRodWidth.BackColor != SystemColors.Window)
                 {
-                    this.SecondValidate(this.TextBoxRodWidth, ParameterType.RodWidth);
+                    this.Validator(this.TextBoxRodWidth, ParameterType.RodWidth);
                 }
 
                 this.FirstValidate(this.TextBoxHandleLength, ParameterType.HandleLength);
                 if (this.TextBoxHandleLength.BackColor != SystemColors.Window)
                 {
-                    this.SecondValidate(
+                    this.Validator(
                         this.TextBoxHandleLength,
                         ParameterType.HandleLength);
                 }
@@ -178,11 +178,11 @@ namespace ScrewdriverPlugin
                 }
             }
 
-            this.SecondValidate(textBox, parameterType);
+            this.Validator(textBox, parameterType);
             if (textBox.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(chainedTextBox, chainedParameterType);
-                this.SecondValidate(secondChainedTextBox, secondChainedParameterType);
+                this.Validator(chainedTextBox, chainedParameterType);
+                this.Validator(secondChainedTextBox, secondChainedParameterType);
             }
         }
 
@@ -218,10 +218,10 @@ namespace ScrewdriverPlugin
                 }
             }
 
-            this.SecondValidate(textBox, parameterType);
+            this.Validator(textBox, parameterType);
             if (textBox.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(chainedTextBox, chainedParameterType);
+                this.Validator(chainedTextBox, chainedParameterType);
             }
         }
 
@@ -237,11 +237,11 @@ namespace ScrewdriverPlugin
             this.FirstValidate(this.TextBoxRodLength, parameterType);
             if (this.TextBoxRodLength.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(this.TextBoxRodLength, parameterType);
+                this.Validator(this.TextBoxRodLength, parameterType);
                 this.FirstValidate(this.TextBoxHandleLength, ParameterType.HandleLength);
                 if (this.TextBoxHandleLength.BackColor != SystemColors.Window)
                 {
-                    this.SecondValidate(this.TextBoxHandleLength, ParameterType.HandleLength);
+                    this.Validator(this.TextBoxHandleLength, ParameterType.HandleLength);
                 }
             }
         }*/
@@ -258,11 +258,11 @@ namespace ScrewdriverPlugin
             this.FirstValidate(this.TextBoxRodWidth, parameterType);
             if (this.TextBoxRodWidth.BackColor != SystemColors.Window)
             {
-                this.SecondValidate(this.TextBoxRodWidth, parameterType);
+                this.Validator(this.TextBoxRodWidth, parameterType);
                 this.FirstValidate(this.TextBoxHandleWidth, ParameterType.HandleWidth);
                 if (this.TextBoxHandleWidth.BackColor != SystemColors.Window)
                 {
-                    this.SecondValidate(this.TextBoxHandleWidth, ParameterType.HandleWidth);
+                    this.Validator(this.TextBoxHandleWidth, ParameterType.HandleWidth);
                 }
             }
         }*/
@@ -353,7 +353,7 @@ namespace ScrewdriverPlugin
         /// </summary>
         /// <param name="textBox">Используемый текстБокс.</param>
         /// <param name="parameterType">Тип параметра.</param>
-        private void SecondValidate(
+        private void Validator(
             System.Windows.Forms.TextBox textBox,
             ParameterType parameterType)
         {
