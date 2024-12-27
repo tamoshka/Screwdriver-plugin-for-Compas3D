@@ -97,7 +97,7 @@ namespace ScrewdriverPlugin
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
         public void Validator()
         {
-            if (this._maxValue < this._minValue)
+            if (this._maxValue <= this._minValue || this._minValue < 0)
             {
                 throw new ArgumentException("Нарушение в определении граничных условий");
             }
