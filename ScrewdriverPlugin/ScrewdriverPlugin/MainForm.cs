@@ -299,6 +299,7 @@ namespace ScrewdriverPlugin
         /// <param name="text">Текст устанавливаемый в подсказку.</param>
         private void SetColors(
             System.Windows.Forms.TextBox textBox,
+            Parameter parameter,
             int whatColor,
             string text)
         {
@@ -307,10 +308,13 @@ namespace ScrewdriverPlugin
                 case 1:
                 {
                     textBox.BackColor = SystemColors.Window;
-                    if (text != string.Empty)
-                    {
-                        this.toolTip1.SetToolTip(textBox, "Доступны только целочисленные значения");
-                    }
+                    var message = textBox.Text != string.Empty
+                        ? "Доступны только целочисленные значения"
+                        : "Введите значения от " +
+                            parameter.MinValue.ToString() +
+                            " до " + parameter.MaxValue.ToString() +
+                            " мм";
+                    this.toolTip1.SetToolTip(textBox, message);
 
                     textBox.Text = string.Empty;
                     break;
@@ -365,7 +369,7 @@ namespace ScrewdriverPlugin
             {
                 parameter.Value = int.Parse(textBox.Text);
                 this._parameters.SetParameter(parameter);
-                this.SetColors(textBox, 3, string.Empty);
+                this.SetColors(textBox, parameter, 3, string.Empty);
             }
             catch (Exception e)
             {
@@ -378,23 +382,24 @@ namespace ScrewdriverPlugin
                         parameter.MinValue.ToString() +
                         " до " + parameter.MaxValue.ToString() +
                         " мм";
-                        this.SetColors(textBox, 2, toolTipText);
+                        this.SetColors(textBox, parameter, 2, toolTipText);
                         break;
                     }
 
                     case "Входная строка имела неверный формат.":
                     {
+                        this._parameters.DefineMinMax(parameter);
                         var message = textBox.Text != string.Empty
                             ? "Ошибка"
                             : string.Empty;
 
-                        this.SetColors(textBox, 1, message);
+                        this.SetColors(textBox, parameter, 1, message);
                         break;
                     }
 
                     default:
                     {
-                        this.SetColors(textBox, 2, e.Message);
+                        this.SetColors(textBox, parameter, 2, e.Message);
                         break;
                     }
                 }
