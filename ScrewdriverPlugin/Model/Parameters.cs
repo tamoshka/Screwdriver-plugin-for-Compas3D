@@ -144,21 +144,32 @@ namespace ScrewdriverPlugin
             switch (parameter.TypeOfParameter)
             {
                 case ParameterType.HandleLength:
+                {
                     parameter.MinValue = 45;
                     parameter.MaxValue = 150;
                     break;
+                }
+
                 case ParameterType.HandleWidth:
+                {
                     parameter.MinValue = 7;
                     parameter.MaxValue = 42;
                     break;
+                }
+
                 case ParameterType.RodLength:
+                {
                     parameter.MinValue = 45;
                     parameter.MaxValue = 500;
                     break;
+                }
+
                 case ParameterType.RodWidth:
+                {
                     parameter.MinValue = 3;
                     parameter.MaxValue = 21;
                     break;
+                }
             }
         }
 
