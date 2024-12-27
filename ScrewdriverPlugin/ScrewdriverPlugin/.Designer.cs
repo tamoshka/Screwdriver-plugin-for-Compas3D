@@ -51,7 +51,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.CheckBoxIsHoleExist = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.labelWarning = new System.Windows.Forms.Label();
+            this.LabelWarning = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -312,7 +312,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.labelWarning);
+            this.groupBox1.Controls.Add(this.LabelWarning);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.ButtonCreate);
             this.groupBox1.Controls.Add(this.CheckBoxIsHoleExist);
@@ -341,11 +341,11 @@
             // 
             // labelWarning
             // 
-            this.labelWarning.AutoSize = true;
-            this.labelWarning.Location = new System.Drawing.Point(372, 309);
-            this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(0, 20);
-            this.labelWarning.TabIndex = 25;
+            this.LabelWarning.AutoSize = true;
+            this.LabelWarning.Location = new System.Drawing.Point(372, 309);
+            this.LabelWarning.Name = "labelWarning";
+            this.LabelWarning.Size = new System.Drawing.Size(0, 20);
+            this.LabelWarning.TabIndex = 25;
             // 
             // MainForm
             // 
@@ -387,7 +387,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox CheckBoxIsHoleExist;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.Label LabelWarning;
     }
 }
 

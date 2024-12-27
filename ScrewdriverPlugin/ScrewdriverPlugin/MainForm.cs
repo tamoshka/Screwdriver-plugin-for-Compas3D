@@ -323,7 +323,7 @@ namespace ScrewdriverPlugin
                     {
                         case "Нарушение в определении граничных условий":
                         {
-                            this.labelWarning.Text = "Критическая ошибка системы.";
+                            this.LabelWarning.Text = "Критическая ошибка системы.";
                             this.ButtonCreate.Enabled = false;
                             break;
                         }
