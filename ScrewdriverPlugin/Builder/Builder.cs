@@ -87,8 +87,8 @@ namespace ScrewdriverPlugin
             parameters.AllParameters.TryGetValue(ParameterType.RodWidth, out Parameter rodWidth);
             double x1 = -((double)rodWidth.Value);
             double x3 = x1 * ONESECOND;
-            //TODO: const
             double fivedX = x1 * ONEFIVED;
+            //TODO: RSDN
             double newY = y * ONEFIVED / Math.Log10(y * ONEFIVED) / (y / (-x3 * 2) * ONESEVENED / Math.Sqrt(y * ONEFOURTYFIVED));
             switch (parameters.ShapeOfRod)
             {
@@ -133,7 +133,6 @@ namespace ScrewdriverPlugin
                         double[] extrusionDepth = { -x1, -x1, y, -x1, -x1 };
                         int[] start = { 4, 9, 14, 16, 22 };
                         int[] count = { 5, 5, 2, 6, 6 };
-                        //TODO: RSDN
                         this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
                         break;
                     }
@@ -215,7 +214,6 @@ namespace ScrewdriverPlugin
             double y3 = 0;
             parameters.AllParameters.TryGetValue(ParameterType.HandleWidth, out Parameter handleWidth);
             double x2 = -handleWidth.Value;
-            //TODO: const
             double x1 = -handleWidth.Value - (x2 * ONETENTH);
             double x3 = -handleWidth.Value - (x2 * ONETENTH);
             double quarterX = x2 * ONEFOURTH;
@@ -238,7 +236,6 @@ namespace ScrewdriverPlugin
                         double[] extrusionDepth = { y1 };
                         int[] start = { 0 };
                         int[] count = { 6 };
-                        //TODO: RSDN
                         this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
                         break;
                     }
@@ -259,9 +256,10 @@ namespace ScrewdriverPlugin
                     }
             }
 
-            if (parameters.IsHoleExist == true)
+            if (parameters.IsHoleExist)
             {
                 this._wrapper.CreateSketch(1);
+                //TODO: RSDN
                 this._wrapper.CreateArc(0, y1 * FIVESIXED, x2 * ONEFOURTH, y1 * FOURWITHHALFSIXED, 0, y1 * TWOTHIRD);
                 this._wrapper.CreateArc(0, y1 * FIVESIXED, -x2 * ONEFOURTH, y1 * FOURWITHHALFSIXED, 0, y1 * TWOTHIRD);
                 this._wrapper.Extrusion(1, -x2);

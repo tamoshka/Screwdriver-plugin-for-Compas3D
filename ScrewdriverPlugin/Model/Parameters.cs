@@ -32,11 +32,6 @@ namespace ScrewdriverPlugin
         private const double HALF = 2;
 
         /// <summary>
-        /// Поле хранящее в себе словарь всех параметров.
-        /// </summary>
-        private Dictionary<ParameterType, Parameter> _parameters;
-
-        /// <summary>
         /// Поле хранящее в себе тип ручки.
         /// </summary>
         private HandleType _handleType;
@@ -129,9 +124,9 @@ namespace ScrewdriverPlugin
                 this.AllParameters.Add(parameter.TypeOfParameter, parameter);
                 this.ValidateParameters(parameter);
             }
-            catch (Exception ex)
+            catch (ArgumentException ex)
             {
-                throw new ArgumentException(ex.Message);
+                throw ex;
             }
         }
 
@@ -179,12 +174,9 @@ namespace ScrewdriverPlugin
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
         private void ValidateParameters(Parameter parameter)
         {
-            //TODO: rename
             string message = string.Empty;
-            //TODO: redo
             switch (parameter.TypeOfParameter)
             {
-                //TODO: RSDN
                 case ParameterType.HandleLength:
                 {
                     if (this.AllParameters.TryGetValue(
@@ -198,7 +190,6 @@ namespace ScrewdriverPlugin
                                 ParameterType.HandleWidth,
                                 out chainedParameterFirst))
                         {
-                            //TODO: const
                             double maxValue = (chainedParameterFirst.Value + DIF) * FOURPLE;
                             double minValue = (chainedParameterFirst.Value - DIF) * FOURPLE;
                             if (parameter.Value > maxValue)
@@ -263,7 +254,6 @@ namespace ScrewdriverPlugin
                                 ParameterType.RodWidth,
                                 out chainedParameterSecond) == true)
                         {
-                            //TODO: const
                             double minValue = chainedParameterSecond.Value * HALF;
                             double maxValue = (chainedParameterSecond.Value + DIAMETERDIF) * HALF;
                             if (parameter.Value < minValue)

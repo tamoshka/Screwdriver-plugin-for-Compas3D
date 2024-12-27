@@ -34,6 +34,7 @@ namespace ScrewdriverPlugin
             // stress.StressTesting();
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Инициализация ряда параметров при загрузке формы.
         /// </summary>
@@ -51,7 +52,6 @@ namespace ScrewdriverPlugin
                 rodLength.MinValue.ToString() +
                 " до " + rodLength.MaxValue.ToString() +
                 " мм";
-            //TODO: refactor
             this.toolTip1.SetToolTip(this.TextBoxRodLength, toolTipRodLengthText);
             string toolTipRodWidthDefaultText =
                 "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм";
@@ -66,7 +66,6 @@ namespace ScrewdriverPlugin
                 handleLength.MinValue.ToString() +
                 " до " + handleLength.MaxValue.ToString() +
                 " мм";
-            //TODO: refactor
             this.toolTip1.SetToolTip(this.TextBoxHandleLength, toolTipHandleLengthText);
         }
 
@@ -147,12 +146,19 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void TextBoxHandle_Leave(object sender, EventArgs e)
         {
+            var widthTextBoxes = new Dictionary<TextBox, ParameterType>()
+            {
+                {TextBoxHandleWidth, ParameterType.HandleWidth },
+                {TextBoxHandleLength, ParameterType.HandleLength }
+            };
+
             ParameterType parameterType;
             System.Windows.Forms.TextBox textBox;
             ParameterType chainedParameterType;
             System.Windows.Forms.TextBox chainedTextBox;
             ParameterType secondChainedParameterType;
             System.Windows.Forms.TextBox secondChainedTextBox;
+
             switch (((System.Windows.Forms.Control)sender).Name)
             {
                 case "TextBoxHandleWidth":
@@ -361,7 +367,6 @@ namespace ScrewdriverPlugin
             System.Windows.Forms.TextBox textBox,
             ParameterType parameterType)
         {
-            //TODO: mistype
             Parameter parameter = new Parameter();
             parameter.TypeOfParameter = parameterType;
             //TODO: FormatException
@@ -371,6 +376,7 @@ namespace ScrewdriverPlugin
                 this._parameters.SetParameter(parameter);
                 this.SetColors(textBox, parameter, 3, string.Empty);
             }
+            //TODO: base exception - зло
             catch (Exception e)
             {
                 switch (e.Message)
@@ -458,7 +464,6 @@ namespace ScrewdriverPlugin
             }
         }
 
-        //TODO:XML
         /// <summary>
         /// Обработчик изменения состояния CheckBox "Наличие отверстия".
         /// </summary>
