@@ -88,8 +88,8 @@ namespace ScrewdriverPlugin
             double x1 = -((double)rodWidth.Value);
             double x3 = x1 * ONESECOND;
             double fivedX = x1 * ONEFIVED;
-            //TODO: RSDN
-            double newY = y * ONEFIVED / Math.Log10(y * ONEFIVED) / (y / (-x3 * 2) * ONESEVENED / Math.Sqrt(y * ONEFOURTYFIVED));
+            double newY = y * ONEFIVED / Math.Log10(y * ONEFIVED) /
+                (y / (-x3 * 2) * ONESEVENED / Math.Sqrt(y * ONEFOURTYFIVED));
             switch (parameters.ShapeOfRod)
             {
                 case RodType.Cruciform:
@@ -133,7 +133,14 @@ namespace ScrewdriverPlugin
                         double[] extrusionDepth = { -x1, -x1, y, -x1, -x1 };
                         int[] start = { 4, 9, 14, 16, 22 };
                         int[] count = { 5, 5, 2, 6, 6 };
-                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        //TODO: RSDN +
+                        this.Helper(
+                            pointsArray,
+                            typeExtrusion,
+                            typeSketch,
+                            extrusionDepth,
+                            start,
+                            count);
                         break;
                     }
 
@@ -158,7 +165,14 @@ namespace ScrewdriverPlugin
                         double[] extrusionDepth = { -x1 };
                         int[] start = { 4 };
                         int[] count = { 5 };
-                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        //TODO: RSDN +
+                        this.Helper(
+                            pointsArray,
+                            typeExtrusion,
+                            typeSketch,
+                            extrusionDepth,
+                            start,
+                            count);
                         break;
                     }
 
@@ -194,8 +208,14 @@ namespace ScrewdriverPlugin
                         double[] extrusionDepth = { -x3 * 2, -x3 * 2 };
                         int[] start = { 4, 12 };
                         int[] count = { 8, 8 };
-                        //TODO: RSDN
-                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        //TODO: RSDN +
+                        this.Helper(
+                            pointsArray,
+                            typeExtrusion,
+                            typeSketch,
+                            extrusionDepth,
+                            start,
+                            count);
                         break;
                     }
             }
@@ -236,7 +256,13 @@ namespace ScrewdriverPlugin
                         double[] extrusionDepth = { y1 };
                         int[] start = { 0 };
                         int[] count = { 6 };
-                        this.Helper(pointsArray, typeExtrusion, typeSketch, extrusionDepth, start, count);
+                        this.Helper(
+                            pointsArray,
+                            typeExtrusion,
+                            typeSketch,
+                            extrusionDepth,
+                            start,
+                            count);
                         break;
                     }
 
@@ -259,9 +285,21 @@ namespace ScrewdriverPlugin
             if (parameters.IsHoleExist)
             {
                 this._wrapper.CreateSketch(1);
-                //TODO: RSDN
-                this._wrapper.CreateArc(0, y1 * FIVESIXED, x2 * ONEFOURTH, y1 * FOURWITHHALFSIXED, 0, y1 * TWOTHIRD);
-                this._wrapper.CreateArc(0, y1 * FIVESIXED, -x2 * ONEFOURTH, y1 * FOURWITHHALFSIXED, 0, y1 * TWOTHIRD);
+                //TODO: RSDN +
+                this._wrapper.CreateArc(
+                    0,
+                    y1 * FIVESIXED,
+                    x2 * ONEFOURTH,
+                    y1 * FOURWITHHALFSIXED,
+                    0,
+                    y1 * TWOTHIRD);
+                this._wrapper.CreateArc(
+                    0,
+                    y1 * FIVESIXED,
+                    -x2 * ONEFOURTH,
+                    y1 * FOURWITHHALFSIXED,
+                    0,
+                    y1 * TWOTHIRD);
                 this._wrapper.Extrusion(1, -x2);
             }
         }

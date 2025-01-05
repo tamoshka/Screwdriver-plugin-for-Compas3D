@@ -34,41 +34,6 @@ namespace ScrewdriverPlugin
             // stress.StressTesting();
         }
 
-        //TODO: RSDN
-        /// <summary>
-        /// Инициализация ряда параметров при загрузке формы.
-        /// </summary>
-        /// <param name="sender">Объект.</param>
-        /// <param name="e">Аргумент.</param>
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
-            this.ComboBoxShapeOfHandle.SelectedIndex = 1;
-            this.ComboBoxShapeOfRod.SelectedIndex = 1;
-            Parameter rodLength = new Parameter();
-            rodLength.TypeOfParameter = ParameterType.RodLength;
-            this._parameters.DefineMinMax(rodLength);
-            string toolTipRodLengthText = "Длина наконечника должна находиться в диапазоне от " +
-                rodLength.MinValue.ToString() +
-                " до " + rodLength.MaxValue.ToString() +
-                " мм";
-            this.toolTip1.SetToolTip(this.TextBoxRodLength, toolTipRodLengthText);
-            string toolTipRodWidthDefaultText =
-                "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм";
-            this.toolTip1.SetToolTip(this.TextBoxRodWidth, toolTipRodWidthDefaultText);
-            string toolTipHandleWidthDefaultText =
-                "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм";
-            this.toolTip1.SetToolTip(this.TextBoxHandleWidth, toolTipHandleWidthDefaultText);
-            Parameter handleLength = new Parameter();
-            handleLength.TypeOfParameter = ParameterType.HandleLength;
-            this._parameters.DefineMinMax(handleLength);
-            string toolTipHandleLengthText = "Длина ручки должна находиться в диапазоне от " +
-                handleLength.MinValue.ToString() +
-                " до " + handleLength.MaxValue.ToString() +
-                " мм";
-            this.toolTip1.SetToolTip(this.TextBoxHandleLength, toolTipHandleLengthText);
-        }
-
         /// <summary>
         /// Обработчик нажатия на кнопку "Создать".
         /// </summary>
@@ -85,60 +50,6 @@ namespace ScrewdriverPlugin
             }
         }
 
-        /*/// <summary>
-        /// Обработчик выхода из текстБокса "Длина ручки".
-        /// </summary>
-        /// <param name="sender">Объект.</param>
-        /// <param name="e">Аргумент.</param>
-        private void TextBoxHandleLength_Leave(object sender, EventArgs e)
-        {
-            ParameterType parameterType = ParameterType.HandleLength;
-            this.FirstValidate(this.TextBoxHandleLength, parameterType);
-            if (this.TextBoxHandleLength.BackColor != SystemColors.Window)
-            {
-                this.Validator(this.TextBoxHandleLength, parameterType);
-                this.FirstValidate(this.TextBoxHandleWidth, ParameterType.HandleWidth);
-                if (this.TextBoxHandleWidth.BackColor != SystemColors.Window)
-                {
-                    this.Validator(this.TextBoxHandleWidth, ParameterType.HandleWidth);
-                }
-
-                this.FirstValidate(this.TextBoxRodLength, ParameterType.RodLength);
-                if (this.TextBoxRodLength.BackColor != SystemColors.Window)
-                {
-                    this.Validator(this.TextBoxRodLength, ParameterType.RodLength);
-                }
-            }
-        }*/
-
-        /*/// <summary>
-        /// Обработчик выхода из текстБокса "Диаметр ручки".
-        /// </summary>
-        /// <param name="sender">Объект.</param>
-        /// <param name="e">Аргумент.</param>
-        private void TextBoxHandleWidth_Leave(object sender, EventArgs e)
-        {
-            ParameterType parameterType = ParameterType.HandleWidth;
-            this.FirstValidate(this.TextBoxHandleWidth, parameterType);
-            if (this.TextBoxHandleWidth.BackColor != SystemColors.Window)
-            {
-                this.Validator(this.TextBoxHandleWidth, parameterType);
-                this.FirstValidate(this.TextBoxRodWidth, ParameterType.RodWidth);
-                if (this.TextBoxRodWidth.BackColor != SystemColors.Window)
-                {
-                    this.Validator(this.TextBoxRodWidth, ParameterType.RodWidth);
-                }
-
-                this.FirstValidate(this.TextBoxHandleLength, ParameterType.HandleLength);
-                if (this.TextBoxHandleLength.BackColor != SystemColors.Window)
-                {
-                    this.Validator(
-                        this.TextBoxHandleLength,
-                        ParameterType.HandleLength);
-                }
-            }
-        }*/
-
         /// <summary>
         /// Обработчик выхода из текстБоксов ручки.
         /// </summary>
@@ -146,12 +57,6 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void TextBoxHandle_Leave(object sender, EventArgs e)
         {
-            var widthTextBoxes = new Dictionary<TextBox, ParameterType>()
-            {
-                {TextBoxHandleWidth, ParameterType.HandleWidth },
-                {TextBoxHandleLength, ParameterType.HandleLength }
-            };
-
             ParameterType parameterType;
             System.Windows.Forms.TextBox textBox;
             ParameterType chainedParameterType;
@@ -199,6 +104,7 @@ namespace ScrewdriverPlugin
         /// <param name="e">Аргумент.</param>
         private void TextBoxRod_Leave(object sender, EventArgs e)
         {
+
             ParameterType parameterType;
             System.Windows.Forms.TextBox textBox;
             ParameterType chainedParameterType;
@@ -230,72 +136,6 @@ namespace ScrewdriverPlugin
                 this.Validator(chainedTextBox, chainedParameterType);
             }
         }
-
-        /*/// <summary>
-        /// Обработчик выхода из текстБокса "Длина наконечника".
-        /// </summary>
-        /// <param name="sender">Объект.</param>
-        /// <param name="e">Аргумент.</param>
-        private void TextBoxRodLength_Leave(object sender, EventArgs e)
-        {
-             //TODO: duplication
-            ParameterType parameterType = ParameterType.RodLength;
-            this.FirstValidate(this.TextBoxRodLength, parameterType);
-            if (this.TextBoxRodLength.BackColor != SystemColors.Window)
-            {
-                this.Validator(this.TextBoxRodLength, parameterType);
-                this.FirstValidate(this.TextBoxHandleLength, ParameterType.HandleLength);
-                if (this.TextBoxHandleLength.BackColor != SystemColors.Window)
-                {
-                    this.Validator(this.TextBoxHandleLength, ParameterType.HandleLength);
-                }
-            }
-        }*/
-
-        /*/// <summary>
-        /// /// Обработчик выхода из текстБокса "Диаметр наконечника".
-        /// </summary>
-        /// <param name="sender">Объект.</param>
-        /// <param name="e">Аргумент.</param>
-        private void TextBoxRodWidth_Leave(object sender, EventArgs e)
-        {
-             //TODO: duplication
-            ParameterType parameterType = ParameterType.RodWidth;
-            this.FirstValidate(this.TextBoxRodWidth, parameterType);
-            if (this.TextBoxRodWidth.BackColor != SystemColors.Window)
-            {
-                this.Validator(this.TextBoxRodWidth, parameterType);
-                this.FirstValidate(this.TextBoxHandleWidth, ParameterType.HandleWidth);
-                if (this.TextBoxHandleWidth.BackColor != SystemColors.Window)
-                {
-                    this.Validator(this.TextBoxHandleWidth, ParameterType.HandleWidth);
-                }
-            }
-        }*/
-
-        /*/// <summary>
-        /// Первичная валидация (проверка на введение в текстБоксы целых чисел.
-        /// </summary>
-        /// <param name="textBox">ТекстБокс.</param>
-        /// <param name="parameterType">Тип параметра.</param>
-        private void FirstValidate(
-            System.Windows.Forms.TextBox textBox,
-            ParameterType parameterType)
-        {
-            try
-            {
-                int.Parse(textBox.Text);
-                this.SetColors(textBox, 3, string.Empty);
-            }
-            catch
-            {
-                var message = textBox.Text != string.Empty
-                    ? "Ошибка"
-                    : string.Empty;
-
-                this.SetColors(textBox, 1, message);
-            }
-        }*/
 
         /// <summary>
         /// Вспомогательный метод для установки цвета для текстБокса.
@@ -367,23 +207,34 @@ namespace ScrewdriverPlugin
             System.Windows.Forms.TextBox textBox,
             ParameterType parameterType)
         {
-            Parameter parameter = new Parameter();
-            parameter.TypeOfParameter = parameterType;
-            //TODO: FormatException
+            //TODO: FormatException +
             try
             {
-                parameter.Value = int.Parse(textBox.Text);
-                this._parameters.SetParameter(parameter);
+                this._parameters.SetParameter(parameterType, int.Parse(textBox.Text));
+                this._parameters.AllParameters.TryGetValue(parameterType, out Parameter parameter);
+                parameter.TypeOfParameter = parameterType;
                 this.SetColors(textBox, parameter, 3, string.Empty);
             }
-            //TODO: base exception - зло
-            catch (Exception e)
+            catch (FormatException e)
+            {
+                this._parameters.AllParameters.TryGetValue(parameterType, out Parameter parameter);
+                parameter.TypeOfParameter = parameterType;
+                var message = textBox.Text != string.Empty
+                    ? "Ошибка"
+                    : string.Empty;
+
+                this.SetColors(textBox, parameter, 1, message);
+            }
+
+            //TODO: base exception - зло +
+            catch (ArgumentException e)
             {
                 switch (e.Message)
                 {
                     case "Значение за граничными пределами":
                     {
-                        this._parameters.DefineMinMax(parameter);
+                        this._parameters.AllParameters.TryGetValue(parameterType, out Parameter parameter);
+                        parameter.TypeOfParameter = parameterType;
                         string toolTipText = "Введите значения от " +
                         parameter.MinValue.ToString() +
                         " до " + parameter.MaxValue.ToString() +
@@ -392,19 +243,10 @@ namespace ScrewdriverPlugin
                         break;
                     }
 
-                    case "Входная строка имела неверный формат.":
-                    {
-                        this._parameters.DefineMinMax(parameter);
-                        var message = textBox.Text != string.Empty
-                            ? "Ошибка"
-                            : string.Empty;
-
-                        this.SetColors(textBox, parameter, 1, message);
-                        break;
-                    }
-
                     default:
                     {
+                        this._parameters.AllParameters.TryGetValue(parameterType, out Parameter parameter);
+                        parameter.TypeOfParameter = parameterType;
                         this.SetColors(textBox, parameter, 2, e.Message);
                         break;
                     }
@@ -472,6 +314,37 @@ namespace ScrewdriverPlugin
         private void CheckBoxIsHoleExist_CheckedChanged(object sender, EventArgs e)
         {
             this._parameters.IsHoleExist = this.CheckBoxIsHoleExist.Checked;
+        }
+
+        /// <summary>
+        /// Инициализация ряда параметров при загрузке формы.
+        /// </summary>
+        /// <param name="sender">Объект.</param>
+        /// <param name="e">Аргумент.</param>
+        //TODO: RSDN +
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            this._parameters = new Parameters();
+            this.ComboBoxShapeOfHandle.SelectedIndex = 1;
+            this.ComboBoxShapeOfRod.SelectedIndex = 1;
+            this._parameters.AllParameters.TryGetValue(ParameterType.RodLength, out Parameter rodLength);
+            string toolTipRodLengthText = "Длина наконечника должна находиться в диапазоне от " +
+                rodLength.MinValue.ToString() +
+                " до " + rodLength.MaxValue.ToString() +
+                " мм";
+            this.toolTip1.SetToolTip(this.TextBoxRodLength, toolTipRodLengthText);
+            string toolTipRodWidthDefaultText =
+                "Диаметр наконечника должен находиться в диапазоне пятой части от длины отвёртки +/- 2 мм";
+            this.toolTip1.SetToolTip(this.TextBoxRodWidth, toolTipRodWidthDefaultText);
+            string toolTipHandleWidthDefaultText =
+                "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм";
+            this.toolTip1.SetToolTip(this.TextBoxHandleWidth, toolTipHandleWidthDefaultText);
+            this._parameters.AllParameters.TryGetValue(ParameterType.HandleLength, out Parameter handleLength);
+            string toolTipHandleLengthText = "Длина ручки должна находиться в диапазоне от " +
+                handleLength.MinValue.ToString() +
+                " до " + handleLength.MaxValue.ToString() +
+                " мм";
+            this.toolTip1.SetToolTip(this.TextBoxHandleLength, toolTipHandleLengthText);
         }
     }
 }

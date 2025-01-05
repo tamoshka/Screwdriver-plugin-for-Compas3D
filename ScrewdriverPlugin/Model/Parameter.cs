@@ -28,6 +28,19 @@ namespace ScrewdriverPlugin
         private ParameterType _typeOfParameter;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Parameter"/> class.
+        /// </summary>
+        /// <param name="maxValue">Максимальное значение.</param>
+        /// <param name="minValue">Минимальное значение.</param>
+        /// <param name="value">Значение.</param>
+        public Parameter(int maxValue, int minValue)
+        {
+            this.MaxValue = maxValue;
+            this.MinValue = minValue;
+            this.Validator(0);
+        }
+
+        /// <summary>
         /// Gets or sets для поля _maxValue (максимальное значение).
         /// </summary>
         public int MaxValue
@@ -72,6 +85,7 @@ namespace ScrewdriverPlugin
             set
             {
                 this._value = value;
+                this.Validator(1);
             }
         }
 
@@ -95,16 +109,29 @@ namespace ScrewdriverPlugin
         /// Валидация вводимого значения _value в параметр.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        public void Validator()
+        public void Validator(int type)
         {
-            if (this._maxValue <= this._minValue || this._minValue < 0)
+            switch (type)
             {
-                throw new ArgumentException("Нарушение в определении граничных условий");
-            }
+                case 0:
+                {
+                    if (this._maxValue <= this._minValue || this._minValue < 0)
+                    {
+                        throw new ArgumentException("Нарушение в определении граничных условий");
+                    }
 
-            if (this._value < this._minValue || this._value > this._maxValue)
-            {
-                throw new ArgumentException("Значение за граничными пределами");
+                    break;
+                }
+
+                case 1:
+                {
+                    if (this._value < this._minValue || this._value > this._maxValue)
+                    {
+                        throw new ArgumentException("Значение за граничными пределами");
+                    }
+
+                    break;
+                }
             }
         }
     }

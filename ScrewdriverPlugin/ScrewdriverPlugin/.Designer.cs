@@ -339,11 +339,11 @@
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             // 
-            // labelWarning
+            // LabelWarning
             // 
             this.LabelWarning.AutoSize = true;
             this.LabelWarning.Location = new System.Drawing.Point(372, 309);
-            this.LabelWarning.Name = "labelWarning";
+            this.LabelWarning.Name = "LabelWarning";
             this.LabelWarning.Size = new System.Drawing.Size(0, 20);
             this.LabelWarning.TabIndex = 25;
             // 
@@ -356,7 +356,7 @@
             this.MinimumSize = new System.Drawing.Size(809, 452);
             this.Name = "MainForm";
             this.Text = "Отвёртка";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

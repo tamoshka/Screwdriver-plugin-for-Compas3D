@@ -105,14 +105,9 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест метода SetParameter.")]
         public void TestProjectSetParameter()
         {
-            Parameter parameter = new Parameter();
-            parameter.TypeOfParameter = ParameterType.HandleWidth;
-            parameter.Value = 15;
             Parameters expected = new Parameters();
-            this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
-            expected.AllParameters = new Dictionary<ParameterType, Parameter>();
-            this._parameters.SetParameter(parameter);
-            expected.SetParameter(parameter);
+            this._parameters.SetParameter(ParameterType.HandleWidth, 15);
+            expected.SetParameter(ParameterType.HandleWidth, 15);
             var actual = this._parameters;
             Assert.AreEqual(expected.AllParameters, actual.AllParameters);
         }
@@ -178,28 +173,13 @@ namespace ScrewdriverPlugin.UnitTests
             int wrongArgument,
             string message)
         {
-            Parameter handleLength = new Parameter();
-            handleLength.TypeOfParameter = ParameterType.HandleLength;
-            handleLength.Value = 100;
-            Parameter handleWidth = new Parameter();
-            handleWidth.TypeOfParameter = ParameterType.HandleWidth;
-            handleWidth.Value = 25;
-            Parameter rodLength = new Parameter();
-            rodLength.TypeOfParameter = ParameterType.RodLength;
-            rodLength.Value = 100;
-            Parameter rodWidth = new Parameter();
-            rodWidth.TypeOfParameter = ParameterType.RodWidth;
-            rodWidth.Value = 11;
             this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
-            this._parameters.SetParameter(handleLength);
-            this._parameters.SetParameter(handleWidth);
-            this._parameters.SetParameter(rodLength);
-            this._parameters.SetParameter(rodWidth);
-            Parameter newParameter = new Parameter();
-            newParameter.TypeOfParameter = parameterType;
-            newParameter.Value = wrongArgument;
+            this._parameters.SetParameter(ParameterType.HandleLength, 100);
+            this._parameters.SetParameter(ParameterType.HandleWidth, 25);
+            this._parameters.SetParameter(ParameterType.RodLength, 100);
+            this._parameters.SetParameter(ParameterType.RodWidth, 11);
             Assert.Throws<ArgumentException>(
-            () => { this._parameters.SetParameter(newParameter); },
+            () => { this._parameters.SetParameter(parameterType, wrongArgument); },
             message);
         }
     }

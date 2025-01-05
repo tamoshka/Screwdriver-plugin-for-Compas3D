@@ -12,7 +12,7 @@ namespace ScrewdriverPlugin.UnitTests
         /// <summary>
         /// Тестовый параметр.
         /// </summary>
-        private Parameter _parameter = new Parameter();
+        private Parameter _parameter = new Parameter(16, 14);
 
         /// <summary>
         /// Позитивный тест геттера MaxValue.
@@ -20,8 +20,7 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест геттера MaxValue.")]
         public void TestProjectGetMaxValue()
         {
-            var expected = 15;
-            this._parameter.MaxValue = 15;
+            var expected = 16;
             var actual = this._parameter.MaxValue;
             Assert.AreEqual(expected, actual);
         }
@@ -32,9 +31,8 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест сеттера MaxValue.")]
         public void TestProjectSetMaxValue()
         {
-            Parameter expected = new Parameter();
-            this._parameter.MaxValue = 15;
-            expected.MaxValue = 15;
+            Parameter expected = new Parameter(16, 14);
+            expected.MaxValue = 16;
             var actual = this._parameter;
             Assert.AreEqual(expected.MaxValue, actual.MaxValue);
         }
@@ -45,8 +43,7 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест геттера MinValue.")]
         public void TestProjectGetMinValue()
         {
-            var expected = 15;
-            this._parameter.MinValue = 15;
+            var expected = 14;
             var actual = this._parameter.MinValue;
             Assert.AreEqual(expected, actual);
         }
@@ -57,9 +54,8 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест сеттера MinValue.")]
         public void TestProjectSetMinValue()
         {
-            Parameter expected = new Parameter();
-            this._parameter.MinValue = 15;
-            expected.MinValue = 15;
+            Parameter expected = new Parameter(16, 14);
+            expected.MinValue = 14;
             var actual = this._parameter;
             Assert.AreEqual(expected.MinValue, actual.MinValue);
         }
@@ -71,9 +67,6 @@ namespace ScrewdriverPlugin.UnitTests
         public void TestProjectGetValue()
         {
             var expected = 15;
-            this._parameter.MinValue = 15;
-            this._parameter.MaxValue = 15;
-            this._parameter.Value = 15;
             var actual = this._parameter.Value;
             Assert.AreEqual(expected, actual);
         }
@@ -84,12 +77,7 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест сеттера Value.")]
         public void TestProjectSetValue()
         {
-            Parameter expected = new Parameter();
-            this._parameter.MinValue = 15;
-            this._parameter.MaxValue = 15;
-            this._parameter.Value = 15;
-            expected.MinValue = 15;
-            expected.MaxValue = 15;
+            Parameter expected = new Parameter(16, 14);
             expected.Value = 15;
             var actual = this._parameter.Value;
             Assert.AreEqual(expected.Value, actual);
@@ -110,8 +98,6 @@ namespace ScrewdriverPlugin.UnitTests
             TestName = "Простая ошибка")]
         public void TestSetArgumentException(int wrongValue, string message)
         {
-            this._parameter.MaxValue = 16;
-            this._parameter.MinValue = 14;
             this._parameter.Value = wrongValue;
             Assert.Throws<ArgumentException>(
             () => { this._parameter.Validator(); },
