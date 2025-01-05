@@ -108,7 +108,7 @@ namespace ScrewdriverPlugin
         /// Валидация вводимого значения _value в параметр.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        public void Validate()
+        private void Validate()
         {
             if (this._value < this._minValue || this._value > this._maxValue)
             {
