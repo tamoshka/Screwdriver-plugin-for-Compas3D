@@ -31,17 +31,16 @@ namespace ScrewdriverPlugin
         /// Initializes a new instance of the <see cref="Parameter"/> class.
         /// </summary>
         /// <param name="maxValue">Максимальное значение.</param>
-        /// <param name="minValue">Минимальное значение.</param>
-        /// <param name="value">Значение.</param>
+        /// <param name="minValue">Минимальное значение.</param>]
         public Parameter(int maxValue, int minValue)
         {
-            this.MaxValue = maxValue;
-            this.MinValue = minValue;
-            this.Validator(0);
+            this._maxValue = maxValue;
+            this._minValue = minValue;
+            this.MinMaxValidate();
         }
 
         /// <summary>
-        /// Gets or sets для поля _maxValue (максимальное значение).
+        /// Gets для поля _maxValue (максимальное значение).
         /// </summary>
         public int MaxValue
         {
@@ -50,14 +49,14 @@ namespace ScrewdriverPlugin
                 return this._maxValue;
             }
 
-            set
+            private set
             {
                 this._maxValue = value;
             }
         }
 
         /// <summary>
-        /// Gets or sets для поля _minValue (минимальное значение).
+        /// Gets для поля _minValue (минимальное значение).
         /// </summary>
         public int MinValue
         {
@@ -66,7 +65,7 @@ namespace ScrewdriverPlugin
                 return this._minValue;
             }
 
-            set
+            private set
             {
                 this._minValue = value;
             }
@@ -85,7 +84,7 @@ namespace ScrewdriverPlugin
             set
             {
                 this._value = value;
-                this.Validator(1);
+                this.Validate();
             }
         }
 
@@ -109,29 +108,23 @@ namespace ScrewdriverPlugin
         /// Валидация вводимого значения _value в параметр.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        public void Validator(int type)
+        public void Validate()
         {
-            switch (type)
+            if (this._value < this._minValue || this._value > this._maxValue)
             {
-                case 0:
-                {
-                    if (this._maxValue <= this._minValue || this._minValue < 0)
-                    {
-                        throw new ArgumentException("Нарушение в определении граничных условий");
-                    }
+                throw new ArgumentException("Значение за граничными пределами");
+            }
+        }
 
-                    break;
-                }
-
-                case 1:
-                {
-                    if (this._value < this._minValue || this._value > this._maxValue)
-                    {
-                        throw new ArgumentException("Значение за граничными пределами");
-                    }
-
-                    break;
-                }
+        /// <summary>
+        /// Валидация на определение граничных условий.
+        /// </summary>
+        /// <exception cref="ArgumentException">Текст ошибки.</exception>
+        private void MinMaxValidate()
+        {
+            if (this._maxValue <= this._minValue || this._minValue < 0)
+            {
+                throw new ArgumentException("Нарушение в определении граничных условий");
             }
         }
     }

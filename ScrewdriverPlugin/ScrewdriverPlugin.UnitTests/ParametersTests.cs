@@ -21,32 +21,11 @@ namespace ScrewdriverPlugin.UnitTests
         [Test(Description = "Позитивный тест геттера AllParameters.")]
         public void TestProjectGetParameters()
         {
-            Dictionary<ParameterType, Parameter> expected = new Dictionary<ParameterType,
-                Parameter>()
-            {
-            };
-            this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>()
-            {
-            };
-            var actual = this._parameters;
-            Assert.AreEqual(expected, actual.AllParameters);
-        }
-
-        /// <summary>
-        /// Позитивный тест сеттера AllParameters.
-        /// </summary>
-        [Test(Description = "Позитивный тест сеттера AllParameters.")]
-        public void TestProjectSetParameters()
-        {
-            this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>()
-            {
-            };
             Parameters expected = new Parameters();
-            expected.AllParameters = new Dictionary<ParameterType, Parameter>()
-            {
-            };
             var actual = this._parameters;
-            Assert.AreEqual(expected.AllParameters, actual.AllParameters);
+            Assert.AreEqual(
+                expected.AllParameters[ParameterType.HandleLength].Value,
+                actual.AllParameters[ParameterType.HandleLength].Value);
         }
 
         /// <summary>
@@ -109,7 +88,9 @@ namespace ScrewdriverPlugin.UnitTests
             this._parameters.SetParameter(ParameterType.HandleWidth, 15);
             expected.SetParameter(ParameterType.HandleWidth, 15);
             var actual = this._parameters;
-            Assert.AreEqual(expected.AllParameters, actual.AllParameters);
+            Assert.AreEqual(
+                expected.AllParameters[ParameterType.HandleWidth].Value,
+                actual.AllParameters[ParameterType.HandleWidth].Value);
         }
 
         /// <summary>
@@ -162,24 +143,24 @@ namespace ScrewdriverPlugin.UnitTests
             ParameterType.RodWidth,
             13,
             "Должно возникать исключение, если RodWidth менее чем в 2 раза меньше HandleWidth",
-            TestName = "Диаметр наконечника меньше половины диаметра ручки, увеличьте заданное значение минимум до 12")]
+            TestName = "Диаметр наконечника больше половины диаметра ручки, уменьшите заданное значение минимум до 12")]
         [TestCase(
             ParameterType.RodWidth,
-            10,
+            9,
             "Должно возникать исключение, если RodWidth более чем в 2 раза меньше HandleWidth",
-            TestName = "Диаметр наконечника больше половины диаметра ручки, уменьшите заданное значение минимум до 11")]
+            TestName = "Диаметр наконечника меньше половины диаметра ручки, увеличьте заданное значение минимум до 11")]
         public void TestSetArgumentException(
             ParameterType parameterType,
             int wrongArgument,
             string message)
         {
-            this._parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
-            this._parameters.SetParameter(ParameterType.HandleLength, 100);
-            this._parameters.SetParameter(ParameterType.HandleWidth, 25);
-            this._parameters.SetParameter(ParameterType.RodLength, 100);
-            this._parameters.SetParameter(ParameterType.RodWidth, 11);
+            Parameters parameters = new Parameters();
+            parameters.SetParameter(ParameterType.HandleLength, 100);
+            parameters.SetParameter(ParameterType.HandleWidth, 25);
+            parameters.SetParameter(ParameterType.RodLength, 100);
+            parameters.SetParameter(ParameterType.RodWidth, 11);
             Assert.Throws<ArgumentException>(
-            () => { this._parameters.SetParameter(parameterType, wrongArgument); },
+            () => { parameters.SetParameter(parameterType, wrongArgument); },
             message);
         }
     }

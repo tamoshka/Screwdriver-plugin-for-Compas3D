@@ -20,7 +20,6 @@ namespace StressTesting
             var builder = new Builder();
             var stopWatch = new Stopwatch();
             var parameters = new Parameters();
-            parameters.AllParameters = new Dictionary<ParameterType, Parameter>();
             parameters.SetParameter(ParameterType.HandleLength, 100);
             parameters.SetParameter(ParameterType.HandleWidth, 25);
             parameters.SetParameter(ParameterType.RodLength, 100);

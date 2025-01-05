@@ -26,18 +26,6 @@ namespace ScrewdriverPlugin.UnitTests
         }
 
         /// <summary>
-        /// Позитивный тест сеттера MaxValue.
-        /// </summary>
-        [Test(Description = "Позитивный тест сеттера MaxValue.")]
-        public void TestProjectSetMaxValue()
-        {
-            Parameter expected = new Parameter(16, 14);
-            expected.MaxValue = 16;
-            var actual = this._parameter;
-            Assert.AreEqual(expected.MaxValue, actual.MaxValue);
-        }
-
-        /// <summary>
         /// Позитивный тест геттера MinValue.
         /// </summary>
         [Test(Description = "Позитивный тест геттера MinValue.")]
@@ -47,19 +35,6 @@ namespace ScrewdriverPlugin.UnitTests
             var actual = this._parameter.MinValue;
             Assert.AreEqual(expected, actual);
         }
-
-        /// <summary>
-        /// Позитивный тест сеттера MinValue.
-        /// </summary>
-        [Test(Description = "Позитивный тест сеттера MinValue.")]
-        public void TestProjectSetMinValue()
-        {
-            Parameter expected = new Parameter(16, 14);
-            expected.MinValue = 14;
-            var actual = this._parameter;
-            Assert.AreEqual(expected.MinValue, actual.MinValue);
-        }
-
         /// <summary>
         /// Позитивный тест геттера Value.
         /// </summary>
@@ -67,7 +42,7 @@ namespace ScrewdriverPlugin.UnitTests
         public void TestProjectGetValue()
         {
             var expected = 15;
-            var actual = this._parameter.Value;
+            var actual = this._parameter.Value = 15;
             Assert.AreEqual(expected, actual);
         }
 
@@ -79,7 +54,7 @@ namespace ScrewdriverPlugin.UnitTests
         {
             Parameter expected = new Parameter(16, 14);
             expected.Value = 15;
-            var actual = this._parameter.Value;
+            var actual = this._parameter.Value = 15;
             Assert.AreEqual(expected.Value, actual);
         }
 
@@ -95,12 +70,11 @@ namespace ScrewdriverPlugin.UnitTests
         [TestCase(
             20,
             "Должно возникать исключение, если значение больше MaxValue",
-            TestName = "Простая ошибка")]
+            TestName = "Значение за граничными пределами")]
         public void TestSetArgumentException(int wrongValue, string message)
         {
-            this._parameter.Value = wrongValue;
             Assert.Throws<ArgumentException>(
-            () => { this._parameter.Validator(); },
+            () => { this._parameter.Value = wrongValue; },
             message);
         }
     }
