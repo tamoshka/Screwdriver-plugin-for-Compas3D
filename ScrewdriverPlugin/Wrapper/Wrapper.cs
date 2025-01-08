@@ -117,7 +117,7 @@ namespace Kompas
         /// </summary>
         public void Spin()
         {
-            ksEntity entityRotate = 
+            ksEntity entityRotate =
                 (ksEntity)this._part.NewEntity((short)Obj3dType.o3d_bossRotated);
             if (entityRotate != null)
             {

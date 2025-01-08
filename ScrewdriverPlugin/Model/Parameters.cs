@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ScrewdriverPlugin
 {
@@ -11,6 +12,46 @@ namespace ScrewdriverPlugin
         //TODO: refactor
 
         /// <summary>
+        /// Максимальное значение длины ручки.
+        /// </summary>
+        private const int HANDLE_LENGTH_MAX_VALUE = 150;
+
+        /// <summary>
+        /// Минимальное значение длины ручки.
+        /// </summary>
+        private const int HANDLE_LENGTH_MIN_VALUE = 45;
+
+        /// <summary>
+        /// Максимальное значение диаметра ручки.
+        /// </summary>
+        private const int HANDLE_WIDTH_MAX_VALUE = 150;
+
+        /// <summary>
+        /// Минимальное значение диаметра ручки.
+        /// </summary>
+        private const int HANDLE_WIDTH_MIN_VALUE = 45;
+
+        /// <summary>
+        /// Максимальное значение длины наконечника.
+        /// </summary>
+        private const int ROD_LENGTH_MAX_VALUE = 500;
+
+        /// <summary>
+        /// Минимальное значение длины наконечника.
+        /// </summary>
+        private const int ROD_LENGTH_MIN_VALUE = 45;
+
+        /// <summary>
+        /// Максимальное значение диаметра наконечника.
+        /// </summary>
+        private const int ROD_WIDTH_MAX_VALUE = 21;
+
+        /// <summary>
+        /// Минимальное значение диаметра наконечника.
+        /// </summary>
+        private const int ROD_WIDTH_MIN_VALUE = 3;
+
+        /// <summary>
         /// Увеличивает в четыре раза.
         /// </summary>
         private const double FOURPLE = 4;
@@ -18,12 +59,12 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Размер изменённой части наконечника.
         /// </summary>
-        private const double ABSDEVIATION = 5;
+        private const double ABS_DEVIATION = 5;
 
         /// <summary>
         /// Определяет разницу в диаметре.
         /// </summary>
-        private const double DIAMETERDEVIATION = 2;
+        private const double DIAMETER_DEVIATION = 2;
 
         /// <summary>
         /// Определяет половину размера.
@@ -55,13 +96,13 @@ namespace ScrewdriverPlugin
         /// </summary>
         public Parameters()
         {
-            Parameter handleLength = new Parameter(150, 45);
+            Parameter handleLength = new Parameter(HANDLE_LENGTH_MAX_VALUE, HANDLE_LENGTH_MIN_VALUE);
             handleLength.TypeOfParameter = ParameterType.HandleLength;
-            Parameter handleWidth = new Parameter(42, 7);
+            Parameter handleWidth = new Parameter(HANDLE_WIDTH_MAX_VALUE, HANDLE_WIDTH_MIN_VALUE);
             handleWidth.TypeOfParameter = ParameterType.HandleWidth;
-            Parameter rodLength = new Parameter(500, 45);
+            Parameter rodLength = new Parameter(ROD_LENGTH_MAX_VALUE, ROD_LENGTH_MIN_VALUE);
             rodLength.TypeOfParameter = ParameterType.RodLength;
-            Parameter rodWidth = new Parameter(21, 3);
+            Parameter rodWidth = new Parameter(ROD_WIDTH_MAX_VALUE, ROD_WIDTH_MIN_VALUE);
             rodWidth.TypeOfParameter = ParameterType.RodWidth;
             this.AllParameters = new Dictionary<ParameterType, Parameter>()
             {
@@ -171,8 +212,8 @@ namespace ScrewdriverPlugin
                     {
                         if (handleWidth.Value != 0)
                         {
-                            double maxValue = (handleWidth.Value + ABSDEVIATION) * FOURPLE;
-                            double minValue = (handleWidth.Value - ABSDEVIATION) * FOURPLE;
+                            double maxValue = (handleWidth.Value + ABS_DEVIATION) * FOURPLE;
+                            double minValue = (handleWidth.Value - ABS_DEVIATION) * FOURPLE;
                             if (parameter.Value > maxValue)
                             {
                                 message += "Длина ручки более чем в 4 раза больше её диаметра" +
@@ -207,9 +248,9 @@ namespace ScrewdriverPlugin
                         if (handleLength.Value != 0)
                         {
                             double lowerQuarter = (double)((handleLength.Value / FOURPLE) -
-                                ABSDEVIATION);
+                                ABS_DEVIATION);
                             double upperQuarter = (double)((handleLength.Value / FOURPLE) +
-                                ABSDEVIATION);
+                                ABS_DEVIATION);
                             if (parameter.Value < lowerQuarter)
                             {
                                 message += "Диаметр ручки меньше четверти длины ручки - 5 мм" +
@@ -227,7 +268,7 @@ namespace ScrewdriverPlugin
                         if (rodWidth.Value != 0)
                         {
                             double minValue = rodWidth.Value * HALF;
-                            double maxValue = (rodWidth.Value + DIAMETERDEVIATION) * HALF;
+                            double maxValue = (rodWidth.Value + DIAMETER_DEVIATION) * HALF;
                             if (parameter.Value < minValue)
                             {
                                 message += "Диаметр ручки не превышает диаметр наконечника " +
@@ -269,7 +310,7 @@ namespace ScrewdriverPlugin
                         double upperHalfOfWidth = (double)handleWidth.Value;
                         upperHalfOfWidth = upperHalfOfWidth / HALF;
                         double lowerHalfOfWidth = (double)handleWidth.Value;
-                        lowerHalfOfWidth = (lowerHalfOfWidth / HALF) - DIAMETERDEVIATION;
+                        lowerHalfOfWidth = (lowerHalfOfWidth / HALF) - DIAMETER_DEVIATION;
                         if (parameter.Value < lowerHalfOfWidth)
                         {
                             message += "Диаметр наконечника меньше половины диаметра ручки, " +
