@@ -34,9 +34,16 @@ namespace ScrewdriverPlugin
         /// <param name="minValue">Минимальное значение.</param>]
         public Parameter(int maxValue, int minValue)
         {
-            this._maxValue = maxValue;
-            this._minValue = minValue;
-            this.MinMaxValidate();
+            try
+            {
+                this._maxValue = maxValue;
+                this._minValue = minValue;
+                this.MinMaxValidate();
+            }
+            catch (ArgumentException ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -83,8 +90,15 @@ namespace ScrewdriverPlugin
 
             set
             {
-                this._value = value;
-                this.Validate();
+                try
+                {
+                    this._value = value;
+                    this.Validate();
+                }
+                catch (ArgumentException ex)
+                {
+                    throw ex;
+                }
             }
         }
 
