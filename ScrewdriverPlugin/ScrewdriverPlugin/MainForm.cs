@@ -305,7 +305,6 @@ namespace ScrewdriverPlugin
         //TODO: RSDN +
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this._parameters = new Parameters();
             this.ComboBoxShapeOfHandle.SelectedIndex = 1;
             this.ComboBoxShapeOfRod.SelectedIndex = 1;
             Parameter rodLength = this._parameters.AllParameters[ParameterType.RodLength];
