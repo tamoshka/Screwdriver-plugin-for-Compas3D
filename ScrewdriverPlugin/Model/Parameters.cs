@@ -24,12 +24,12 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Максимальное значение диаметра ручки.
         /// </summary>
-        private const int HANDLE_WIDTH_MAX_VALUE = 150;
+        private const int HANDLE_WIDTH_MAX_VALUE = 42;
 
         /// <summary>
         /// Минимальное значение диаметра ручки.
         /// </summary>
-        private const int HANDLE_WIDTH_MIN_VALUE = 45;
+        private const int HANDLE_WIDTH_MIN_VALUE = 7;
 
         /// <summary>
         /// Максимальное значение длины наконечника.
