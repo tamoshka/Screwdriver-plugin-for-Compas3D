@@ -299,10 +299,10 @@ namespace ScrewdriverPlugin
         private string RangeTextCaster (Parameter parameter)
         {
             return "Введите значение от " +
-                    parameter.MinValue.ToString() +
-                    " до " +
-                    parameter.MaxValue.ToString() +
-                    " мм";
+                parameter.MinValue.ToString() +
+                " до " +
+                parameter.MaxValue.ToString() +
+                " мм";
         }
 
         /// <summary>
