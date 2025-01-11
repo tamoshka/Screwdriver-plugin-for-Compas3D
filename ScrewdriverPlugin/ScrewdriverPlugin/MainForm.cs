@@ -298,7 +298,7 @@ namespace ScrewdriverPlugin
         /// <returns>Текст для подсказки.</returns>
         private string RangeTextCaster (Parameter parameter)
         {
-            return "Введите значения от " +
+            return "Введите значение от " +
                     parameter.MinValue.ToString() +
                     " до " +
                     parameter.MaxValue.ToString() +
