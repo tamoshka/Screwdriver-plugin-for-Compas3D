@@ -9,8 +9,6 @@ namespace ScrewdriverPlugin
     /// </summary>
     public class Parameters
     {
-        //TODO: refactor
-
         /// <summary>
         /// Максимальное значение длины ручки.
         /// </summary>

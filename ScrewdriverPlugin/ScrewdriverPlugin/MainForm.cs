@@ -136,6 +136,7 @@ namespace ScrewdriverPlugin
                     textBox.BackColor = SystemColors.Window;
                     var message = textBox.Text != string.Empty
                         ? "Доступны только целочисленные значения"
+                         //TODO: duplication
                         : "Введите значения от " +
                           parameter.MinValue.ToString() +
                           " до " + parameter.MaxValue.ToString() +
@@ -172,7 +173,6 @@ namespace ScrewdriverPlugin
             System.Windows.Forms.TextBox textBox,
             ParameterType parameterType)
         {
-            //TODO: FormatException +
             try
             {
                 this._parameters.SetParameter(parameterType, int.Parse(textBox.Text));
@@ -194,19 +194,19 @@ namespace ScrewdriverPlugin
                     1,
                     message);
             }
-
-            //TODO: base exception - зло +
             catch (ArgumentException e)
             {
                 switch (e.Message)
                 {
-                    case "Значение за граничными пределами":
+                    //TODO: refactor
+                    case "Значение за граничными пределам":
                     {
+                             //TODO: duplication
                         string toolTipText = "Введите значения от " +
-                        this._parameters.AllParameters[parameterType].MinValue.ToString() +
-                        " до " +
-                        this._parameters.AllParameters[parameterType].MaxValue.ToString() +
-                        " мм";
+                            this._parameters.AllParameters[parameterType].MinValue.ToString() +
+                            " до " +
+                            this._parameters.AllParameters[parameterType].MaxValue.ToString() +
+                            " мм";
                         this.SetColors(
                             textBox,
                             this._parameters.AllParameters[parameterType],
@@ -302,12 +302,12 @@ namespace ScrewdriverPlugin
         /// </summary>
         /// <param name="sender">Объект.</param>
         /// <param name="e">Аргумент.</param>
-        //TODO: RSDN +
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.ComboBoxShapeOfHandle.SelectedIndex = 1;
             this.ComboBoxShapeOfRod.SelectedIndex = 1;
             Parameter rodLength = this._parameters.AllParameters[ParameterType.RodLength];
+             //TODO: duplication
             string toolTipRodLengthText = "Длина наконечника должна находиться в диапазоне от " +
                 rodLength.MinValue.ToString() +
                 " до " +
@@ -322,6 +322,7 @@ namespace ScrewdriverPlugin
                 "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм";
             this.toolTip1.SetToolTip(this.TextBoxHandleWidth, toolTipHandleWidthDefaultText);
             Parameter handleLength = this._parameters.AllParameters[ParameterType.HandleLength];
+             //TODO: duplication
             string toolTipHandleLengthText = "Длина ручки должна находиться в диапазоне от " +
                 handleLength.MinValue.ToString() +
                 " до " +

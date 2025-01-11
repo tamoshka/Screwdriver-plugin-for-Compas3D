@@ -133,7 +133,6 @@ namespace ScrewdriverPlugin
                     double[] extrusionDepth = { -x1, -x1, y, -x1, -x1 };
                     int[] start = { 4, 9, 14, 16, 22 };
                     int[] count = { 5, 5, 2, 6, 6 };
-                    //TODO: RSDN +
                     this.Helper(
                         pointsArray,
                         typeExtrusion,
@@ -165,7 +164,6 @@ namespace ScrewdriverPlugin
                     double[] extrusionDepth = { -x1 };
                     int[] start = { 4 };
                     int[] count = { 5 };
-                    //TODO: RSDN +
                     this.Helper(
                         pointsArray,
                         typeExtrusion,
@@ -208,7 +206,6 @@ namespace ScrewdriverPlugin
                     double[] extrusionDepth = { -x3 * 2, -x3 * 2 };
                     int[] start = { 4, 12 };
                     int[] count = { 8, 8 };
-                    //TODO: RSDN +
                     this.Helper(
                         pointsArray,
                         typeExtrusion,
@@ -285,7 +282,6 @@ namespace ScrewdriverPlugin
             if (parameters.IsHoleExist)
             {
                 this._wrapper.CreateSketch(1);
-                //TODO: RSDN +
                 this._wrapper.CreateArc(
                     0,
                     y1 * FIVESIXED,
