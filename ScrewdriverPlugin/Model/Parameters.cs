@@ -344,10 +344,6 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Вспомогательный метод формирующий текст для сообщения.
         /// </summary>
-        /// <param name="measure">Тип измерения.</param>
-        /// <param name="part">Часть детали.</param>
-        /// <param name="compare">Сравнение.</param>
-        /// <param name="value">Значение.</param>
         /// <returns>Текст сообщения.</returns>
         private string TextCaster(double value)
         {
