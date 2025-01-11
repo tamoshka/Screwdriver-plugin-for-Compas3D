@@ -290,18 +290,17 @@ namespace ScrewdriverPlugin
             this.ComboBoxShapeOfRod.SelectedIndex = 1;
             Parameter rodLength = this._parameters.AllParameters[ParameterType.RodLength];
             //TODO: duplication +
-            string toolTipRodLengthText = this.TextCaster(rodLength, "наконечника");
+            string toolTipRodLengthText = this.TextLengthCaster(rodLength, "наконечника");
             this.toolTip1.SetToolTip(this.TextBoxRodLength, toolTipRodLengthText);
             string toolTipRodWidthDefaultText =
-                "Диаметр наконечника должен находиться в диапазоне пятой части " +
-                "от длины отвёртки +/- 2 мм";
+                this.TextWidthCaster("наконечника", "одной второй", "2", "диаметра");
             this.toolTip1.SetToolTip(this.TextBoxRodWidth, toolTipRodWidthDefaultText);
             string toolTipHandleWidthDefaultText =
-                "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм";
+                this.TextWidthCaster("ручки", "четверти", "5", "длины");
             this.toolTip1.SetToolTip(this.TextBoxHandleWidth, toolTipHandleWidthDefaultText);
             Parameter handleLength = this._parameters.AllParameters[ParameterType.HandleLength];
             //TODO: duplication +
-            string toolTipHandleLengthText = this.TextCaster(handleLength, "ручки");
+            string toolTipHandleLengthText = this.TextLengthCaster(handleLength, "ручки");
             this.toolTip1.SetToolTip(this.TextBoxHandleLength, toolTipHandleLengthText);
         }
 
@@ -320,15 +319,29 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Вспомогательный метод для генерации текста граничных условий при загрузке формы.
+        /// Вспомогательный метод для генерации текста для граничных условий длины при загрузке формы.
         /// </summary>
         /// <param name="parameter">Параметр.</param>
-        /// <param name="word">Слово.</param>
+        /// <param name="part">Слово обозначающее элемент детали.</param>
         /// <returns>Текст для подсказки.</returns>
-        private string TextCaster (Parameter parameter, string word)
+        private string TextLengthCaster (Parameter parameter, string part)
         {
-            return $"Длина {word} должна находиться в диапазоне от" +
+            return $"Длина {part} должна находиться в диапазоне от" +
                 $" {parameter.MinValue.ToString()} до {parameter.MaxValue.ToString()} мм";
+        }
+
+        /// <summary>
+        /// Вспомогательный метод для генерации текста для граничных условий диаметра при загрузке формы.
+        /// </summary>
+        /// <param name="part">Слово обозначающее элемент детали.</param>
+        /// <param name="scale">Слово обозначающее соотношение элементов деталей.</param>
+        /// <param name="deviation">Допустимая погрешность для элемента.</param>
+        /// <param name="type">Тип параметра от которого зависит основной.</param>
+        /// <returns>Текст для подсказки.</returns>
+        private string TextWidthCaster(string part, string scale, string deviation, string type)
+        {
+            return $"Диаметр {part} должен находиться в диапазоне {scale}" +
+                $" от {type} ручки +/- {deviation} мм";
         }
     }
 }

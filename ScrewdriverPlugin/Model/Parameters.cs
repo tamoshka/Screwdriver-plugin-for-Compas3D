@@ -234,12 +234,12 @@ namespace ScrewdriverPlugin
                             double minValue = (handleWidth.Value - ABS_DEVIATION) * FOURPLE;
                             if (parameter.Value > maxValue)
                             {
-                                message += "Длина ручки более чем в 4 раза больше её диаметра" +
+                                message += "Длина ручки более чем в 4 раза больше диаметра ручки" +
                                     $", уменьшите {this.TextCaster(maxValue)}";
                             }
                             else if (parameter.Value < minValue)
                             {
-                                message += "Длина ручки менее чем в 4 раза больше её диаметра" +
+                                message += "Длина ручки менее чем в 4 раза больше диаметра ручки" +
                                     $", увеличьте {this.TextCaster(minValue)}";
                             }
                         }
@@ -343,6 +343,9 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Вспомогательный метод формирующий текст для сообщения.
         /// </summary>
+        /// <param name="measure">Тип измерения.</param>
+        /// <param name="part">Часть детали.</param>
+        /// <param name="compare">Сравнение.</param>
         /// <param name="value">Значение.</param>
         /// <returns>Текст сообщения.</returns>
         private string TextCaster(double value)
