@@ -136,7 +136,6 @@ namespace ScrewdriverPlugin
         /// <param name="text">Текст устанавливаемый в подсказку.</param>
         private void SetColors(
             System.Windows.Forms.TextBox textBox,
-            Parameter parameter,
              //TODO: refactor +
             Color whatColor,
             string text)
@@ -147,7 +146,7 @@ namespace ScrewdriverPlugin
                 var message = textBox.Text != string.Empty
                     ? "Доступны только целочисленные значения"
                     //TODO: duplication +
-                    : this.RangeTextCaster(parameter);
+                    : text;
                 this.toolTip1.SetToolTip(textBox, message);
                 textBox.Text = string.Empty;
             }
@@ -172,21 +171,15 @@ namespace ScrewdriverPlugin
                 this._parameters.SetParameter(parameterType, int.Parse(textBox.Text));
                 this.SetColors(
                     textBox,
-                    this._parameters.AllParameters[parameterType],
                     Color.Green,
                     string.Empty);
             }
             catch (FormatException)
             {
-                var message = textBox.Text != string.Empty
-                    ? "Ошибка"
-                    : string.Empty;
-
                 this.SetColors(
                     textBox,
-                    this._parameters.AllParameters[parameterType],
                     SystemColors.Window,
-                    message);
+                    this.RangeTextCaster(this._parameters.AllParameters[parameterType]));
             }
             catch (ValueException)
             {
@@ -194,7 +187,6 @@ namespace ScrewdriverPlugin
                     this.RangeTextCaster(this._parameters.AllParameters[parameterType]);
                 this.SetColors(
                     textBox,
-                    this._parameters.AllParameters[parameterType],
                     Color.Red,
                     toolTipText);
             }
@@ -207,7 +199,6 @@ namespace ScrewdriverPlugin
             {
                 this.SetColors(
                     textBox,
-                    this._parameters.AllParameters[parameterType],
                     Color.Red,
                     e.Message);
             }

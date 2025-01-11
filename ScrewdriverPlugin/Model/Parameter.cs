@@ -123,6 +123,7 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Валидация вводимого значения _value в параметр.
         /// </summary>
+        /// <param name="value">Значение.</param>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
         private void ValueValidate(int value)
         {
@@ -135,6 +136,8 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Валидация на определение граничных условий.
         /// </summary>
+        /// <param name="minValue">Минимальное значение.</param>
+        /// <param name="maxValue">Максимальное значение.</param>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
         private void MinMaxValidate(int minValue, int maxValue)
         {

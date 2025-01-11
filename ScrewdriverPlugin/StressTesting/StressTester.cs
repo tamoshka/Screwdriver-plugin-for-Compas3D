@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
 using NickStrupat;
 using ScrewdriverPlugin;
@@ -39,14 +37,11 @@ namespace StressTesting
                 var usedMemory = (computerInfo.TotalPhysicalMemory
                                   - computerInfo.AvailablePhysicalMemory)
                                   * gigabyteInByte;
-                streamWriter.WriteLine($"{++count}\t{stopWatch.Elapsed:hh\\:mm\\:ss}\t{usedMemory}");
+                streamWriter.WriteLine(
+                    $"{++count}\t{stopWatch.Elapsed:hh\\:mm\\:ss}\t{usedMemory}");
                 streamWriter.Flush();
                 stopWatch.Reset();
             }
-
-            streamWriter.Close();
-            streamWriter.Dispose();
-            Console.WriteLine($"End {new ComputerInfo().TotalPhysicalMemory}");
         }
     }
 }

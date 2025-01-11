@@ -216,6 +216,7 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Валидация зависимых параметров.
         /// </summary>
+        /// <param name="parameter">Параметр.</param>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
         private void ValidateParameters(Parameter parameter)
         {
@@ -344,6 +345,7 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Вспомогательный метод формирующий текст для сообщения.
         /// </summary>
+        /// <param name="value">Значение для формирования сообщения.</param>
         /// <returns>Текст сообщения.</returns>
         private string TextCaster(double value)
         {
