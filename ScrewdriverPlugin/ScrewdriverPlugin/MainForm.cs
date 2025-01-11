@@ -275,9 +275,11 @@ namespace ScrewdriverPlugin
         {
             this.ComboBoxShapeOfHandle.SelectedIndex = 1;
             this.ComboBoxShapeOfRod.SelectedIndex = 1;
-            Parameter rodLength = this._parameters.AllParameters[ParameterType.RodLength];
             //TODO: duplication +
-            string toolTipRodLengthText = this.TextLengthCaster(rodLength, "наконечника");
+            string toolTipRodLengthText =
+                this.TextLengthCaster(
+                    this._parameters.AllParameters[ParameterType.RodLength],
+                    "наконечника");
             this.toolTip1.SetToolTip(this.TextBoxRodLength, toolTipRodLengthText);
             string toolTipRodWidthDefaultText =
                 this.TextWidthCaster("наконечника", "одной второй", "2", "диаметра");
@@ -285,9 +287,11 @@ namespace ScrewdriverPlugin
             string toolTipHandleWidthDefaultText =
                 this.TextWidthCaster("ручки", "четверти", "5", "длины");
             this.toolTip1.SetToolTip(this.TextBoxHandleWidth, toolTipHandleWidthDefaultText);
-            Parameter handleLength = this._parameters.AllParameters[ParameterType.HandleLength];
             //TODO: duplication +
-            string toolTipHandleLengthText = this.TextLengthCaster(handleLength, "ручки");
+            string toolTipHandleLengthText =
+                this.TextLengthCaster(
+                    this._parameters.AllParameters[ParameterType.HandleLength],
+                    "ручки");
             this.toolTip1.SetToolTip(this.TextBoxHandleLength, toolTipHandleLengthText);
         }
 
