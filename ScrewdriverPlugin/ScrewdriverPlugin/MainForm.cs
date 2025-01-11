@@ -127,37 +127,22 @@ namespace ScrewdriverPlugin
         private void SetColors(
             System.Windows.Forms.TextBox textBox,
             Parameter parameter,
-            KnownColor whatColor,
+            Color whatColor,
             string text)
         {
-            switch (whatColor)
+            textBox.BackColor = whatColor;
+            if (whatColor == SystemColors.Window)
             {
-                case KnownColor.Window:
-                {
-                    textBox.BackColor = SystemColors.Window;
-                    var message = textBox.Text != string.Empty
+                var message = textBox.Text != string.Empty
                         ? "Доступны только целочисленные значения"
-                         //TODO: duplication +
+                        //TODO: duplication +
                         : this.RangeTextCaster(parameter);
-                    this.toolTip1.SetToolTip(textBox, message);
-
-                    textBox.Text = string.Empty;
-                    break;
-                }
-
-                case KnownColor.Red:
-                {
-                    textBox.BackColor = Color.Red;
-                    this.toolTip1.SetToolTip(textBox, text);
-                    break;
-                }
-
-                case KnownColor.Green:
-                {
-                    textBox.BackColor = Color.Green;
-                    this.toolTip1.SetToolTip(textBox, string.Empty);
-                    break;
-                }
+                this.toolTip1.SetToolTip(textBox, message);
+                textBox.Text = string.Empty;
+            }
+            else
+            {
+                this.toolTip1.SetToolTip(textBox, text);
             }
         }
 
@@ -177,7 +162,7 @@ namespace ScrewdriverPlugin
                 this.SetColors(
                     textBox,
                     this._parameters.AllParameters[parameterType],
-                    KnownColor.Green,
+                    Color.Green,
                     string.Empty);
             }
             catch (FormatException)
@@ -189,7 +174,7 @@ namespace ScrewdriverPlugin
                 this.SetColors(
                     textBox,
                     this._parameters.AllParameters[parameterType],
-                    KnownColor.Window,
+                    SystemColors.Window,
                     message);
             }
             catch (ValueException)
@@ -199,7 +184,7 @@ namespace ScrewdriverPlugin
                 this.SetColors(
                     textBox,
                     this._parameters.AllParameters[parameterType],
-                    KnownColor.Red,
+                    Color.Red,
                     toolTipText);
             }
             catch (MinMaxException)
@@ -212,7 +197,7 @@ namespace ScrewdriverPlugin
                 this.SetColors(
                     textBox,
                     this._parameters.AllParameters[parameterType],
-                    KnownColor.Red,
+                    Color.Red,
                     e.Message);
             }
         }
