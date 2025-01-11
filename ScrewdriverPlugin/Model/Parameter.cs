@@ -31,16 +31,18 @@ namespace ScrewdriverPlugin
         /// Initializes a new instance of the <see cref="Parameter"/> class.
         /// </summary>
         /// <param name="maxValue">Максимальное значение.</param>
-        /// <param name="minValue">Минимальное значение.</param>]
-        public Parameter(int maxValue, int minValue)
+        /// <param name="minValue">Минимальное значение.</param>
+        /// <param name="parameterType">Тип параметра.</param>
+        public Parameter(int maxValue, int minValue, ParameterType parameterType)
         {
             try
             {
-                this._maxValue = maxValue;
-                this._minValue = minValue;
+                this.MinValue = minValue;
+                this.MaxValue = maxValue;
+                this.TypeOfParameter = parameterType;
                 this.MinMaxValidate();
             }
-            catch (ArgumentException ex)
+            catch (MinMaxException ex)
             {
                 throw ex;
             }
@@ -93,9 +95,9 @@ namespace ScrewdriverPlugin
                 try
                 {
                     this._value = value;
-                    this.Validate();
+                    this.ValueValidate();
                 }
-                catch (ArgumentException ex)
+                catch (ValueException ex)
                 {
                     throw ex;
                 }
@@ -103,7 +105,7 @@ namespace ScrewdriverPlugin
         }
 
         /// <summary>
-        /// Gets or sets для поля _typeOfParameter (значение).
+        /// Gets для поля _typeOfParameter (значение).
         /// </summary>
         public ParameterType TypeOfParameter
         {
@@ -112,7 +114,7 @@ namespace ScrewdriverPlugin
                 return this._typeOfParameter;
             }
 
-            set
+            private set
             {
                 this._typeOfParameter = value;
             }
@@ -122,11 +124,11 @@ namespace ScrewdriverPlugin
         /// Валидация вводимого значения _value в параметр.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        private void Validate()
+        private void ValueValidate()
         {
             if (this._value < this._minValue || this._value > this._maxValue)
             {
-                throw new ArgumentException("Значение за граничными пределами");
+                throw new ValueException();
             }
         }
 
@@ -138,8 +140,34 @@ namespace ScrewdriverPlugin
         {
             if (this._maxValue <= this._minValue || this._minValue < 0)
             {
-                throw new ArgumentException("Нарушение в определении граничных условий");
+                throw new MinMaxException();
             }
+        }
+    }
+
+    /// <summary>
+    /// Класс пользовательского исключения на ввод Min и Max.
+    /// </summary>
+    public class MinMaxException : ArgumentException
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MinMaxException"/> class.
+        /// </summary>
+        public MinMaxException()
+        {
+        }
+    }
+
+    /// <summary>
+    /// Класс пользовательского исключения на ввод Value.
+    /// </summary>
+    public class ValueException : ArgumentException
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValueException"/> class.
+        /// </summary>
+        public ValueException()
+        {
         }
     }
 }

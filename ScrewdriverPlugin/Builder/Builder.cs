@@ -226,8 +226,7 @@ namespace ScrewdriverPlugin
         {
             Parameter handleLength = parameters.AllParameters[ParameterType.HandleLength];
             double y1 = -handleLength.Value;
-            double y2 = -handleLength.Value;
-            y2 = y2 * ONESECOND;
+            double y2 = -((double)handleLength.Value) * ONESECOND;
             double y3 = 0;
             Parameter handleWidth = parameters.AllParameters[ParameterType.HandleWidth];
             double x2 = -handleWidth.Value;

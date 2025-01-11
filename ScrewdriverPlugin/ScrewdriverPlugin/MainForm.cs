@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using StressTesting;
 
@@ -126,35 +127,32 @@ namespace ScrewdriverPlugin
         private void SetColors(
             System.Windows.Forms.TextBox textBox,
             Parameter parameter,
-            int whatColor,
+            KnownColor whatColor,
             string text)
         {
             switch (whatColor)
             {
-                case 1:
+                case KnownColor.Window:
                 {
                     textBox.BackColor = SystemColors.Window;
                     var message = textBox.Text != string.Empty
                         ? "Доступны только целочисленные значения"
-                         //TODO: duplication
-                        : "Введите значения от " +
-                          parameter.MinValue.ToString() +
-                          " до " + parameter.MaxValue.ToString() +
-                          " мм";
+                         //TODO: duplication +
+                        : this.RangeTextCaster(parameter);
                     this.toolTip1.SetToolTip(textBox, message);
 
                     textBox.Text = string.Empty;
                     break;
                 }
 
-                case 2:
+                case KnownColor.Red:
                 {
                     textBox.BackColor = Color.Red;
                     this.toolTip1.SetToolTip(textBox, text);
                     break;
                 }
 
-                case 3:
+                case KnownColor.Green:
                 {
                     textBox.BackColor = Color.Green;
                     this.toolTip1.SetToolTip(textBox, string.Empty);
@@ -179,7 +177,7 @@ namespace ScrewdriverPlugin
                 this.SetColors(
                     textBox,
                     this._parameters.AllParameters[parameterType],
-                    3,
+                    KnownColor.Green,
                     string.Empty);
             }
             catch (FormatException)
@@ -191,47 +189,31 @@ namespace ScrewdriverPlugin
                 this.SetColors(
                     textBox,
                     this._parameters.AllParameters[parameterType],
-                    1,
+                    KnownColor.Window,
                     message);
             }
-            catch (ArgumentException e)
+            catch (ValueException)
             {
-                switch (e.Message)
-                {
-                    //TODO: refactor
-                    case "Значение за граничными пределам":
-                    {
-                             //TODO: duplication
-                        string toolTipText = "Введите значения от " +
-                            this._parameters.AllParameters[parameterType].MinValue.ToString() +
-                            " до " +
-                            this._parameters.AllParameters[parameterType].MaxValue.ToString() +
-                            " мм";
-                        this.SetColors(
-                            textBox,
-                            this._parameters.AllParameters[parameterType],
-                            2,
-                            toolTipText);
-                        break;
-                    }
-
-                    case "Нарушение в определении граничных условий":
-                    {
-                        this.LabelWarning.Text = "Критическая ошибка системы.";
-                        this.ButtonCreate.Enabled = false;
-                        break;
-                    }
-
-                    default:
-                    {
-                        this.SetColors(
-                            textBox,
-                            this._parameters.AllParameters[parameterType],
-                            2,
-                            e.Message);
-                        break;
-                    }
-                }
+                string toolTipText =
+                    this.RangeTextCaster(this._parameters.AllParameters[parameterType]);
+                this.SetColors(
+                    textBox,
+                    this._parameters.AllParameters[parameterType],
+                    KnownColor.Red,
+                    toolTipText);
+            }
+            catch (MinMaxException)
+            {
+                this.LabelWarning.Text = "Критическая ошибка системы.";
+                this.ButtonCreate.Enabled = false;
+            }
+            catch (ParametersException e)
+            {
+                this.SetColors(
+                    textBox,
+                    this._parameters.AllParameters[parameterType],
+                    KnownColor.Red,
+                    e.Message);
             }
         }
 
@@ -307,12 +289,8 @@ namespace ScrewdriverPlugin
             this.ComboBoxShapeOfHandle.SelectedIndex = 1;
             this.ComboBoxShapeOfRod.SelectedIndex = 1;
             Parameter rodLength = this._parameters.AllParameters[ParameterType.RodLength];
-             //TODO: duplication
-            string toolTipRodLengthText = "Длина наконечника должна находиться в диапазоне от " +
-                rodLength.MinValue.ToString() +
-                " до " +
-                rodLength.MaxValue.ToString() +
-                " мм";
+            //TODO: duplication +
+            string toolTipRodLengthText = this.TextCaster(rodLength, "наконечника");
             this.toolTip1.SetToolTip(this.TextBoxRodLength, toolTipRodLengthText);
             string toolTipRodWidthDefaultText =
                 "Диаметр наконечника должен находиться в диапазоне пятой части " +
@@ -322,13 +300,35 @@ namespace ScrewdriverPlugin
                 "Диаметр ручки должен находиться в диапазоне четверти от длины ручки +/- 5 мм";
             this.toolTip1.SetToolTip(this.TextBoxHandleWidth, toolTipHandleWidthDefaultText);
             Parameter handleLength = this._parameters.AllParameters[ParameterType.HandleLength];
-             //TODO: duplication
-            string toolTipHandleLengthText = "Длина ручки должна находиться в диапазоне от " +
-                handleLength.MinValue.ToString() +
-                " до " +
-                handleLength.MaxValue.ToString() +
-                " мм";
+            //TODO: duplication +
+            string toolTipHandleLengthText = this.TextCaster(handleLength, "ручки");
             this.toolTip1.SetToolTip(this.TextBoxHandleLength, toolTipHandleLengthText);
+        }
+
+        /// <summary>
+        /// Вспомогательный метод для генерации текста граничных условий.
+        /// </summary>
+        /// <param name="parameter">Передаваемый параметр.</param>
+        /// <returns>Текст для подсказки.</returns>
+        private string RangeTextCaster (Parameter parameter)
+        {
+            return "Введите значения от " +
+                    parameter.MinValue.ToString() +
+                    " до " +
+                    parameter.MaxValue.ToString() +
+                    " мм";
+        }
+
+        /// <summary>
+        /// Вспомогательный метод для генерации текста граничных условий при загрузке формы.
+        /// </summary>
+        /// <param name="parameter">Параметр.</param>
+        /// <param name="word">Слово.</param>
+        /// <returns>Текст для подсказки.</returns>
+        private string TextCaster (Parameter parameter, string word)
+        {
+            return $"Длина {word} должна находиться в диапазоне от" +
+                $" {parameter.MinValue.ToString()} до {parameter.MaxValue.ToString()} мм";
         }
     }
 }
