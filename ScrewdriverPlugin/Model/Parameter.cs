@@ -37,10 +37,10 @@ namespace ScrewdriverPlugin
         {
             try
             {
+                this.MinMaxValidate(minValue, maxValue);
                 this.MinValue = minValue;
                 this.MaxValue = maxValue;
                 this.TypeOfParameter = parameterType;
-                this.MinMaxValidate();
             }
             catch (MinMaxException ex)
             {
@@ -94,8 +94,8 @@ namespace ScrewdriverPlugin
             {
                 try
                 {
+                    this.ValueValidate(value);
                     this._value = value;
-                    this.ValueValidate();
                 }
                 catch (ValueException ex)
                 {
@@ -124,9 +124,9 @@ namespace ScrewdriverPlugin
         /// Валидация вводимого значения _value в параметр.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        private void ValueValidate()
+        private void ValueValidate(int value)
         {
-            if (this._value < this._minValue || this._value > this._maxValue)
+            if (value < this.MinValue || value > this.MaxValue)
             {
                 throw new ValueException();
             }
@@ -136,9 +136,9 @@ namespace ScrewdriverPlugin
         /// Валидация на определение граничных условий.
         /// </summary>
         /// <exception cref="ArgumentException">Текст ошибки.</exception>
-        private void MinMaxValidate()
+        private void MinMaxValidate(int minValue, int maxValue)
         {
-            if (this._maxValue <= this._minValue || this._minValue < 0)
+            if (maxValue <= minValue || minValue < 0)
             {
                 throw new MinMaxException();
             }

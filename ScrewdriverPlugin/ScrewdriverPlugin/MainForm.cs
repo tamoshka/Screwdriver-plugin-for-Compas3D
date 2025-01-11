@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using StressTesting;
 
@@ -60,7 +59,11 @@ namespace ScrewdriverPlugin
             var handleTextBoxesChainedParameters =
                 new Dictionary<
                     TextBox,
-                    (ParameterType, TextBox, ParameterType, TextBox, ParameterType)>
+                    (ParameterType parameterType,
+                    TextBox firstChainedTextBox,
+                    ParameterType firstChainedParameterType,
+                    TextBox secondChainedTextBox,
+                    ParameterType secondChainedParameterType)>
             {
                 {
                     this.TextBoxHandleWidth,
@@ -81,11 +84,11 @@ namespace ScrewdriverPlugin
             };
             TextBox textBox = (TextBox)sender;
             var chained = handleTextBoxesChainedParameters[textBox];
-            this.Validate(textBox, chained.Item1);
+            this.Validate(textBox, chained.parameterType);
             if (textBox.BackColor != SystemColors.Window)
             {
-                this.Validate(chained.Item2, chained.Item3);
-                this.Validate(chained.Item4, chained.Item5);
+                this.Validate(chained.firstChainedTextBox, chained.firstChainedParameterType);
+                this.Validate(chained.secondChainedTextBox, chained.secondChainedParameterType);
             }
         }
 
@@ -97,24 +100,31 @@ namespace ScrewdriverPlugin
         private void TextBoxRod_Leave(object sender, EventArgs e)
         {
             var rodTextBoxesChainedParameters =
-                new Dictionary<TextBox, (ParameterType, TextBox, ParameterType)>
+                new Dictionary<TextBox,
+                (ParameterType parameterType,
+                TextBox chainedTextBox,
+                ParameterType chainedParameterType)>
             {
                 {
                     this.TextBoxRodLength,
-                    (ParameterType.RodLength, this.TextBoxHandleLength, ParameterType.HandleLength)
+                    (ParameterType.RodLength,
+                    this.TextBoxHandleLength,
+                    ParameterType.HandleLength)
                 },
                 {
                     this.TextBoxRodWidth,
-                    (ParameterType.RodWidth, this.TextBoxHandleWidth, ParameterType.HandleWidth)
+                    (ParameterType.RodWidth,
+                    this.TextBoxHandleWidth,
+                    ParameterType.HandleWidth)
                 },
             };
 
             TextBox textBox = (TextBox)sender;
             var chained = rodTextBoxesChainedParameters[textBox];
-            this.Validate(textBox, chained.Item1);
+            this.Validate(textBox, chained.parameterType);
             if (textBox.BackColor != SystemColors.Window)
             {
-                this.Validate(chained.Item2, chained.Item3);
+                this.Validate(chained.chainedTextBox, chained.chainedParameterType);
             }
         }
 
@@ -127,6 +137,7 @@ namespace ScrewdriverPlugin
         private void SetColors(
             System.Windows.Forms.TextBox textBox,
             Parameter parameter,
+             //TODO: refactor +
             Color whatColor,
             string text)
         {
@@ -134,9 +145,9 @@ namespace ScrewdriverPlugin
             if (whatColor == SystemColors.Window)
             {
                 var message = textBox.Text != string.Empty
-                        ? "Доступны только целочисленные значения"
-                        //TODO: duplication +
-                        : this.RangeTextCaster(parameter);
+                    ? "Доступны только целочисленные значения"
+                    //TODO: duplication +
+                    : this.RangeTextCaster(parameter);
                 this.toolTip1.SetToolTip(textBox, message);
                 textBox.Text = string.Empty;
             }

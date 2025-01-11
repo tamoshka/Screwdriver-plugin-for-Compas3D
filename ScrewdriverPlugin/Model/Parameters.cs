@@ -317,7 +317,8 @@ namespace ScrewdriverPlugin
                     if (handleWidth.Value != 0)
                     {
                         double upperHalfOfWidth = ((double)handleWidth.Value) / HALF;
-                        double lowerHalfOfWidth = (((double)handleWidth.Value) / HALF) - DIAMETER_DEVIATION;
+                        double lowerHalfOfWidth =
+                                (((double)handleWidth.Value) / HALF) - DIAMETER_DEVIATION;
                         if (parameter.Value < lowerHalfOfWidth)
                         {
                             message = "Диаметр наконечника меньше половины диаметра ручки, " +
@@ -362,15 +363,9 @@ namespace ScrewdriverPlugin
         /// <summary>
         /// Initializes a new instance of the <see cref="ParametersException"/> class.
         /// </summary>
-        public ParametersException()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ParametersException"/> class.
-        /// </summary>
         /// <param name="message">Передаваемое сообщение.</param>
-        public ParametersException(string message) : base(message)
+        public ParametersException(string message)
+            : base(message)
         {
         }
     }
