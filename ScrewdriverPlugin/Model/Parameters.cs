@@ -203,11 +203,7 @@ namespace ScrewdriverPlugin
                 this.AllParameters[parameterType].Value = value;
                 this.ValidateParameters(this.AllParameters[parameterType]);
             }
-            catch (ValueException ex)
-            {
-                throw ex;
-            }
-            catch (ParametersException ex)
+            catch (ArgumentOutOfRangeException ex)
             {
                 throw ex;
             }
