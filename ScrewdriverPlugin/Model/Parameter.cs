@@ -151,7 +151,7 @@ namespace ScrewdriverPlugin
     /// <summary>
     /// Класс пользовательского исключения на ввод Min и Max.
     /// </summary>
-    public class MinMaxException : ArgumentException
+    public class MinMaxException : ArgumentOutOfRangeException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MinMaxException"/> class.
@@ -164,7 +164,7 @@ namespace ScrewdriverPlugin
     /// <summary>
     /// Класс пользовательского исключения на ввод Value.
     /// </summary>
-    public class ValueException : ArgumentException
+    public class ValueException : ArgumentOutOfRangeException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ValueException"/> class.

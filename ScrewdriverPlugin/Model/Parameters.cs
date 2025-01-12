@@ -356,7 +356,7 @@ namespace ScrewdriverPlugin
     /// <summary>
     /// Класс пользовательского исключения на ввод параметров.
     /// </summary>
-    public class ParametersException : ArgumentException
+    public class ParametersException : ArgumentOutOfRangeException
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ParametersException"/> class.
