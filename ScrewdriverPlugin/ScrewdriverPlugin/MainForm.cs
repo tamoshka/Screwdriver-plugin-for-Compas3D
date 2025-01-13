@@ -169,33 +169,33 @@ namespace ScrewdriverPlugin
                     Color.Green,
                     string.Empty);
             }
-            catch (FormatException)
-            {
-                this.SetColors(
-                    textBox,
-                    SystemColors.Window,
-                    this.RangeTextCaster(this._parameters.AllParameters[parameterType]));
-            }
-            catch (ValueException)
-            {
-                string toolTipText =
-                    this.RangeTextCaster(this._parameters.AllParameters[parameterType]);
-                this.SetColors(
-                    textBox,
-                    Color.Red,
-                    toolTipText);
-            }
             catch (MinMaxException)
             {
                 this.LabelWarning.Text = "Критическая ошибка системы.";
                 this.ButtonCreate.Enabled = false;
             }
-            catch (ParametersException e)
+            catch (Exception e)
             {
+                var exceptionDictionary =
+                    new Dictionary<System.Type, (Color color, string message)>()
+                {
+                    {
+                        typeof(FormatException),
+                        (SystemColors.Window,
+                        this.RangeTextCaster(this._parameters.AllParameters[parameterType]))
+                    },
+                    {
+                        typeof(ValueException),
+                        (Color.Red,
+                        this.RangeTextCaster(this._parameters.AllParameters[parameterType]))
+                    },
+                    { typeof(ParametersException), (Color.Red, e.Message) },
+                };
+                var chained = exceptionDictionary[e.GetType()];
                 this.SetColors(
                     textBox,
-                    Color.Red,
-                    e.Message);
+                    chained.color,
+                    chained.message);
             }
         }
 
