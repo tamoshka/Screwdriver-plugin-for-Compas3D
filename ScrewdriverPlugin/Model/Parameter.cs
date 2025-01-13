@@ -148,6 +148,7 @@ namespace ScrewdriverPlugin
         }
     }
 
+    //TODO: RSDN
     /// <summary>
     /// Класс пользовательского исключения на ввод Min и Max.
     /// </summary>

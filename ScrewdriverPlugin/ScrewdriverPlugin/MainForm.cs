@@ -136,23 +136,18 @@ namespace ScrewdriverPlugin
         /// <param name="text">Текст устанавливаемый в подсказку.</param>
         private void SetColors(
             System.Windows.Forms.TextBox textBox,
-             //TODO: refactor +
             Color whatColor,
             string text)
         {
             textBox.BackColor = whatColor;
+            var message = textBox.Text != string.Empty
+                    ? "Доступны только целочисленные значения"
+                    : text;
+            this.toolTip1.SetToolTip(textBox, message);
+            
             if (whatColor == SystemColors.Window)
             {
-                var message = textBox.Text != string.Empty
-                    ? "Доступны только целочисленные значения"
-                    //TODO: duplication +
-                    : text;
-                this.toolTip1.SetToolTip(textBox, message);
                 textBox.Text = string.Empty;
-            }
-            else
-            {
-                this.toolTip1.SetToolTip(textBox, text);
             }
         }
 
@@ -275,19 +270,21 @@ namespace ScrewdriverPlugin
         {
             this.ComboBoxShapeOfHandle.SelectedIndex = 1;
             this.ComboBoxShapeOfRod.SelectedIndex = 1;
-            //TODO: duplication +
+
             string toolTipRodLengthText =
                 this.TextLengthCaster(
                     this._parameters.AllParameters[ParameterType.RodLength],
                     "наконечника");
             this.toolTip1.SetToolTip(this.TextBoxRodLength, toolTipRodLengthText);
+
             string toolTipRodWidthDefaultText =
                 this.TextWidthCaster("наконечника", "одной второй", "2", "диаметра");
             this.toolTip1.SetToolTip(this.TextBoxRodWidth, toolTipRodWidthDefaultText);
+
             string toolTipHandleWidthDefaultText =
                 this.TextWidthCaster("ручки", "четверти", "5", "длины");
             this.toolTip1.SetToolTip(this.TextBoxHandleWidth, toolTipHandleWidthDefaultText);
-            //TODO: duplication +
+
             string toolTipHandleLengthText =
                 this.TextLengthCaster(
                     this._parameters.AllParameters[ParameterType.HandleLength],

@@ -349,6 +349,7 @@ namespace ScrewdriverPlugin
         }
     }
 
+    //TODO: RSDN
     /// <summary>
     /// Класс пользовательского исключения на ввод параметров.
     /// </summary>
