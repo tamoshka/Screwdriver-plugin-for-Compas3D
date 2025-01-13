@@ -348,6 +348,4 @@ namespace ScrewdriverPlugin
             return $"заданное значение минимум до {value.ToString()}\n";
         }
     }
-
-    //TODO: RSDN+
 }
